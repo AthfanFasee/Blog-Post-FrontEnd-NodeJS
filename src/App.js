@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div>
-      Athfan v3
+      Athfan
     </div>
   );
 }
