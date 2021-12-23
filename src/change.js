@@ -1,7 +1,7 @@
 export default function change() {
     return (
         <div>
-            Hello
+            Hello v2.0
         </div>
     )
 }
