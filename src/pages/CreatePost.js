@@ -3,7 +3,7 @@ import {addDoc, collection} from 'firebase/firestore'
 import {db, auth} from '../firebase-config'
 import {useNavigate} from 'react-router-dom'
 
-function CreatePost({isAuth}, {isEditsection}) {
+function CreatePost({isAuth}) {
 
     const [title, setTitle] = useState("")
     const [postText, setPostText] = useState("")
@@ -49,7 +49,6 @@ function CreatePost({isAuth}, {isEditsection}) {
                 <textarea placeholder="Post..." onChange={(event) => setPostText(event.target.value)} />
             </div>
             <button onClick={createPost}>Submit Post</button>
-            <button onClick={() => isEditsection(false)}>Cancel</button>
             </div>
         </div>
         
