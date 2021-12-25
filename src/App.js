@@ -7,6 +7,7 @@ import CreatePost from './pages/CreatePost'
 import { useState } from 'react'
 import {signOut} from 'firebase/auth'
 import { auth } from './firebase-config';
+import Updatepost from './pages/updatepost';
 
 
 

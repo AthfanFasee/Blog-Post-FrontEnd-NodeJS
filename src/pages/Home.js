@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
+import {useNavigate} from 'react-router-dom'
+import CreatePost from "./CreatePost";
 
 function Home({ isAuth }) {
   const [postLists, setPostLists] = useState([]);
   const postsCollectionRef = collection(db, "posts");
+  
+
+  const[editsection, isEditsection] = useState(false);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -19,6 +24,16 @@ function Home({ isAuth }) {
     const postDoc = doc(db, "posts", id);
     await deleteDoc(postDoc);
   };
+
+  // const editPost = async (id) => {
+  //   const postDoc = doc(db, "posts", id);
+  //   await (postDoc);
+  // };
+
+  let navigate = useNavigate()
+  const callEdit = () => navigate("/update")
+
+
   return (
     <div className="homePage">
       {postLists.map((post) => {
@@ -32,6 +47,10 @@ function Home({ isAuth }) {
               onClick={() => {
               deletePost(post.id)}}>&#128465;</button>
             )}
+            {isAuth && post.aurthor.id === auth.currentUser.uid &&(
+            <button 
+              onClick={() => isEditsection(true)}>&#128394;</button>
+            )}
             </div>
             </div>
             
@@ -41,6 +60,7 @@ function Home({ isAuth }) {
           </div>
         );
       })}
+      {editsection && <CreatePost isEditsection={isEditsection}/>}
     </div>
   );
 }
