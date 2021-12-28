@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import {AppContext} from '../../pages/HomePage/HomePage'
 
-export default function Updatepost({toggle}) {
+export default function UpdatePost({updatePost}) {
     const {isEditsection, setTitle, setPostText, newpostText, newtitle } = useContext(AppContext)
     return (
         <div className="BackGround">
@@ -17,7 +17,7 @@ export default function Updatepost({toggle}) {
                 <label>New Post:</label>
                 <textarea placeholder="Post..." value={newpostText} onChange={(event) => setPostText(event.target.value)} />
             </div>
-            <button onClick={toggle}>Save Changes</button>
+            <button onClick={updatePost}>Save Changes</button>
             <button onClick={() => isEditsection(false)}>Cancel</button>
             </div>
         </div>

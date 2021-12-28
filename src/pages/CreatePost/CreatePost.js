@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import {addDoc, collection} from 'firebase/firestore'
 import {db, auth} from '../../firebase-config'
 import {useNavigate} from 'react-router-dom'
+import CreatePostElmnts from "../../Components/CreatePostElements/CreatePostElmnts"
 
 function CreatePost({isAuth}) {
 
@@ -18,7 +19,7 @@ function CreatePost({isAuth}) {
                 + currentdate.getMinutes() 
 
 
-    //saving or adding post to firebase data base//
+    //saving or adding post to firebase data base
     const postsCollectionRef = collection(db, "posts")  //We need to let addDoc or getDoc knw which exact collection or table("posts") we wanna add information to and in which exact app("db")
                                                         //so we are simply creating a reference to the exact collection here
     const createPost = async () => {
@@ -37,19 +38,8 @@ function CreatePost({isAuth}) {
 
     
     return (
-        <div className="createPostPage">
-            <div className="cpContainer">
-            <h1>Create A Post</h1>
-            <div className="inputGp">
-                <label>Title:</label>
-                <input placeholder="Title.."  onChange={(event) => setTitle(event.target.value)}/>
-            </div>
-            <div className="inputGp">
-                <label>Post:</label>
-                <textarea placeholder="Post..." onChange={(event) => setPostText(event.target.value)} />
-            </div>
-            <button onClick={createPost}>Submit Post</button>
-            </div>
+        <div >
+            <CreatePostElmnts createPost={createPost} setTitle={setTitle} setPostText={setPostText}/>
         </div>
         
     )

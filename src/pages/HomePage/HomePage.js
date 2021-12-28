@@ -1,26 +1,28 @@
 import { useEffect, useState, createContext } from "react";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
-import Updatepost from "../../Components/UpdatePost/Updatepost";
+import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 
-//Using contextApi to pass props to updatepost Component
+
+//Using contextApi to pass props to CreatePost Component
 export const AppContext = createContext(null)
 
 function HomePage({ isAuth }) {
   const [postLists, setPostLists] = useState([]);
   const postsCollectionRef = collection(db, "posts");
 
-  
-  
-
 
   const [newtitle, setTitle] = useState("")
   const [newpostText, setPostText] = useState("")
+
+
 
   const [id, setId] = useState("")
 
   const[editsection, isEditsection] = useState(false);
 
+
+  //Getting Posts from FireBase DataBase when the HomePage Component is rendered
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postsCollectionRef) //just like we did in addDoc inside creatpost.js, we are just letting getDoc knw from which exact app and which collection or table it needs to get data from
@@ -28,6 +30,8 @@ function HomePage({ isAuth }) {
     };
     getPosts();
   });
+
+
 
   //Deleting the post
   const deletePost = async (id) => {
@@ -48,6 +52,7 @@ function HomePage({ isAuth }) {
 
   return (
     <div className="homePage">
+      {!isAuth && <h3 className="signInWarning">Please LogIn to Post Blogs and Edit your own blogs</h3>}
       {postLists.map((post) => {
         return ( 
           <div className="post">
@@ -55,13 +60,14 @@ function HomePage({ isAuth }) {
             <div className="title"><h1>{post.title}</h1></div>
             <div className="deletePost">
 
-            {/* Making sure that the delete and edit buttons only show to the user authenticated rn */}
+            {/*Setting up DeleteButton*/}
             {isAuth && post.aurthor.id === auth.currentUser.uid &&(
             <button 
               onClick={() => {
               deletePost(post.id)}}>&#128465;</button>
             )}
 
+              {/*Setting up Update button*/}
             {isAuth && post.aurthor.id === auth.currentUser.uid &&(
             <button 
               onClick={() => { 
@@ -84,7 +90,7 @@ function HomePage({ isAuth }) {
 
     {editsection && 
     <AppContext.Provider value={{newtitle, newpostText, setTitle, setPostText, isEditsection  }}>
-    <Updatepost toggle={() => updatePost(id, newtitle, newpostText )}/>
+    <UpdatePost updatePost={() => updatePost(id, newtitle, newpostText )}/>
     </AppContext.Provider>
     }
     </div>

@@ -4,9 +4,8 @@ import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import Login from './pages/Login/Login'
 import CreatePost from './pages/CreatePost/CreatePost'
 import { useState } from 'react'
-import {signOut} from 'firebase/auth'
-import { auth } from './firebase-config';
 import HomePage from './pages/HomePage/HomePage';
+import SignOutButton from './Components/SignOutButton/SignOutButton';
 
 
 
@@ -16,13 +15,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"))
 
 
-  //setting up logout function
-  const signout = () => {
-    signOut(auth).then(() => {
-      localStorage.clear()        //reverting back both things we added when we signed in
-      setIsAuth(false)
-    })
-  }
+  
 
   return (
     <Router>
@@ -37,7 +30,7 @@ function App() {
            
          <Link to='/createpost'>Create Post</Link>
          
-         <button onClick={signout}>LogOut</button>
+         <SignOutButton setIsAuth={setIsAuth}/>
          </>
          )}
       </nav>

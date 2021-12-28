@@ -1,6 +1,7 @@
 import {auth, provider} from '../../firebase-config'
 import {signInWithPopup} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+import LoginButton from '../../Components/LoginButton/LoginButton'
 
 function Login({setIsAuth}) {
 
@@ -19,11 +20,8 @@ function Login({setIsAuth}) {
 //IMPORTANTTTT local storage le save panne muthal check box and state use panni tick panna mattum staysigned in option kudukkalam
 
     return (
-        <div className="loginPage">
-            <p>Sign In With Google to Continue</p>
-            <button className="login-with-google-btn" onClick={signInWithGoogle}>
-                Sign in with Google
-            </button>
+        <div>
+            <LoginButton signInWithGoogle={signInWithGoogle}/>
         </div>
     )
 }
