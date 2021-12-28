@@ -1,12 +1,12 @@
 import { useEffect, useState, createContext } from "react";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../firebase-config";
-import Updatepost from "./updatepost";
+import { auth, db } from "../../firebase-config";
+import Updatepost from "../../Components/UpdatePost/Updatepost";
 
 //Using contextApi to pass props to updatepost Component
 export const AppContext = createContext(null)
 
-function Home({ isAuth }) {
+function HomePage({ isAuth }) {
   const [postLists, setPostLists] = useState([]);
   const postsCollectionRef = collection(db, "posts");
 
@@ -91,4 +91,4 @@ function Home({ isAuth }) {
   );
 }
 
-export default Home;
+export default HomePage;

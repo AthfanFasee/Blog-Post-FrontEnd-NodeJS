@@ -1,12 +1,12 @@
 
 import './App.css';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-import Home from './pages/Home'
-import Login from './pages/Login'
-import CreatePost from './pages/CreatePost'
+import Login from './pages/Login/Login'
+import CreatePost from './pages/CreatePost/CreatePost'
 import { useState } from 'react'
 import {signOut} from 'firebase/auth'
 import { auth } from './firebase-config';
+import HomePage from './pages/HomePage/HomePage';
 
 
 
@@ -42,7 +42,7 @@ function App() {
          )}
       </nav>
       <Routes>
-        <Route path='/' element={<Home isAuth={isAuth} />} />
+        <Route path='/' element={<HomePage isAuth={isAuth} />} />
         <Route path='/createpost' element={<CreatePost isAuth={isAuth} />} />
         <Route path='/login' element={<Login setIsAuth={setIsAuth}/>} />
 {

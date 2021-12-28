@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import {AppContext} from './Home'
+import {AppContext} from '../../pages/HomePage/HomePage'
 
 export default function Updatepost({toggle}) {
     const {isEditsection, setTitle, setPostText, newpostText, newtitle } = useContext(AppContext)
