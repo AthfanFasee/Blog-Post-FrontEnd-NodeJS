@@ -61,7 +61,7 @@ function HomePage({ isAuth }) {
       {postLists.map((post) => {
         return( 
           <AppContext.Provider value={{setId, isEditsection, setTitle, setPostText, isAuth}}>
-          <UserPosts post={post} deletePost={() => deletePost(post.id)}/>)
+          <UserPosts post={post} deletePost={() => deletePost(post.id)}/>
         </AppContext.Provider> )
       })}
 

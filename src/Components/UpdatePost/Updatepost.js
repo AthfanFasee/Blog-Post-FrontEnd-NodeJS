@@ -17,7 +17,7 @@ export default function UpdatePost({updatePost}) {
                 <label>New Post:</label>
                 <textarea placeholder="Post..." value={newpostText} onChange={(event) => setPostText(event.target.value)} />
             </div>
-            <button onClick={updatePost}>Save Changes</button>
+            <button disabled={!newpostText || !newtitle} onClick={updatePost}>Save Changes</button>
             <button onClick={() => isEditsection(false)}>Cancel</button>
             </div>
         </div>

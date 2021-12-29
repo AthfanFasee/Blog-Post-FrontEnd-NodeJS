@@ -39,7 +39,7 @@ function CreatePost({isAuth}) {
     
     return (
         <div >
-            <CreatePostElmnts createPost={createPost} setTitle={setTitle} setPostText={setPostText}/>
+            <CreatePostElmnts createPost={createPost} setTitle={setTitle} setPostText={setPostText} title={title} postText={postText}/>
         </div>
         
     )

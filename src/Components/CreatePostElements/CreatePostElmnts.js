@@ -1,4 +1,4 @@
-function CreatePostElmnts({createPost, setTitle, setPostText}) {
+function CreatePostElmnts({createPost, setTitle, setPostText, postText, title}) {
     return (
         <div className="createPostPage">
             <div className="cpContainer">
@@ -11,7 +11,7 @@ function CreatePostElmnts({createPost, setTitle, setPostText}) {
                 <label>Post:</label>
                 <textarea placeholder="Post..." onChange={(event) => setPostText(event.target.value)} />
             </div>
-            <button onClick={createPost}>Submit Post</button>
+            <button disabled={!title || !postText}  onClick={createPost}>Submit Post</button>
             </div>
         </div>
     )
