@@ -1,9 +1,5 @@
-import { useContext } from "react"
-import {AppContext} from '../../pages/HomePage/HomePage'
 
-
-function UpdateButton({post}) {
-    const {setId, setTitle, setPostText, isEditsection} = useContext(AppContext)
+function UpdateButton({post, setId, setTitle, setPostText, isEditsection}) {
     return (
         <div>
             <button 
