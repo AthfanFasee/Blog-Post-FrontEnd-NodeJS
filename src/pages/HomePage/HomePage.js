@@ -2,6 +2,8 @@ import { useEffect, useState, createContext } from "react";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
+import UpdateButton from "../../Components/UpdateButton/UpdateButton";
+import DeleteButton from "../../Components/DeleteButton/DeleteButton";
 
 
 //Using contextApi to pass props to CreatePost Component
@@ -52,7 +54,11 @@ function HomePage({ isAuth }) {
 
   return (
     <div className="homePage">
+
+      {/*Warning Users to SignIn when they are not SignedIn */}
       {!isAuth && <h3 className="signInWarning">Please LogIn to Post Blogs and Edit your own blogs</h3>}
+
+      {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
         return ( 
           <div className="post">
@@ -61,22 +67,16 @@ function HomePage({ isAuth }) {
             <div className="deletePost">
 
             {/*Setting up DeleteButton*/}
-            {isAuth && post.aurthor.id === auth.currentUser.uid &&(
-            <button 
-              onClick={() => {
-              deletePost(post.id)}}>&#128465;</button>
-            )}
+            {isAuth && post.aurthor.id === auth.currentUser.uid && 
+            <DeleteButton deletePost={() => deletePost(post.id)}/>}
 
-              {/*Setting up Update button*/}
-            {isAuth && post.aurthor.id === auth.currentUser.uid &&(
-            <button 
-              onClick={() => { 
-                setId(post.id)                           //I need the id of the specific post the edit button is clicked later to use on updateDoc function. And I can't access the id outside of mapping, so setting it up on a state right here when I click the edit button
-                isEditsection(true)
-                setTitle(post.title)
-                setPostText(post.postText)  
-              }}>&#128394;</button> //rendering the updateDoc component when button is clicked
-            )}
+
+            {/*Setting up Update button(passing post as props so I can access post.id and stuffs to set them to states)*/}
+            {isAuth && post.aurthor.id === auth.currentUser.uid &&
+             <AppContext.Provider value={{setId, isEditsection, setTitle, setPostText}}>
+             <UpdateButton post={post}/> 
+             </AppContext.Provider>}
+             
             </div>
             </div>
             
@@ -88,6 +88,8 @@ function HomePage({ isAuth }) {
         );
       })}
 
+
+    {/* Rendering UpdatePost Component only when UpdateButton is clicked */}
     {editsection && 
     <AppContext.Provider value={{newtitle, newpostText, setTitle, setPostText, isEditsection  }}>
     <UpdatePost updatePost={() => updatePost(id, newtitle, newpostText )}/>
