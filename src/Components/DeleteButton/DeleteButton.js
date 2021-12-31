@@ -2,8 +2,9 @@
 function DeleteButton({deletePost}) {
     return (
         <div>
-            <button 
-              onClick={deletePost}>&#128465;</button>
+            <button
+                title="Delete Post" 
+                onClick={deletePost}>&#128465;</button>
         </div>
     )
 }

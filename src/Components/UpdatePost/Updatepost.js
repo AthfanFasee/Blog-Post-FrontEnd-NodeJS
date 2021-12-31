@@ -1,8 +1,8 @@
 import { useContext } from "react"
-import {AppContext} from '../../pages/HomePage/HomePage'
+import { HomePageContext } from "../../Helper/HomePageContexts/HomePageContext"
 
 export default function UpdatePost({updatePost}) {
-    const {isEditsection, setTitle, setPostText, newpostText, newtitle } = useContext(AppContext)
+    const {isEditsection, setTitle, setPostText, newpostText, newtitle } = useContext(HomePageContext)
     return (
         <div className="BackGround">
         <div className="">

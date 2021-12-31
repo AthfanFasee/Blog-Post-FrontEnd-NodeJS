@@ -1,27 +1,18 @@
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useContext } from "react";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
+import { HomePageContext } from "../../Helper/HomePageContexts/HomePageContext";
 
 
 //Using contextApi to pass props to Child Components
-export const AppContext = createContext(null)
+
 
 function HomePage({ isAuth }) {
-  const [postLists, setPostLists] = useState([]);
+
   const postsCollectionRef = collection(db, "posts");
-
-
-  const [newtitle, setTitle] = useState("")
-  const [newpostText, setPostText] = useState("")
-
-
-
-  const [id, setId] = useState("")
-
-  const[editsection, isEditsection] = useState(false);
-
+  const {postLists, setPostLists, newtitle, newpostText, id, editsection, isEditsection} = useContext(HomePageContext)
 
   //Getting Posts from FireBase DataBase when the HomePage Component is rendered
   useEffect(() => {
@@ -60,17 +51,14 @@ function HomePage({ isAuth }) {
       {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
         return( 
-          <AppContext.Provider value={{setId, isEditsection, setTitle, setPostText, isAuth}}>
-          <UserPosts post={post} deletePost={() => deletePost(post.id)}/>
-        </AppContext.Provider> )
+          <UserPosts post={post} isAuth={isAuth} deletePost={() => deletePost(post.id)}/>
+         )
       })}
 
 
     {/* Rendering UpdatePost Component only when UpdateButton is clicked */}
     {editsection && 
-    <AppContext.Provider value={{newtitle, newpostText, setTitle, setPostText, isEditsection  }}>
     <UpdatePost updatePost={() => updatePost(id, newtitle, newpostText )}/>
-    </AppContext.Provider>
     }
     </div>)
 }

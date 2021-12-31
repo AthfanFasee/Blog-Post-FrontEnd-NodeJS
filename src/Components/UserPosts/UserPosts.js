@@ -1,12 +1,12 @@
 import DeleteButton from "../DeleteButton/DeleteButton"
 import UpdateButton from "../UpdateButton/UpdateButton"
 import { useContext } from "react"
-import {AppContext} from '../../pages/HomePage/HomePage'
 import { auth } from "../../firebase-config";
+import { HomePageContext } from "../../Helper/HomePageContexts/HomePageContext";
 
 
-function UserPosts({post, deletePost}) {
-    const {setId, isEditsection, setTitle, setPostText, isAuth} = useContext(AppContext)
+function UserPosts({post, deletePost, isAuth}) {
+    const {setId, isEditsection, setTitle, setPostText} = useContext(HomePageContext)
     return (
         <div>
              
@@ -18,11 +18,12 @@ function UserPosts({post, deletePost}) {
             {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
             {isAuth && post.aurthor.id === auth.currentUser.uid && 
             <DeleteButton deletePost={deletePost}/>}
+    
 
 
             {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn(passing post as props so I can access post.id and stuffs to set them to states)*/}
-            {isAuth && post.aurthor.id === auth.currentUser.uid && (
-             
+            
+            {isAuth && post.aurthor.id === auth.currentUser.uid && ( 
              <UpdateButton post={post} setId={setId} isEditsection={isEditsection} setTitle={setTitle} setPostText={setPostText}/>
             )}
             </div>

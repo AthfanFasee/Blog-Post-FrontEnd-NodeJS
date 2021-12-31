@@ -10,6 +10,7 @@ function CreatePost({isAuth}) {
     const [postText, setPostText] = useState("")
     let navigate = useNavigate()
 
+
     //getting current date and time
     const currentdate = new Date(); 
     const datetime = "Posted at: " + currentdate.getDate() + "/"

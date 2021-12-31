@@ -8,7 +8,7 @@ function Login({setIsAuth}) {
     const navigate = useNavigate()
 
     const signInWithGoogle = () => {
-        signInWithPopup(auth, provider).then(() => {
+            signInWithPopup(auth, provider).then(() => {
             localStorage.setItem("isAuth", true) //making sure we stay signed in even after closing tab or browser//
 
             setIsAuth(true) //can use it to prevent users from specific pages without signin//
