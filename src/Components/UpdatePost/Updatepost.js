@@ -11,11 +11,11 @@ export default function UpdatePost({updatePost}) {
             <h1>Update Your Post</h1>
             <div className="inputGp">
                 <label>New Post Title:</label>
-                <input placeholder="Title.." value={newtitle}  onChange={(event) => setNewTitle(event.target.value)}/>
+                <input placeholder="Title.." title="Title" value={newtitle}  onChange={(event) => setNewTitle(event.target.value)}/>
             </div>
             <div className="inputGp">
                 <label>New Post:</label>
-                <textarea placeholder="Post..." value={newpostText} onChange={(event) => setNewPostText(event.target.value)} />
+                <textarea placeholder="Post..." title="TextArea" value={newpostText} onChange={(event) => setNewPostText(event.target.value)} />
             </div>
             <button disabled={!newpostText || !newtitle} onClick={updatePost}>Save Changes</button>
             <button onClick={() => isEditsection(false)}>Cancel</button>
