@@ -9,8 +9,8 @@ function HomePageProvider({children}) {
     
 
 
-    const [newtitle, setTitle] = useState("")
-    const [newpostText, setPostText] = useState("")
+    const [newtitle, setNewTitle] = useState("")
+    const [newpostText, setNewPostText] = useState("")
 
 
 
@@ -19,7 +19,7 @@ function HomePageProvider({children}) {
     const[editsection, isEditsection] = useState(false);
     
     return (
-        <HomePageContext.Provider value={{postLists, setPostLists, newtitle, setTitle, newpostText ,setPostText, id, setId, editsection, isEditsection}}>
+        <HomePageContext.Provider value={{postLists, setPostLists, newtitle, setNewTitle, newpostText ,setNewPostText, id, setId, editsection, isEditsection}}>
             {children}
         </HomePageContext.Provider>
     )

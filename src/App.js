@@ -6,7 +6,7 @@ import CreatePost from './pages/CreatePost/CreatePost'
 import { useState } from 'react'
 import HomePage from './pages/HomePage/HomePage';
 import SignOutButton from './Components/SignOutButton/SignOutButton';
-import HomePageProvider from './Helper/HomePageContexts/HomePageContext';
+import HomePageProvider from './Helper/HomePageContexts/HomePageProvider';
 
 
 
