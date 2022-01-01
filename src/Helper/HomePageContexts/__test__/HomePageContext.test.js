@@ -1,4 +1,4 @@
-import HomePageProvider, {HomePageContext} from '../HomePageProvider'
+import {HomePageProvider, HomePageContext} from '../HomePageProvider'
 import '@testing-library/jest-dom'
 import { render, screen} from '@testing-library/react'
 

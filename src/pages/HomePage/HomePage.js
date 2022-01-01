@@ -34,9 +34,9 @@ function HomePage({ isAuth }) {
   
 
   //Updating the Post(Editing the Post)
-  const updatePost = async (id, ntitle, npostText) => {
+  const updatePost = async (id, newtitle, newpostText) => {
     const userDoc = doc(db, "posts", id)
-    const newFields = {title : ntitle, postText: npostText}  
+    const newFields = {title : newtitle, postText: newpostText}  
     await updateDoc(userDoc, newFields)
     isEditsection(false)
     }        

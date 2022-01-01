@@ -3,7 +3,7 @@ import { createContext, useState } from "react"
 
 export const HomePageContext = createContext(null)
 
-function HomePageProvider({children}) {
+export function HomePageProvider({children}) {
 
     const [postLists, setPostLists] = useState([]);
     
@@ -25,4 +25,4 @@ function HomePageProvider({children}) {
     )
 }
 
-export default HomePageProvider
+

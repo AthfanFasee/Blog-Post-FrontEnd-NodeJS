@@ -1,13 +1,15 @@
 import UpdatePost from '../UpdatePost'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen} from '@testing-library/react'
+import {  render, screen} from '@testing-library/react'
+import { HomePageProvider } from '../../../Helper/HomePageContexts/HomePageProvider'
 
-const mockedFunction= jest.fn()
+const mockedUpdatePost = jest.fn()
 describe("Checking Render", () => {
     it("Input", () => {
-        // render(<UpdatePost updatePost={mockedFunction}/>)
-        // const InputElement = screen.getByPlaceholderText("Title..")
-        // expect(InputElement).toBeInTheDocument()
+        render(<UpdatePost/>, {wrapper: HomePageProvider})
+           
+        const EditSection = screen.getByText(/Update Your Post/i)
+        expect(EditSection).toBeTruthy()
     })
 
 })
