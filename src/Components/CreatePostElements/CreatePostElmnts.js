@@ -1,3 +1,5 @@
+import './CreatePostElement.css'
+
 function CreatePostElmnts({createPost, setTitle, setPostText, postText, title}) {
     return (
         <div className="createPostPage">

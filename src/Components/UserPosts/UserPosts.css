@@ -1,0 +1,60 @@
+
+.post {
+    width: 600px;
+    height: auto;
+    max-height: 600px;
+    background-color: rgb(237, 248, 248);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .post:hover{
+    border: 1px solid black;
+  }
+  
+  .post .postHeader {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: rgb(7, 36, 53);
+    font-family: 'Inconsolata', monospace;
+  }
+  
+  .title {
+    flex: 50%;
+  }
+  
+  .deletePost {
+    flex: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: auto;
+  }
+  
+  .deletePost button {
+    border: none;
+    background: none;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  .post .postTextContainer {
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    height: auto;
+    max-height: 400px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  
+  .Aurthor{
+    font-family: 'Pacifico', cursive;
+  }
+  
+  .Time {
+    font-family: 'Pacifico', cursive;
+  }

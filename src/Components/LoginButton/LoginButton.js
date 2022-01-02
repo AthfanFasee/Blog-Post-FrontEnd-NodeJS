@@ -1,3 +1,5 @@
+import './LoginButton.css'
+
 function LoginButton({signInWithGoogle}) {
     return (
         <div className="loginPage">
