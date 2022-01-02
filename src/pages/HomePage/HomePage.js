@@ -4,7 +4,7 @@ import { db } from "../../firebase-config";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
-
+import './HomePage.css'
 
 //Using contextApi to pass props to Child Components
 

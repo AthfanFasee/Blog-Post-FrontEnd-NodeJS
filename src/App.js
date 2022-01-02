@@ -1,5 +1,5 @@
 
-import './App.css';
+import './AppStyle/App.css';
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import Login from './pages/Login/Login'
 import CreatePost from './pages/CreatePost/CreatePost'
