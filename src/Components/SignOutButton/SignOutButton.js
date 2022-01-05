@@ -1,6 +1,6 @@
 import {signOut} from 'firebase/auth'
 import { auth } from '../../firebase-config'
-
+import './SignOutStyle/SignOut.css'
 
 
 
@@ -14,7 +14,7 @@ function SignOutButton({setIsAuth}) {
     })
   }
     return (
-        <div>
+        <div className="SignOut">
             <button onClick={signout}>LogOut</button>
         </div>
     )

@@ -7,11 +7,11 @@ function CreatePostElmnts({createPost, setTitle, setPostText, postText, title}) 
             <h1>Create A Post</h1>
             <div className="inputGp">
                 <label>Title:</label>
-                <input placeholder="Title.."  onChange={(event) => setTitle(event.target.value)}/>
+                <input placeholder="Title.." value={title}  onChange={(event) => setTitle(event.target.value)}/>
             </div>
             <div className="inputGp">
                 <label>Post:</label>
-                <textarea placeholder="Post..." onChange={(event) => setPostText(event.target.value)} />
+                <textarea placeholder="Post..." value={postText} onChange={(event) => setPostText(event.target.value)} />
             </div>
             <button disabled={!title || !postText}  onClick={createPost}>Submit Post</button>
             </div>

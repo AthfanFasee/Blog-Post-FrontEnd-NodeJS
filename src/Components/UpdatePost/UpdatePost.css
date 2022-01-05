@@ -1,0 +1,9 @@
+.UpdatePostBG {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(21, 24, 23, 0.829);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

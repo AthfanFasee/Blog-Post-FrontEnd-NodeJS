@@ -7,18 +7,21 @@
   }
   
   .cpContainer {
+    font-family: 'Pacifico', cursive;
     width: 500px;
     height: auto;
     padding: 20px;
-    background-color: black;
+    background-color: rgb(121, 95, 95);
     border-radius: 12px;
-    color: white;
+    color: rgb(0, 0, 0);
     display: flex;
     flex-direction: column;
   }
   
   .cpContainer h1 {
+    
     text-align: center;
+    font-size: 40px;
   }
   
   .cpContainer label {
@@ -46,15 +49,22 @@
   }
   
   .cpContainer button {
+    font-family: 'Pacifico', cursive;
     margin-top: 20px;
     height: 40px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 18px;
+    
   }
   input,
   textarea {
     margin-top: 5px;
+  }
+
+  .cpContainer button:hover {
+    color: rgb(39, 27, 27);
+    border-bottom: 2px solid rgb(39, 27, 27);
   }
   

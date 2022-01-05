@@ -1,10 +1,12 @@
 import { useContext } from "react"
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider"
+import './UpdatePost.css'
+
 
 export default function UpdatePost({updatePost}) {
     const {isEditsection, setNewTitle, setNewPostText, newpostText, newtitle } = useContext(HomePageContext)
     return (
-        <div className="BackGround">
+        <div className="UpdatePostBG">
         <div className="">
         <div className="createPostPage">
             <div className="cpContainer">
