@@ -15,9 +15,9 @@ function Login({setIsAuth}) {
             //note that button click function doesnt change state value. instead the promise(signInwithProp does that if the promise is suceeded. so users cant simply click button and then cancel google login page and still acess restricted pages)
 
             navigate("/")
-        })
+        }).catch(alert) //if promise doesnt pass or if user couldnt signIn, alerting them the error
     }
-//IMPORTANTTTT local storage le save panne muthal check box and state use panni tick panna mattum staysigned in option kudukkalam
+//IMPORTANTTTT local storage le save panne muthal check box and state use panni tick panna mattum staysigned in option kudukkalam(extra va theveyenda)
 
     return (
         <div>

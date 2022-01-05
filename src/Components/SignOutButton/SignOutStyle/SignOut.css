@@ -1,71 +1,23 @@
+
+.SignOut{
+    margin-left: auto;
+    margin-right: 20px;
+    
+} 
+/* Reset */
 .SignOutbutton {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: inherit;
-  font-weight: 700;
+  background: transparent;
+  color: rgb(7, 8, 19);
+  cursor: pointer;
+  padding: 10px 15px ;
+  margin-left: 20px;
+  margin-right: auto;
+  font-size: 17px;
+  font-weight: 500;
+  border: 2px solid rgb(15, 7, 7);
+  transition-duration: 0.4s;
+
 }
 
-.SignOut {
-  color: white;
-  text-decoration: none;
-  margin-left: auto;
-  margin-right: 20px;
-}
 
-.SignOut {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 13px 17px;
-  -webkit-box-shadow: inset 0 0 0 2px #ddeef5;
-          box-shadow: inset 0 0 0 2px #ddeef5;
-  color: white;
-  position: relative;
-  vertical-align: middle;
-}
 
-.SignOut::before, .SignOut::after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit;
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.SignOut:hover {
-  color: black;
-}
-
-.SignOut::before, .SignOut::after {
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  -webkit-transform-origin: center;
-          transform-origin: center;
-}
-
-.SignOut::before {
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
-  -webkit-transform: scale3d(0, 1, 1);
-          transform: scale3d(0, 1, 1);
-}
-
-.SignOut::after {
-  border-left: 3px solid black;
-  border-right: 3px solid black;
-  -webkit-transform: scale3d(1, 0, 1);
-          transform: scale3d(1, 0, 1);
-}
-
-.SignOut:hover::before, .SignOut:hover::after {
-  -webkit-transform: scale3d(1, 1, 1);
-          transform: scale3d(1, 1, 1);
-  -webkit-transition: -webkit-transform 0.5s;
-  transition: -webkit-transform 0.5s;
-  transition: transform 0.5s;
-  transition: transform 0.5s, -webkit-transform 0.5s;
-}
-/*# sourceMappingURL=SignOut.css.map */

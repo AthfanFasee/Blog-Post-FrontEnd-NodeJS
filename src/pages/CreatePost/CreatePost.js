@@ -30,6 +30,8 @@ function CreatePost({isAuth}) {
             aurthor: {name: auth.currentUser.displayName , id: auth.currentUser.uid},
             time : datetime,
         })
+        localStorage.removeItem("Title")
+        localStorage.removeItem("PostText")
         navigate("/")  // Imagine internet is bad or something. We dont want the page to redirected to homepage before even the data is properly added to the firebase database right? and thats why we use async await here, telling to function to actually await addingDoc beofore navigating
     }
 
