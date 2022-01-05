@@ -1,15 +1,25 @@
-.SignOut {
-  background: none;
-  border: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  margin: 1em;
-  padding: 1em 2em;
-  -webkit-box-shadow: inset 0 0 0 2px #f45e61;
-          box-shadow: inset 0 0 0 2px #f45e61;
-  color: #f45e61;
+.SignOutbutton {
+  background-color: transparent;
+  border: none;
+  color: white;
   font-size: inherit;
   font-weight: 700;
+}
+
+.SignOut {
+  color: white;
+  text-decoration: none;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.SignOut {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 13px 17px;
+  -webkit-box-shadow: inset 0 0 0 2px #ddeef5;
+          box-shadow: inset 0 0 0 2px #ddeef5;
+  color: white;
   position: relative;
   vertical-align: middle;
 }
@@ -23,47 +33,39 @@
   height: 100%;
 }
 
-.SignOut {
-  -webkit-transition: color 0.25s;
-  transition: color 0.25s;
+.SignOut:hover {
+  color: black;
 }
 
 .SignOut::before, .SignOut::after {
-  border: 2px solid transparent;
-  width: 0;
-  height: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-origin: center;
+          transform-origin: center;
 }
 
 .SignOut::before {
-  top: 0;
-  left: 0;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  -webkit-transform: scale3d(0, 1, 1);
+          transform: scale3d(0, 1, 1);
 }
 
 .SignOut::after {
-  bottom: 0;
-  right: 0;
-}
-
-.SignOut:hover {
-  color: #60daaa;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  -webkit-transform: scale3d(1, 0, 1);
+          transform: scale3d(1, 0, 1);
 }
 
 .SignOut:hover::before, .SignOut:hover::after {
-  width: 100%;
-  height: 100%;
-}
-
-.SignOut:hover::before {
-  border-top-color: #60daaa;
-  border-right-color: #60daaa;
-  -webkit-transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
-  transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
-}
-
-.SignOut:hover::after {
-  border-bottom-color: #60daaa;
-  border-left-color: #60daaa;
-  -webkit-transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
-  transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out 0.75s;
+  -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
 }
 /*# sourceMappingURL=SignOut.css.map */

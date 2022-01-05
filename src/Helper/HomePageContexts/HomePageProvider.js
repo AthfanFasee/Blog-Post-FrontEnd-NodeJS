@@ -11,6 +11,8 @@ export function HomePageProvider({children}) {
 
     const [newtitle, setNewTitle] = useState("")
     const [newpostText, setNewPostText] = useState("")
+    
+    
 
 
 

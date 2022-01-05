@@ -15,7 +15,7 @@ function SignOutButton({setIsAuth}) {
   }
     return (
         <div className="SignOut">
-            <button onClick={signout}>LogOut</button>
+            <button className = "SignOutbutton" onClick={signout}>LogOut</button>
         </div>
     )
 }

@@ -50,8 +50,9 @@ function HomePage({ isAuth }) {
 
       {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
-        return( 
-          <UserPosts post={post} isAuth={isAuth} deletePost={() => deletePost(post.id)}/>
+        return(
+          <div key={post.id}> 
+          <UserPosts post={post} isAuth={isAuth} deletePost={() => deletePost(post.id)}/></div>
          )
       })}
 
