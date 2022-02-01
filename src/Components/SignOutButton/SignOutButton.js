@@ -7,7 +7,7 @@ import './SignOutStyle/SignOut.css'
 function SignOutButton({setIsAuth}) {
 
     //setting up logout function
-  const signout = () => {
+  const signOut = () => {
     signOut(auth).then(() => {
       localStorage.clear()        //reverting back both things we added when we signed in
       setIsAuth(false)
@@ -15,7 +15,7 @@ function SignOutButton({setIsAuth}) {
   }
     return (
         <div className="SignOut">
-            <button className = "SignOutbutton" onClick={signout}>LogOut</button>
+            <button className = "SignOutbutton" onClick={signOut}>LogOut</button>
         </div>
     )
 }
