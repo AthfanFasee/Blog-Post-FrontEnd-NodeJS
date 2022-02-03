@@ -2,11 +2,15 @@ import {auth, provider} from '../../firebase-config'
 import {signInWithPopup} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import LoginButton from '../../Components/LoginButton/LoginButton'
+import Register from '../../Components/Register/Register'
+import {useState} from 'react'
+
 
 function Login({setIsAuth}) {
 
+    
     const navigate = useNavigate()
-
+    const [isRegister, setIsRegister] = useState(false)
     const signInWithGoogle = () => {
             signInWithPopup(auth, provider).then(() => {
             localStorage.setItem("isAuth", true) //making sure we stay signed in even after closing tab or browser//
@@ -21,7 +25,8 @@ function Login({setIsAuth}) {
 
     return (
         <div>
-            <LoginButton signInWithGoogle={signInWithGoogle}/>
+            {isRegister ? <Register setIsRegister={setIsRegister} /> : <LoginButton  setIsRegister={setIsRegister}/>}       
+            
         </div>
     )
 }

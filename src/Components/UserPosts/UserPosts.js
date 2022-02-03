@@ -1,7 +1,6 @@
 import DeleteButton from "../DeleteButton/DeleteButton"
 import UpdateButton from "../UpdateButton/UpdateButton"
-import { useContext, useState, useEffect } from "react"
-import { auth } from "../../firebase-config";
+import { useContext, useState } from "react"
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import './UserPosts.css'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -26,6 +25,7 @@ function UserPosts({post, deletePost, isAuth}) {
     return (
         <div className="postParent">
              
+             
           <div className="post">
             <div className="postHeader">
             <div className="title"><h1>{post.title}</h1></div>
@@ -38,20 +38,21 @@ function UserPosts({post, deletePost, isAuth}) {
 
             {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn(passing post as props so I can access post.id and stuffs to set them to states)*/}
             
-            {isAuth && post.aurthor.id === auth.currentUser.uid && ( 
+            {/* Need to change these button  logics according to JWT token */}
+            
              <div className="UpdateButton"><UpdateButton post={post} setId={setId} isEditsection={isEditsection} setNewTitle={setNewTitle} setNewPostText={setNewPostText}/></div>
-            )}
+            
 
             {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
-            {isAuth && post.aurthor.id === auth.currentUser.uid && 
-            <div className="DeleteButton"><DeleteButton deletePost={deletePost}/></div>}
+           
+            <div className="DeleteButton"><DeleteButton deletePost={deletePost}/></div>
     
             </div>
             </div>
             
             <div className="postTextContainer">{post.postText}</div>
-            <h4 className="Aurthor">@{post.aurthor.name}</h4>
-            <div className="Time">{post.time}</div>
+            <h4 className="Aurthor">Athfan</h4>
+            <div className="Time">{post.createdAt}</div>
             
           </div>
         </div>

@@ -5,6 +5,7 @@ export const HomePageContext = createContext(null)
 
 export function HomePageProvider({children}) {
 
+    //For all the posts in HomePage
     const [postLists, setPostLists] = useState([]);
     
 
@@ -18,7 +19,10 @@ export function HomePageProvider({children}) {
 
     const [id, setId] = useState("")
 
-    const[editsection, isEditsection] = useState(false);
+
+    const [editsection, isEditsection] = useState(false);
+
+    
     
     return (
         <HomePageContext.Provider value={{postLists, setPostLists, newtitle, setNewTitle, newpostText ,setNewPostText, id, setId, editsection, isEditsection}}>
