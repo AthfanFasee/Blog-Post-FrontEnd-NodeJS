@@ -1,16 +1,14 @@
 import './Register.css';
 
 
-function Register({setError, error, RegisterUser, setIsRegister, setRegisterPassword, setRegisterEmail, setRegisterUserName}) {\
-    
-  return (
-    <div className="createPostPage">
-        <div className="cpContainer">
-        <h1>Register</h1>
-        {error && <div className="errDiv">
-                    <h3>{error}</h3>
-                    </div>
-        }
+function Register({setError, error, RegisterUser, setIsRegister, setRegisterPassword, setRegisterEmail, setRegisterUserName}) {
+
+    return (
+    <div className="MainContainer">
+        <div className="childContainer">
+        <h1>Register Here</h1>   
+       {error && <h3 className="error">{`!! ${error}`}</h3>}  
+
         <div className="inputGp">
             <label>Email:</label>
             <input placeholder="Email..." onChange={(event) => setRegisterEmail(event.target.value)} />
@@ -26,7 +24,10 @@ function Register({setError, error, RegisterUser, setIsRegister, setRegisterPass
         <button onClick={RegisterUser}>Submit</button>
         <div className="RegisterContainer">
             <p>Already Registered?</p>
-        <button onClick={() => setIsRegister(false) } className="Register">Login Here</button>
+        <button onClick={() => {
+            setIsRegister(false)
+            setError("")
+            }} className="Register">Login Here</button>
         </div>
         </div>
     </div>

@@ -1,70 +1,86 @@
 
-.createPostPage {
-    width: 100%;
-    height: calc(100vh - 80px);
-    display: grid;
-    place-items: center;
-  }
+.MainContainer {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: grid;
+  place-items: center;
+}
+
+.childContainer {
+  font-family: 'Pacifico', cursive;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  background-color: rgb(121, 95, 95);
+  border-radius: 12px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+}
+
+.childContainer h1 {
   
-  .cpContainer {
-    font-family: 'Pacifico', cursive;
-    width: 500px;
-    height: auto;
-    padding: 20px;
-    background-color: rgb(121, 95, 95);
-    border-radius: 12px;
-    color: rgb(0, 0, 0);
-    display: flex;
-    flex-direction: column;
-  }
+  text-align: center;
+  font-size: 35px;
+}
+
+.error{
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  color: rgb(129, 19, 19);
+}
+
+
+.childContainer label {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.childContainer .inputGp {
   
-  .cpContainer h1 {
-    
-    text-align: center;
-    font-size: 40px;
-  }
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGp input {
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
   
-  .cpContainer label {
-    font-size: 25px;
-  }
-  .cpContainer .inputGp {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-  }
+}
+
+.childContainer button {
+  font-family: 'Pacifico', cursive;
+  margin-top: 20px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
   
-  .inputGp input,
-  .inputGp textarea {
-    font-size: 18px;
-    border: none;
-    border-radius: 2px;
-    padding: 5px;
-  }
+}
+
+.childContainer button:hover {
+  color: rgb(39, 27, 27);
+  border-bottom: 2px solid rgb(39, 27, 27);
+}
+
+.RegisterContainer{
+  display: flex;
+  align-items: center;
+  font-size: 21px;
   
-  .inputGp input {
-    height: 40px;
-  }
-  .inputGp textarea {
-    height: 150px;
-  }
-  
-  .cpContainer button {
-    font-family: 'Pacifico', cursive;
-    margin-top: 20px;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    
-  }
-  input,
-  textarea {
-    margin-top: 5px;
-  }
-  
-  .cpContainer button:hover {
-    color: rgb(39, 27, 27);
-    border-bottom: 2px solid rgb(39, 27, 27);
-  }
-  
+}
+
+
+.Register {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+
+

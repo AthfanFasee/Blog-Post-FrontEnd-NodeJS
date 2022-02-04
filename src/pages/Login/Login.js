@@ -28,15 +28,20 @@ function Login({setIsAuth}) {
     const [error, setError] = useState("")
 
 
+    //to save username
+    const [username, setUsername] = useState("")
+
     //Login
     const LoginUser = async () => {
         try{
             const {data} = await axios.post(LoginURL, {email: loginEmail, password: loginPassword});
             localStorage.setItem('token', data.token)
+            localStorage.setItem('userID', data.user.id)
+            
             navigate("/")
             window.location.reload();
         } catch(err) {
-            setError(err.response.data.msg)
+             setError(err.response.data.msg)             
         }
     }
 
@@ -51,13 +56,14 @@ function Login({setIsAuth}) {
 
         } catch(err) {
             setError(err.response.data.msg)
+            console.error(error)
         }
     }
 
     return (
         <div>
-            {isRegister ? <Register error={error} setIsRegister={setIsRegister} setRegisterUserName={setRegisterUserName} setRegisterEmail={setRegisterEmail} setRegisterPassword={setRegisterPassword} RegisterUser={RegisterUser}/>
-             : <LoginButton error={error} LoginUser={LoginUser}  setIsRegister={setIsRegister} setLoginEmail={setLoginEmail} setLoginPassword={setLoginPassword} />}       
+            {isRegister ? <Register setError={setError} error={error} setIsRegister={setIsRegister} setRegisterUserName={setRegisterUserName} setRegisterEmail={setRegisterEmail} setRegisterPassword={setRegisterPassword} RegisterUser={RegisterUser}/>
+             : <LoginButton setError={setError} error={error} LoginUser={LoginUser}  setIsRegister={setIsRegister} setLoginEmail={setLoginEmail} setLoginPassword={setLoginPassword} />}       
             
         </div>
     )

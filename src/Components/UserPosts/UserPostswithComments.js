@@ -9,7 +9,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 
 
-function UserPosts({post, deletePost}) {
+function UserPostswithComments({post, deletePost}) {
     const {setId, isEditsection, setNewTitle, setNewPostText} = useContext(HomePageContext)
     
   
@@ -33,18 +33,13 @@ function UserPosts({post, deletePost}) {
         }})
 
     }
-    return (        
+    return (
+        <div className="postParent">
+             
+             
           <div className="post">
-
-            <div className="postHeader"><h1>{post.title}</h1></div>
-
-             <div className="postContentContainer">
-                  <div className="postTextContainer">{post.postText}</div>
-                  <h4 className="Aurthor">Posted by: {post.userName}</h4>
-                  <div className="Time">@{post.createdAt}</div>
-                  <p className="likesCount">{post.likedBy.length}</p>    
-              </div>          
-
+            <div className="postHeader">
+            <div className="title"><h1>{post.title}</h1></div>
             <div className="UIButtons">
 
             {/* Showing like button according to if the user alrdy liked the post or not */}
@@ -56,21 +51,27 @@ function UserPosts({post, deletePost}) {
             {userID === post.createdBy && 
             <div className="UpdateButton"><UpdateButton post={post} setId={setId} isEditsection={isEditsection} setNewTitle={setNewTitle} setNewPostText={setNewPostText}/></div>
             }
+             
             
-
 
             {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
-            {userID === post.createdBy &&
+           {userID === post.createdBy &&
             <div className="DeleteButton"><DeleteButton deletePost={deletePost} post={post}/></div>
-            }
-
-            <CommentIcon fontSize="medium" className="commentsIcon"/>
-
-
+           }
+            
+           <CommentIcon fontSize="medium" className="commentsIcon"/>
+            
+            </div>
             </div>
             
+            <div className="postTextContainer">{post.postText}</div>
+            <h4 className="Aurthor">Posted by: {post.userName}</h4>
+            <div className="Time">@{post.createdAt}</div>
+            <p className="likesCount">{post.likedBy.length}</p>
+            
           </div>
+        </div>
     )
 }
 
-export default UserPosts
+export default UserPostswithComments

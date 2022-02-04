@@ -1,16 +1,12 @@
 import './LoginButton.css'
 
-function LoginButton({error, setIsRegister, setLoginEmail, setLoginPassword, LoginUser}) {
-
-    
+function LoginButton({setError, error, setIsRegister, setLoginEmail, setLoginPassword, LoginUser}) {
+ 
     return (
-        <div className="createPostPage">
-        <div className="cpContainer">
+        <div className="MainContainer">
+        <div className="childContainer">
         <h1>Login with your Email</h1>
-        {error && <div className="errDiv">
-                    <h3>{error}</h3>
-                    </div>
-        }
+        {error && <h3 className="error">{`!! ${error}`}</h3>}
         
         <div className="inputGp">
             <label>Email:</label>
@@ -23,7 +19,10 @@ function LoginButton({error, setIsRegister, setLoginEmail, setLoginPassword, Log
         <button onClick={LoginUser} >Login</button>
         <div className="RegisterContainer">
             <p>Don't have an account?</p>
-        <button onClick={() => setIsRegister(true)} className="Register">Register Here</button>
+        <button onClick={() => {
+            setIsRegister(true)
+            setError("")
+            }} className="Register">Register Here</button>
         </div>
         </div>
     </div>

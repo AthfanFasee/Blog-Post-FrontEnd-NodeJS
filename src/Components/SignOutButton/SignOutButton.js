@@ -10,6 +10,7 @@ function SignOutButton() {
     //setting up logout function
   const signOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userID');
     navigate('/')
     window.location.reload();
 

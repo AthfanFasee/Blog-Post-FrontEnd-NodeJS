@@ -15,18 +15,35 @@
     border: 1px solid black;
   }
   
-  .post .postHeader {
+   .postHeader {
     display: flex;
     justify-content: center;
     width: 100%;
     color: rgb(7, 36, 53);
     font-family: 'Inconsolata', monospace;
-  }
-  
-  .title {
     flex: 50%;
+  }   
+
+  .post .postTextContainer {
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    height: auto;
+    max-height: 400px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
   }
   
+  .Aurthor{
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 15px;
+  }
+  
+  .Time {
+    margin-bottom: 40px;
+    font-family: 'Pacifico', cursive;
+  }
+
   .UIButtons {
     
     flex: 50%;
@@ -44,17 +61,11 @@
     cursor: pointer;
   }
   
-  .HeartIcon {
-    position: absolute;
-    top: 10px; 
-    right: 10px;
-    
-  }
 
   .UpdateButton{
     position: absolute;
-    right: 10px;
-    top: 50px;
+    right: 15px;
+    top: 20px;
   }
 
   .DeleteButton {
@@ -63,20 +74,22 @@
     right: 10px;
   }
 
-  .post .postTextContainer {
-    font-family: 'Open Sans', sans-serif;
-    word-wrap: break-word;
-    height: auto;
-    max-height: 400px;
-    width: 100%;
-    overflow: hidden;
-    overflow-y: auto;
+  .LikeIcon {
+    position: absolute;
+    bottom: 12px; 
+    left: 10px;
+    
   }
-  
-  .Aurthor{
-    font-family: 'Pacifico', cursive;
+
+  .likesCount {
+    position: absolute;
+    bottom: 0; 
+    left: 40px;
   }
-  
-  .Time {
-    font-family: 'Pacifico', cursive;
+
+  .commentsIcon {
+    position: absolute;
+    bottom: 12px; 
+    left: 70px;
+    
   }

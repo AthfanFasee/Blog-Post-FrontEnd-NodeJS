@@ -1,12 +1,12 @@
 
-.createPostPage {
+.MainContainer {
   width: 100%;
   height: calc(100vh - 80px);
   display: grid;
   place-items: center;
 }
 
-.cpContainer {
+.childContainer {
   font-family: 'Pacifico', cursive;
   width: 500px;
   height: auto;
@@ -18,37 +18,41 @@
   flex-direction: column;
 }
 
-.cpContainer h1 {
+.childContainer h1 {
   
   text-align: center;
-  font-size: 40px;
+  font-size: 35px;
 }
 
-.cpContainer label {
-  font-size: 25px;
+.error{
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  color: rgb(129, 19, 19);
 }
-.cpContainer .inputGp {
-  margin-top: 30px;
+
+
+.childContainer label {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.childContainer .inputGp {
+  
   display: flex;
   flex-direction: column;
 }
 
-.inputGp input,
-.inputGp textarea {
+.inputGp input {
   font-size: 18px;
   border: none;
-  border-radius: 2px;
+  border-radius: 5px;
   padding: 5px;
+  
 }
 
-.inputGp input {
-  height: 40px;
-}
-.inputGp textarea {
-  height: 150px;
-}
-
-.cpContainer button {
+.childContainer button {
   font-family: 'Pacifico', cursive;
   margin-top: 20px;
   height: 40px;
@@ -58,12 +62,8 @@
   font-size: 18px;
   
 }
-input,
-textarea {
-  margin-top: 5px;
-}
 
-.cpContainer button:hover {
+.childContainer button:hover {
   color: rgb(39, 27, 27);
   border-bottom: 2px solid rgb(39, 27, 27);
 }
@@ -75,10 +75,12 @@ textarea {
   
 }
 
+
 .Register {
   margin-left: 20px;
   margin-bottom: 20px;
   width: 50%;
 }
+
 
 
