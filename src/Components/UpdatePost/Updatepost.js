@@ -4,7 +4,7 @@ import './UpdatePost.css'
 
 
 export default function UpdatePost({updatePost}) {
-    const {isEditsection, setNewTitle, setNewPostText, newpostText, newtitle } = useContext(HomePageContext)
+    const {isEditsection, setNewTitle, setNewPostText, newpostText, newtitle, id } = useContext(HomePageContext)
     return (
         <div className="UpdatePostBG">
         <div className="">
@@ -19,7 +19,7 @@ export default function UpdatePost({updatePost}) {
                 <label>New Post:</label>
                 <textarea placeholder="Post..." title="TextArea" value={newpostText} onChange={(event) => setNewPostText(event.target.value)} />
             </div>
-            <button disabled={!newpostText || !newtitle} onClick={updatePost}>Save Changes</button>
+            <button disabled={!newpostText || !newtitle} onClick={() => updatePost(id) }>Save Changes</button>
             <button onClick={() => isEditsection(false)}>Cancel</button>
             </div>
         </div>

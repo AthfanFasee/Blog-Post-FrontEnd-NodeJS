@@ -6,7 +6,7 @@ import './UserPosts.css'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-function UserPosts({post, deletePost, isAuth}) {
+function UserPosts({post, deletePost}) {
     const {setId, isEditsection, setNewTitle, setNewPostText} = useContext(HomePageContext)
     const [isFavorite, SetisFavorite] = useState(false)
     
@@ -45,13 +45,13 @@ function UserPosts({post, deletePost, isAuth}) {
 
             {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
            
-            <div className="DeleteButton"><DeleteButton deletePost={deletePost}/></div>
+            <div className="DeleteButton"><DeleteButton deletePost={deletePost} post={post}/></div>
     
             </div>
             </div>
             
             <div className="postTextContainer">{post.postText}</div>
-            <h4 className="Aurthor">Athfan</h4>
+            <h4 className="Aurthor">{post.userName}</h4>
             <div className="Time">{post.createdAt}</div>
             
           </div>

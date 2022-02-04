@@ -1,10 +1,10 @@
 
-function DeleteButton({deletePost}) {
+function DeleteButton({deletePost, post}) {
     return (
         <div className="deletediv">
             <button
                 title="Delete Post" 
-                onClick={deletePost}>&#128465;</button>
+                onClick={() => deletePost(post._id)}>&#128465;</button>
         </div>
     )
 }

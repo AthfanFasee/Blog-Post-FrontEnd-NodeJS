@@ -1,31 +1,63 @@
-import {auth, provider} from '../../firebase-config'
-import {signInWithPopup} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import LoginButton from '../../Components/LoginButton/LoginButton'
 import Register from '../../Components/Register/Register'
 import {useState} from 'react'
+import axios from 'axios'
 
 
 function Login({setIsAuth}) {
 
-    
-    const navigate = useNavigate()
-    const [isRegister, setIsRegister] = useState(false)
-    const signInWithGoogle = () => {
-            signInWithPopup(auth, provider).then(() => {
-            localStorage.setItem("isAuth", true) //making sure we stay signed in even after closing tab or browser//
+    const navigate = useNavigate();
+    const RegisterURL = 'http://localhost:4000/api/v1/auth/register'
+    const LoginURL = 'http://localhost:4000/api/v1/auth/login'
 
-            setIsAuth(true) //can use it to prevent users from specific pages without signin//
-            //note that button click function doesnt change state value. instead the promise(signInwithProp does that if the promise is suceeded. so users cant simply click button and then cancel google login page and still acess restricted pages)
+    //To render register form
+    const [isRegister, setIsRegister] = useState(false);
 
+    //in Register form
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+    const [registerUserName, setRegisterUserName] = useState("");
+
+
+    //in Login Form
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+
+    //to catch errors
+    const [error, setError] = useState("")
+
+
+    //Login
+    const LoginUser = async () => {
+        try{
+            const {data} = await axios.post(LoginURL, {email: loginEmail, password: loginPassword});
+            localStorage.setItem('token', data.token)
             navigate("/")
-        }).catch(alert) //if promise doesnt pass or if user couldnt signIn, alerting them the error
+            window.location.reload();
+        } catch(err) {
+            setError(err.response.data.msg)
+        }
     }
-//IMPORTANTTTT local storage le save panne muthal check box and state use panni tick panna mattum staysigned in option kudukkalam(extra va theveyenda)
+
+
+    //Register
+    const RegisterUser = async () => {
+        try {
+            const {data} = await axios.post(RegisterURL, {email: registerEmail, password: registerPassword, name: registerUserName});
+            localStorage.setItem('token', data.token)
+            navigate("/")
+            window.location.reload();
+
+        } catch(err) {
+            setError(err.response.data.msg)
+        }
+    }
 
     return (
         <div>
-            {isRegister ? <Register setIsRegister={setIsRegister} /> : <LoginButton  setIsRegister={setIsRegister}/>}       
+            {isRegister ? <Register error={error} setIsRegister={setIsRegister} setRegisterUserName={setRegisterUserName} setRegisterEmail={setRegisterEmail} setRegisterPassword={setRegisterPassword} RegisterUser={RegisterUser}/>
+             : <LoginButton error={error} LoginUser={LoginUser}  setIsRegister={setIsRegister} setLoginEmail={setLoginEmail} setLoginPassword={setLoginPassword} />}       
             
         </div>
     )

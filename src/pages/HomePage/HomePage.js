@@ -10,9 +10,9 @@ import './HomePage.css'
 
 function HomePage({ isAuth }) {
 
-  const {postLists, setPostLists, newtitle, newpostText, id, editsection, isEditsection} = useContext(HomePageContext)
+  const {postLists, setPostLists, newtitle, newpostText, editsection, isEditsection} = useContext(HomePageContext)
 
-
+  const token = localStorage.getItem('token')
 
   //Getting Posts from FireBase DataBase when the HomePage Component is rendered
   const url = 'http://localhost:4000/api/v1/posts'
@@ -20,20 +20,37 @@ function HomePage({ isAuth }) {
   useEffect(() => {
     const getPosts = async () => {
       const {data} = await axios.get(url)
-      console.log(data)
-      setPostLists(data.posts)
+      setPostLists(data.posts);
     };
     getPosts();
   });
 
 
-
-  //Deleting the post
-  
-
-  
-
   //Updating the Post(Editing the Post)
+
+  const updatePost = async (id) => {
+      axios.patch(url+`/${id}`, {title: newtitle, postText: newpostText }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      isEditsection(false);
+  }
+  
+  
+  
+  
+  //Deleting the post
+  const deletePost = async (id) => {
+    axios.delete(url+`/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+}
+
+  
+
   
 
 
@@ -41,20 +58,20 @@ function HomePage({ isAuth }) {
     <div className="homePage">
 
       {/*Warning Users to SignIn when they are not SignedIn */}
-     
+      {!token && <p>Please Login to createPosts or to comment</p>}
 
       {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
         return(
-          <div key={post._id}> 
-          <UserPosts post={post} isAuth={isAuth} /></div> //delete post ithukkulle props ah pohuma
+          <div key={post._id}>
+          <UserPosts post={post} isAuth={isAuth} deletePost={deletePost}/></div> //delete post ithukkulle props ah pohuma
          )
       })}
 
 
     {/* Rendering UpdatePost Component only when UpdateButton is clicked */}
     {editsection && 
-    <UpdatePost/>
+    <UpdatePost updatePost={updatePost}/>
     }
     </div>)
 }
