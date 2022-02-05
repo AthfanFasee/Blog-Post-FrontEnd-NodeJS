@@ -14,7 +14,7 @@ function HomePage({ isAuth }) {
 
   const token = localStorage.getItem('token')
 
-  //Getting Posts from FireBase DataBase when the HomePage Component is rendered
+  //Getting Posts from MongoDB when the HomePage Component is rendered
   const url = 'http://localhost:4000/api/v1/posts'
   
   useEffect(() => {

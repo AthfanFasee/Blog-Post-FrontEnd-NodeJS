@@ -27,16 +27,14 @@ function Login({setIsAuth}) {
     //to catch errors
     const [error, setError] = useState("")
 
-
-    //to save username
-    const [username, setUsername] = useState("")
+  
 
     //Login
     const LoginUser = async () => {
         try{
             const {data} = await axios.post(LoginURL, {email: loginEmail, password: loginPassword});
             localStorage.setItem('token', data.token)
-            localStorage.setItem('userID', data.user.id)
+            localStorage.setItem('userID', data.user.id)  //Saving token and username as soon as the user is logged in / Registered
             
             navigate("/")
             window.location.reload();
@@ -51,6 +49,7 @@ function Login({setIsAuth}) {
         try {
             const {data} = await axios.post(RegisterURL, {email: registerEmail, password: registerPassword, name: registerUserName});
             localStorage.setItem('token', data.token)
+            localStorage.setItem('userID', data.user.id)
             navigate("/")
             window.location.reload();
 

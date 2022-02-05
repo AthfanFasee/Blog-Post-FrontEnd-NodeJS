@@ -1,10 +1,11 @@
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function DeleteButton({deletePost, post}) {
     return (
         <div className="deletediv">
-            <button
+            <DeleteIcon
                 title="Delete Post" 
-                onClick={() => deletePost(post._id)}>&#128465;</button>
+                onClick={() => deletePost(post._id)}>&#128465;</DeleteIcon>
         </div>
     )
 }

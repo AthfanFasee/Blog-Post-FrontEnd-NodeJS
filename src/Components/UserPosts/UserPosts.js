@@ -1,6 +1,6 @@
 import DeleteButton from "../DeleteButton/DeleteButton"
 import UpdateButton from "../UpdateButton/UpdateButton"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import './UserPosts.css'
 import axios from "axios"

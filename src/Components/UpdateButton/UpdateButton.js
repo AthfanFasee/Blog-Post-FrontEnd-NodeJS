@@ -1,5 +1,7 @@
-import { useContext } from "react"
-import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider"
+import { useContext } from "react";
+import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
+
+
 
 function UpdateButton({post}) {
   const {setNewTitle, setNewPostText, isEditsection, setId} = useContext(HomePageContext)
@@ -17,4 +19,4 @@ function UpdateButton({post}) {
     )
 }
 
-export default UpdateButton
+export default UpdateButton;
