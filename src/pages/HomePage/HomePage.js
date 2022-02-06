@@ -4,26 +4,30 @@ import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import './HomePage.css'
+import Pagination from './Pagination/Pagination'
+
 
 //Using contextApi to pass props to Child Components
 
 
 function HomePage({ isAuth }) {
 
-  const {postLists, setPostLists, newtitle, newpostText, editsection, isEditsection} = useContext(HomePageContext)
+  const {page, postLists, setPostLists, newtitle, newpostText, editsection, isEditsection} = useContext(HomePageContext)
 
   const token = localStorage.getItem('token')
 
+  
+
   //Getting Posts from MongoDB when the HomePage Component is rendered
   const url = 'http://localhost:4000/api/v1/posts'
-  
   useEffect(() => {
     const getPosts = async () => {
-      const {data} = await axios.get(url)
+      const {data} = await axios.get(url+`?page=${page}`)
       setPostLists(data.posts);
+      console.log(data.posts)
     };
     getPosts();
-  });
+  }, [page]);
 
 
   //Updating the Post(Editing the Post)
@@ -35,6 +39,7 @@ function HomePage({ isAuth }) {
         }
       })
       isEditsection(false);
+      window.location.reload();
   }
   
   
@@ -47,6 +52,7 @@ function HomePage({ isAuth }) {
         Authorization: `Bearer ${token}`
       }
     })
+    window.location.reload();
 }
 
   
@@ -59,7 +65,7 @@ function HomePage({ isAuth }) {
 
       {/*Warning Users to SignIn when they are not SignedIn */}
       {!token && <p>Please Login to createPosts or to comment</p>}
-
+      {!editsection && <Pagination />}
       {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
         return(
@@ -73,6 +79,9 @@ function HomePage({ isAuth }) {
     {editsection && 
     <UpdatePost updatePost={updatePost}/>
     }
+
+    {/* Page SetUp(Pagination) */}
+    {!editsection && <Pagination />}
     </div>)
 }
 

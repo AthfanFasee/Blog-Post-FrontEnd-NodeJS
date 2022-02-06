@@ -22,10 +22,11 @@ export function HomePageProvider({children}) {
 
     const [editsection, isEditsection] = useState(false);
 
-    
+    //For Pagination
+    const [page, setPage] = useState(1);
     
     return (
-        <HomePageContext.Provider value={{postLists, setPostLists, newtitle, setNewTitle, newpostText ,setNewPostText, id, setId, editsection, isEditsection}}>
+        <HomePageContext.Provider value={{postLists, setPostLists, newtitle, setNewTitle, newpostText ,setNewPostText, id, setId, editsection, isEditsection, page, setPage}}>
             {children}
         </HomePageContext.Provider>
     )
