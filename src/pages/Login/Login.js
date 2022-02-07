@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import LoginButton from '../../Components/LoginButton/LoginButton'
+import LoginButton from '../../Components/LoginButton/LoginComponent'
 import Register from '../../Components/Register/Register'
 import {useState} from 'react'
 import axios from 'axios'
@@ -55,7 +55,6 @@ function Login({setIsAuth}) {
 
         } catch(err) {
             setError(err.response.data.msg)
-            console.error(error)
         }
     }
 

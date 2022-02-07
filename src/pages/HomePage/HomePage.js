@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import './HomePage.css'
-import Pagination from './Pagination/Pagination'
+import Pagination from '../../Components/HomePageComponents/Pagination/Pagination'
+import ProfileButton from "../../Components/ProfileButton/ProfileButton";
 
 
 //Using contextApi to pass props to Child Components
@@ -12,11 +13,15 @@ import Pagination from './Pagination/Pagination'
 
 function HomePage({ isAuth }) {
 
-  const {page, postLists, setPostLists, newtitle, newpostText, editsection, isEditsection} = useContext(HomePageContext)
+  const {page, postLists, setPostLists, newtitle, setNewTitle, newpostText, setNewPostText, editsection, isEditsection} = useContext(HomePageContext)
 
   const token = localStorage.getItem('token')
 
-  
+  //To save noOfPages
+  const [pageCount, setPageCount] = useState(1)
+
+  //To save updatedPost
+  const [updatedPost, setUpdatedPost] = useState("")
 
   //Getting Posts from MongoDB when the HomePage Component is rendered
   const url = 'http://localhost:4000/api/v1/posts'
@@ -24,7 +29,7 @@ function HomePage({ isAuth }) {
     const getPosts = async () => {
       const {data} = await axios.get(url+`?page=${page}`)
       setPostLists(data.posts);
-      console.log(data.posts)
+      setPageCount(data.noOfPages);
     };
     getPosts();
   }, [page]);
@@ -33,13 +38,17 @@ function HomePage({ isAuth }) {
   //Updating the Post(Editing the Post)
 
   const updatePost = async (id) => {
-      axios.patch(url+`/${id}`, {title: newtitle, postText: newpostText }, {
+      const {data} = await axios.patch(url+`/${id}`, {title: newtitle, postText: newpostText }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
+      setUpdatedPost(data.post) //To re-render a post as soon as it's updated
       isEditsection(false);
-      window.location.reload();
+
+      //After Updating when user click edit button again giving them the updated values typed in Inputs already.
+      setNewTitle(data.post.title)
+      setNewPostText(data.post.postText)
   }
   
   
@@ -52,7 +61,7 @@ function HomePage({ isAuth }) {
         Authorization: `Bearer ${token}`
       }
     })
-    window.location.reload();
+    
 }
 
   
@@ -65,12 +74,18 @@ function HomePage({ isAuth }) {
 
       {/*Warning Users to SignIn when they are not SignedIn */}
       {!token && <p>Please Login to createPosts or to comment</p>}
-      {!editsection && <Pagination />}
+
+      {token && <ProfileButton />}
+      
+      {/* Page SetUp(Pagination) */}
+      {!editsection && <Pagination pageCount={pageCount}/>}
+
+
       {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
         return(
           <div key={post._id}>
-          <UserPosts post={post} isAuth={isAuth} deletePost={deletePost}/></div> //delete post ithukkulle props ah pohuma
+          <UserPosts updatedPost={updatedPost} post={post} isAuth={isAuth} deletePost={deletePost}/></div> //delete post ithukkulle props ah pohuma
          )
       })}
 
@@ -80,8 +95,8 @@ function HomePage({ isAuth }) {
     <UpdatePost updatePost={updatePost}/>
     }
 
-    {/* Page SetUp(Pagination) */}
-    {!editsection && <Pagination />}
+    
+    
     </div>)
 }
 

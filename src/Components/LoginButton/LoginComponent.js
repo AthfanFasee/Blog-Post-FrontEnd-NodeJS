@@ -1,4 +1,4 @@
-import './LoginButton.css'
+import './LoginComponent.css'
 
 function LoginButton({setError, error, setIsRegister, setLoginEmail, setLoginPassword, LoginUser}) {
  

@@ -68,7 +68,12 @@ function UserPostswithComments({post, deletePost}) {
             <h4 className="Aurthor">Posted by: {post.userName}</h4>
             <div className="Time">@{post.createdAt}</div>
             <p className="likesCount">{post.likedBy.length}</p>
-            
+            <div className="CommentsMainContainer">
+              <div className="CommentsContainer">
+                <p>Athfan</p>
+                <p>Amazing Post</p>
+              </div>
+            </div>
           </div>
         </div>
     )

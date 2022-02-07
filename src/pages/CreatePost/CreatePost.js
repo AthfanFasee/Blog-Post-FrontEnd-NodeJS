@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import CreatePostElmnts from "../../Components/CreatePostElements/CreatePostElmnts"
 
-function CreatePost({isAuth}) {
+function CreatePost() {
 
     const [title, setTitle] = useState( localStorage.getItem("Title") || "")
     const [postText, setPostText] = useState(localStorage.getItem("PostText") || "")
@@ -12,9 +12,10 @@ function CreatePost({isAuth}) {
     const url = "http://localhost:4000/api/v1/posts"
     const token = localStorage.getItem("token")
 
+    //to catch errors
+    const [error, setError] = useState("") 
 
-    //saving or adding post to firebase data base
-    
+    //Adding Post to MongoDB
     const createPost = async () => {
         try {
             await axios.post(url, {title, postText}, {
@@ -27,8 +28,15 @@ function CreatePost({isAuth}) {
             navigate("/") 
 
         } catch (err) {
-            console.log(err)
+            setError(err.response.data.msg)
         }
+    }
+
+    //For Cancel button
+    const Cancel = () => {
+        localStorage.removeItem("Title")
+        localStorage.removeItem("PostText")
+        navigate("/")
     }
 
     //If page reloads whatever we typed inside createElement inputs will stay still
@@ -47,7 +55,7 @@ function CreatePost({isAuth}) {
 
     return (
         <div >
-            <CreatePostElmnts createPost={createPost} setTitle={setTitle} setPostText={setPostText} title={title} postText={postText}/>
+            <CreatePostElmnts error={error} Cancel={Cancel} createPost={createPost} setTitle={setTitle} setPostText={setPostText} title={title} postText={postText}/>
         </div>
         
     )

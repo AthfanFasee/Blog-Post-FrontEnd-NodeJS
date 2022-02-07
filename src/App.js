@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import Login from './pages/Login/Login';
 import CreatePost from './pages/CreatePost/CreatePost';
 import HomePage from './pages/HomePage/HomePage';
-import SignOutButton from './Components/SignOutButton/SignOutButton';
 import {HomePageProvider} from './Helper/HomePageContexts/HomePageProvider';
 
 
@@ -27,7 +26,7 @@ function App() {
            
          <Link to='/createpost'>Create Post</Link>
          
-         <SignOutButton/>
+         
          </>
          )}
       </nav>
