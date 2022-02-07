@@ -6,6 +6,7 @@ import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider"
 import './HomePage.css'
 import Pagination from '../../Components/HomePageComponents/Pagination/Pagination'
 import ProfileButton from "../../Components/ProfileButton/ProfileButton";
+import SortButton from "../../Components/HomePageComponents/SortingButton/SortingButton";
 
 
 
@@ -17,6 +18,7 @@ function HomePage({ isAuth }) {
   const {page, postLists, setPostLists, newtitle, setNewTitle, newpostText, setNewPostText, editsection, isEditsection} = useContext(HomePageContext)
 
   const token = localStorage.getItem('token')
+  const userID = localStorage.getItem('userID');
 
   //To save noOfPages
   const [pageCount, setPageCount] = useState(1)
@@ -24,17 +26,25 @@ function HomePage({ isAuth }) {
   //To save updatedPost
   const [updatedPost, setUpdatedPost] = useState("")
 
+  //to save sort value
+  const [sort, setSort] = useState('-createdAt')
+
+  //Saving current User's ID to get only his posts if needed
+  const [ID, setID] = useState("")
+  console.log(ID)
+
   //Getting Posts from MongoDB when the HomePage Component is rendered
   const url = 'http://localhost:4000/api/v1/posts'
   useEffect(() => {
     const getPosts = async () => {
-      const {data} = await axios.get(url+`?page=${page}`)
+      const {data} = await axios.get(url+`?page=${page}&sort=${sort}${ID}`)
       setPostLists(data.posts);
       setPageCount(data.noOfPages);
     };
     getPosts();
-  }, [page]);
+  }, [page, sort, ID]);
 
+ 
 
   //Updating the Post(Editing the Post)
 
@@ -75,8 +85,8 @@ function HomePage({ isAuth }) {
 
       {/*Warning Users to SignIn when they are not SignedIn */}
       {!token && <p>Please Login to createPosts or to comment</p>}
-
-      {token && <ProfileButton />}
+      <SortButton setSort={setSort}/>
+      {token && <ProfileButton setID={setID} userID={userID}/>}
       
       {/* Page SetUp(Pagination) */}
       {!editsection && <Pagination pageCount={pageCount}/>}

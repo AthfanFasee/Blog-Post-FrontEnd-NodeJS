@@ -4,14 +4,14 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
+import './ProfileButton.css';
 
-export default function ProfileButton() {
+export default function ProfileButton({setID, userID}) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -37,7 +37,7 @@ export default function ProfileButton() {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
+        <Tooltip title="My Profile">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -88,10 +88,10 @@ export default function ProfileButton() {
        
 
 
-        <MenuItem>
-          <Avatar /> My Profile
+        <MenuItem className="Menu" onClick={() => setID(`&id=${userID}`)}>
+          <LocalPostOfficeIcon className="PostsIcon" /> My Posts
         </MenuItem>
-        <MenuItem onClick={signOut}>
+        <MenuItem className="Menu" onClick={signOut}>
           <ListItemIcon>
             <Logout fontSize="small"/>
           </ListItemIcon>

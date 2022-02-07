@@ -1,36 +1,59 @@
-import InputLabel from '@mui/material/InputLabel';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { useState } from 'react';
+import './SortingButton.css';
 
-export default function SortButton() {
-  const [age, setAge] = useState('');
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+export default function SortButton({setSort}) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  }
+  const Newest = () => {
+    setAnchorEl(null);
+    setSort('-createdAt')
+  };
+  const Oldest = () => {
+    setAnchorEl(null);
+    setSort('createdAt')
+  };
+  const MostLiked = () => {
+    setAnchorEl(null);
+    setSort('likesCount')
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-helper-label"
-          id="demo-simple-select-helper"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <FormHelperText>With label + helper text</FormHelperText>
-      </FormControl>
-      </div>
-  )}
+    <div className="SortButtonContainer">
+      <Button
+        className="SortButton"
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        Sort By
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={Newest}>Newest First</MenuItem>
+        <MenuItem onClick={Oldest}>Oldest First</MenuItem>
+        <MenuItem onClick={MostLiked}>Most Liked</MenuItem>
+      </Menu>
+    </div>
+  );
+}
