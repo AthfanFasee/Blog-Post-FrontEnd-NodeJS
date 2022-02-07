@@ -63,34 +63,38 @@ function UserPosts({post, deletePost, updatedPost}) {
              <div className="postContentContainer">
                   <div className="postTextContainer">{updatedPost._id === post._id ? updatedPost.postText : post.postText}</div>
                   <h4 className="Aurthor">Posted by: {post.userName}</h4>
-                  <div className="Time">@{post.createdAt}</div>
-                  <p className="likesCount">{likesCount}</p>    
-              </div>          
+                  <div className="Time">@{post.createdAt}</div>   
+              </div>   
 
-            <div className="UIButtons">
-
-            {/* Showing like button according to if the user alrdy liked the post or not */}
-            
-            <div className="LikeIcon">{likeButton}</div>
-
-            {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn(passing post as props so I can access post.id and stuffs to set them to states)*/}     
-            {userID === post.createdBy && 
-            <div className="UpdateButton"><UpdateButton updatedPost={updatedPost} post={post} setId={setId} isEditsection={isEditsection} setNewTitle={setNewTitle} setNewPostText={setNewPostText}/></div>
-            }
-            
-
-
-            {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
-            {userID === post.createdBy &&
-            <div className="DeleteButton"><DeleteButton deletePost={deletePost} post={post}/></div>
-            }
-
-            <CommentIcon fontSize="medium" className="commentsIcon"/>
-
-
-           
-
+              <div className="UpdateButton">
+              {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn(passing post as props so I can access post.id and stuffs to set them to states)*/}     
+              {userID === post.createdBy && 
+              <div><UpdateButton updatedPost={updatedPost} post={post} setId={setId} isEditsection={isEditsection} setNewTitle={setNewTitle} setNewPostText={setNewPostText}/></div>
+              }        
             </div>
+
+
+
+            <div className="LikeandCommentDeleteContainer">
+
+              {/* Showing like button according to if the user alrdy liked the post or not */}
+            
+              <div className="LikeIcon">{likeButton}</div>
+
+              <p className="likesCount">{likesCount}</p> 
+
+              <CommentIcon fontSize="medium" className="commentsIcon"/>
+
+
+              {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
+              {userID === post.createdBy &&
+              <div className="DeleteButton"><DeleteButton deletePost={deletePost} post={post}/></div>
+              }
+            </div>  
+
+
+            
+            
             
           </div>
     )
