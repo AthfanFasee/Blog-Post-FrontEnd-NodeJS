@@ -1,0 +1,13 @@
+.CommentInputContainer{
+    padding: 5px;
+    display:flex;
+    align-items:center;
+}
+.Input{
+    width: 550px;
+   
+    
+}
+.Button{
+    cursor: pointer;
+}

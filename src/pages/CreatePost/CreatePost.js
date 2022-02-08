@@ -54,7 +54,7 @@ function CreatePost() {
     })
 
     return (
-        <div >
+        <div>
             <CreatePostElmnts error={error} Cancel={Cancel} createPost={createPost} setTitle={setTitle} setPostText={setPostText} title={title} postText={postText}/>
         </div>
         

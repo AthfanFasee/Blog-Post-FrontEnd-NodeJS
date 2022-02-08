@@ -8,7 +8,7 @@ function Comments({comment, deleteComment, userID}) {
         <p className="CommentUser">{comment.userName}</p>
         <p className="Comment">{comment.Text}</p>
       </div>
-      {userID === comment.createdBy && <DeleteIcon className="Delete" onClick={() => deleteComment(comment._id)}></DeleteIcon>}
+      {userID === comment.createdBy && <DeleteIcon size="small" className="Delete" onClick={() => deleteComment(comment._id)}></DeleteIcon>}
       
   </div>;
 }

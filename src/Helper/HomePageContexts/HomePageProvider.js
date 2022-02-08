@@ -19,6 +19,8 @@ export function HomePageProvider({children}) {
 
     const [id, setId] = useState("")
 
+   //Saving current User's ID to get only his posts if needed
+    const [ID, setID] = useState("")
 
     const [editsection, isEditsection] = useState(false);
 
@@ -26,7 +28,7 @@ export function HomePageProvider({children}) {
     const [page, setPage] = useState(1);
     
     return (
-        <HomePageContext.Provider value={{postLists, setPostLists, newtitle, setNewTitle, newpostText ,setNewPostText, id, setId, editsection, isEditsection, page, setPage}}>
+        <HomePageContext.Provider value={{setID, ID, postLists, setPostLists, newtitle, setNewTitle, newpostText ,setNewPostText, id, setId, editsection, isEditsection, page, setPage}}>
             {children}
         </HomePageContext.Provider>
     )

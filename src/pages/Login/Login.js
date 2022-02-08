@@ -35,7 +35,8 @@ function Login({setIsAuth}) {
             const {data} = await axios.post(LoginURL, {email: loginEmail, password: loginPassword});
             localStorage.setItem('token', data.token)
             localStorage.setItem('userID', data.user.id)  //Saving token and username as soon as the user is logged in / Registered
-            
+            localStorage.setItem('userName', data.user.name)
+
             navigate("/")
             window.location.reload();
         } catch(err) {
@@ -50,6 +51,8 @@ function Login({setIsAuth}) {
             const {data} = await axios.post(RegisterURL, {email: registerEmail, password: registerPassword, name: registerUserName});
             localStorage.setItem('token', data.token)
             localStorage.setItem('userID', data.user.id)
+            localStorage.setItem('userName', data.user.name)
+
             navigate("/")
             window.location.reload();
 

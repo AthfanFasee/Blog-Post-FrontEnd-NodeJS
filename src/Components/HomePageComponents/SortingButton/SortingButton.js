@@ -2,7 +2,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
-import './SortingButton.css';
+
+
 
 
 export default function SortButton({setSort}) {
@@ -32,7 +33,15 @@ export default function SortButton({setSort}) {
   return (
     <div className="SortButtonContainer">
       <Button
-        className="SortButton"
+      sx={{ fontSize: '18px', 
+            color: '#020202',
+            textTransform: 'none',
+            fontFamily : 'Baloo Bhaijaan 2 cursive',
+            border : '1px solid #87BCF2',
+            borderRadius: '5px',
+            
+          }}
+        className="Button"
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"

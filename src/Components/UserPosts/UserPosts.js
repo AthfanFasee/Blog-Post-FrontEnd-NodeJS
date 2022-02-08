@@ -9,14 +9,17 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import LikePopOver from "../LikePopOver/LikePopOver";
 import Comments from "../Comments/Comments";
-import { Button } from "@mui/material";
+import CommentInput from "../CommentInput/CommentInput";
+import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
-
+ 
 function UserPosts({post, deletePost, updatedPost}) {
     const {setId, isEditsection, setNewTitle, setNewPostText} = useContext(HomePageContext);
     const userID = localStorage.getItem('userID');
     
-  
+    //Modifying Time which comes from DB
+    let time = post.createdAt.split('T').join(', ')
+    time = time.slice(0, 17)
 
     //Saving default values to show when page reloads
     const [likesCount, setLikesCount] = useState(post.likedBy.length);
@@ -63,11 +66,11 @@ function UserPosts({post, deletePost, updatedPost}) {
     //For Comment Section
 
     //For comments button
-  const [isComments, setIsComments] = useState(false)
-
+    const [isComments, setIsComments] = useState(false)
+  
    //to save comments data
     const [commentData, setCommentData] = useState("")
-
+    
     //to save commentInput value
     const [commentInput, setCommentInput] = useState("")
 
@@ -77,24 +80,24 @@ function UserPosts({post, deletePost, updatedPost}) {
     const CommentButtonClick = async () => {
       try {
         const {data} = await axios.get(`${url}/${post._id}`)
-        console.log(data)
         setCommentData(data.comments)
         setIsComments(true)
 
       } catch (error) {
-        console.log(error)
+        alert(error)
       }
        
     }
 
-    const addComment = async () => {
+    const addComment = async (id) => {
       try {
-          await axios.post(`${url}/${post._id}`, {Text:commentInput}, {
+          await axios.post(url, {Text:commentInput, Post:id}, {
             headers: {Authorization: `Bearer ${token}`}
           })
           CommentButtonClick()
+          setCommentInput("")
       } catch (error) {
-        console.log(error)
+        alert(error)
       }
     }
 
@@ -106,7 +109,7 @@ function UserPosts({post, deletePost, updatedPost}) {
       })
       CommentButtonClick()
     } catch (error) {
-      console.log(error)
+      alert.log(error)
     }   
   }
 
@@ -121,7 +124,7 @@ function UserPosts({post, deletePost, updatedPost}) {
              <div className="postContentContainer">
                   <div className="postTextContainer">{updatedPost._id === post._id ? updatedPost.postText : post.postText}</div>
                   <h4 className="Aurthor">Posted by: {post.userName}</h4>
-                  <div className="Time">@{post.createdAt}</div>   
+                  <div className="Time">@{time}</div>   
               </div>   
 
               <div className="UpdateButton">
@@ -131,7 +134,7 @@ function UserPosts({post, deletePost, updatedPost}) {
               }        
             </div>
 
-
+            
 
             <div className="LikeandCommentDeleteContainer">
 
@@ -141,7 +144,11 @@ function UserPosts({post, deletePost, updatedPost}) {
 
               <p className="likesCount">{likesCount}</p> 
 
-              <CommentIcon onClick={CommentButtonClick} fontSize="medium" className="commentsIcon"/>
+
+              {/* Conditionally Rendering CommentsIcon */}
+
+              {isComments ?  <CloseFullscreenIcon onClick={() => setIsComments(false)} className="commentsIcon" fontSize="medium" /> :
+              <CommentIcon onClick={CommentButtonClick} fontSize="medium" className="commentsIcon"/>}
 
 
               {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
@@ -150,16 +157,19 @@ function UserPosts({post, deletePost, updatedPost}) {
               }
             </div>
 
-            <input type="text" className="commentInput" onChange={(event) => setCommentInput(event.target.value)}/>
-            <Button onClick={addComment}>Add Comment</Button> 
-
+            {/* If comment Icon is clicked Rendering Comments on Screen */}
+            
+            {isComments && <CommentInput commentInput={commentInput} setCommentInput={setCommentInput} id={post._id} addComment={addComment}/>}
+            <div className="AllComments">
             {isComments && commentData.map(comment => {
               return (
-                <div className="CommentComponent" key={comment._id}>
+                <div key={comment._id}>
                   <Comments userID={userID} comment={comment} deleteComment={deleteComment}/>
                 </div>
               )
+              
             })}
+            </div>
             
 
 

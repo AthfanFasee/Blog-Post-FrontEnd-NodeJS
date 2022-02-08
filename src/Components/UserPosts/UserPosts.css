@@ -3,10 +3,10 @@
     position: relative;
     width: 600px;
     height: auto;
-    max-height: 600px;
+    max-height: 800px;
     background-color: rgb(237, 248, 248);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    margin: 20px;
+    margin: 25px;
     
     padding-left: 20px;
     padding-right: 20px;
@@ -15,10 +15,6 @@
     border-radius: 15px;
   }
 
-  .post:hover{
-    border: 1px solid black;
-  }
-  
    .postHeader {
     display: flex;
     justify-content: center;
@@ -37,6 +33,15 @@
     overflow: hidden;
     overflow-y: auto;
   }
+
+  .AllComments{
+    height: auto;
+    max-height: 220px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  
   
   .Aurthor{
     font-family: 'Pacifico', cursive;
@@ -50,6 +55,7 @@
 
 
   .LikeandCommentDeleteContainer{
+   
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -72,8 +78,6 @@
   }
   
 
-  
-
   .UpdateButton Button{
     border: none;
     background: none;
@@ -85,8 +89,5 @@
   }
 
 
-  .CommentComponent{
-    padding-bottom: 1px;
-    
-  }
+  
   

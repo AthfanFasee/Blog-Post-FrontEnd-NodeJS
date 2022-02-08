@@ -5,20 +5,20 @@ import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import './HomePage.css'
 import Pagination from '../../Components/HomePageComponents/Pagination/Pagination'
-import ProfileButton from "../../Components/ProfileButton/ProfileButton";
 import SortButton from "../../Components/HomePageComponents/SortingButton/SortingButton";
+import BackToTop from "../../Components/ScrollToTopButton/ScrollToTopButton";
 
 
 
 //Using contextApi to pass props to Child Components
 
 
-function HomePage({ isAuth }) {
+function HomePage({ ID }) {
 
   const {page, postLists, setPostLists, newtitle, setNewTitle, newpostText, setNewPostText, editsection, isEditsection} = useContext(HomePageContext)
 
   const token = localStorage.getItem('token')
-  const userID = localStorage.getItem('userID');
+  
 
   //To save noOfPages
   const [pageCount, setPageCount] = useState(1)
@@ -29,9 +29,7 @@ function HomePage({ isAuth }) {
   //to save sort value
   const [sort, setSort] = useState('-createdAt')
 
-  //Saving current User's ID to get only his posts if needed
-  const [ID, setID] = useState("")
-  console.log(ID)
+  
 
   //Getting Posts from MongoDB when the HomePage Component is rendered
   const url = 'http://localhost:4000/api/v1/posts'
@@ -84,19 +82,26 @@ function HomePage({ isAuth }) {
     <div className="homePage">
 
       {/*Warning Users to SignIn when they are not SignedIn */}
-      {!token && <p>Please Login to createPosts or to comment</p>}
-      <SortButton setSort={setSort}/>
-      {token && <ProfileButton setID={setID} userID={userID}/>}
+      {/* Need to make this like an Alert */}
+      {!token && <p>Please Login to createPosts or to comment</p>} 
       
+      {/* Sort Button */}
+      {!editsection && 
+      <div className="SortButtonContainer">
+      <SortButton setSort={setSort}/>
+      </div>
+      }
+      
+        
       {/* Page SetUp(Pagination) */}
       {!editsection && <Pagination pageCount={pageCount}/>}
 
-
+      <BackToTop />
       {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
         return(
           <div key={post._id}>
-          <UserPosts updatedPost={updatedPost} post={post} isAuth={isAuth} deletePost={deletePost}/></div> //delete post ithukkulle props ah pohuma
+          <UserPosts updatedPost={updatedPost} post={post} deletePost={deletePost}/></div> //delete post ithukkulle props ah pohuma
          )
       })}
 
@@ -105,7 +110,7 @@ function HomePage({ isAuth }) {
     {editsection && 
     <UpdatePost updatePost={updatePost}/>
     }
-
+    
     
     
     </div>)

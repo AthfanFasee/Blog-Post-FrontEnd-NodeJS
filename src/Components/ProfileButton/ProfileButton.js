@@ -11,7 +11,10 @@ import { useNavigate } from 'react-router-dom';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import './ProfileButton.css';
 
-export default function ProfileButton({setID, userID}) {
+export default function ProfileButton({setID, ID}) {
+
+  const userID = localStorage.getItem('userID');
+  const userName = localStorage.getItem('userName')
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -46,7 +49,7 @@ export default function ProfileButton({setID, userID}) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 52, height: 52 }}>M</Avatar>
+            <Avatar sx={{ width: 55, height: 55 }}>{userName.charAt(0)}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -91,6 +94,12 @@ export default function ProfileButton({setID, userID}) {
         <MenuItem className="Menu" onClick={() => setID(`&id=${userID}`)}>
           <LocalPostOfficeIcon className="PostsIcon" /> My Posts
         </MenuItem>
+        {ID &&
+        <MenuItem className="Menu" onClick={() => setID("")}>
+        <LocalPostOfficeIcon className="PostsIcon" /> Show All Posts
+      </MenuItem>
+        }
+        
         <MenuItem className="Menu" onClick={signOut}>
           <ListItemIcon>
             <Logout fontSize="small"/>
