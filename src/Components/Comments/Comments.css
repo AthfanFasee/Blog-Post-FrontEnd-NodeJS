@@ -21,9 +21,34 @@
     font-size: 16px;
     margin-top: 3px;
     word-wrap: break-word; 
-    width: 545px;
+    width: 500px;
     
 }
 .Delete{
     cursor: pointer;
+}
+
+@media (max-width: 760px) {
+
+    .CommentUser{
+        font-size: 14px;
+    }
+    
+    .Comment{
+        font-size: 13px;
+        width: 390px;
+        
+    }
+}
+
+@media (max-width: 480px) {
+    .CommentUser{
+        font-size: 12px;
+    }
+    
+    .Comment{
+        font-size: 11px;
+        width: 300px;
+        
+    }
 }

@@ -91,9 +91,9 @@ export default function ProfileButton({setID, ID}) {
        
 
 
-        <MenuItem className="Menu" onClick={() => setID(`&id=${userID}`)}>
+        {!ID && <MenuItem className="Menu" onClick={() => setID(`&id=${userID}`)}>
           <LocalPostOfficeIcon className="PostsIcon" /> My Posts
-        </MenuItem>
+        </MenuItem>}
         {ID &&
         <MenuItem className="Menu" onClick={() => setID("")}>
         <LocalPostOfficeIcon className="PostsIcon" /> Show All Posts

@@ -1,12 +1,6 @@
 
-.MainContainer {
-  width: 100%;
-  height: calc(100vh - 80px);
-  display: grid;
-  place-items: center;
-}
 
-.childContainer {
+.LogInContainer {
   font-family: 'Pacifico', cursive;
   width: 500px;
   height: auto;
@@ -18,7 +12,7 @@
   flex-direction: column;
 }
 
-.childContainer h1 {
+.LogInContainer h1 {
   
   text-align: center;
   font-size: 35px;
@@ -34,17 +28,18 @@
 }
 
 
-.childContainer label {
+.LogInContainer label {
   margin-top: 10px;
   font-size: 20px;
 }
-.childContainer .inputGp {
+.LogInContainer .LoginInput {
   
   display: flex;
   flex-direction: column;
 }
 
-.inputGp input {
+.LoginInput input {
+  height: 40px;
   font-size: 18px;
   border: none;
   border-radius: 5px;
@@ -52,7 +47,7 @@
   
 }
 
-.childContainer button {
+.LogInContainer button {
   font-family: 'Pacifico', cursive;
   margin-top: 20px;
   height: 40px;
@@ -63,7 +58,7 @@
   
 }
 
-.childContainer button:hover {
+.LogInContainer button:hover {
   color: rgb(39, 27, 27);
   border-bottom: 2px solid rgb(39, 27, 27);
 }
@@ -82,5 +77,149 @@
   width: 50%;
 }
 
+@media(max-width: 760px) {
+  
+  .LogInContainer {
+    width: 400px;
+    height: auto;
+    padding: 20px;
+  
+  }
+  
+  .LogInContainer h1 {
+    
+    text-align: center;
+    font-size: 30px;
+  }
+  
+  .error{
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 20px;
+   
+  }
+  
+  .LogInContainer label {
+    margin-top: 10px;
+    font-size: 19px;
+  }
+  
+  .LoginInput input {
+    height: 35px;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    
+  }
+  
+  .LogInContainer button {
+    margin-top: 20px;
+    height: 35px;
+    font-size: 14px;
+    
+  }
+  
+  .RegisterContainer{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    
+  }
+  
+  .Register {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+    
+  }
+  
+  .RegisterText{
+    font-size: 20px;
+  }
+  
+  .RegisterContainer Button {
+    font-size: 13px;
+  }
+  
+}
+  
+
+@media(max-width: 480px) {
+  
+.LogInContainer {
+  width: 300px;
+  height: auto;
+  padding: 20px;
+
+}
+
+.LogInContainer h1 {
+  
+  text-align: center;
+  font-size: 28px;
+}
+
+.error{
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: rgb(129, 19, 19);
+}
 
 
+.LogInContainer label {
+  margin-top: 10px;
+  font-size: 17px;
+}
+.LogInContainer .LoginInput {
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.LoginInput input {
+  height: 30px;
+  font-size: 13px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  
+}
+
+.LogInContainer button {
+  font-family: 'Pacifico', cursive;
+  margin-top: 20px;
+  height: 30px;
+  font-size: 14px;
+  
+}
+
+
+.RegisterContainer{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  
+}
+
+
+.Register {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 50%;
+  
+}
+
+.RegisterText{
+  font-size: 18px;
+}
+
+.RegisterContainer Button {
+  font-size: 11px;
+}
+
+}

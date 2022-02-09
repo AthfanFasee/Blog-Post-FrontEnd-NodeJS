@@ -7,7 +7,6 @@ export default function UpdatePost({updatePost}) {
     const {isEditsection, setNewTitle, setNewPostText, newpostText, newtitle, id } = useContext(HomePageContext)
     return (
         <div className="UpdatePostBG">
-        <div className="">
         <div className="createPostPage">
             <div className="cpContainer">
             <h1>Update Your Post</h1>
@@ -22,7 +21,6 @@ export default function UpdatePost({updatePost}) {
             <button disabled={!newpostText || !newtitle} onClick={() => updatePost(id) }>Save Changes</button>
             <button onClick={() => isEditsection(false)}>Cancel</button>
             </div>
-        </div>
         </div>
         </div>
         

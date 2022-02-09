@@ -3,9 +3,9 @@ import LoginButton from '../../Components/LoginButton/LoginComponent'
 import Register from '../../Components/Register/Register'
 import {useState} from 'react'
 import axios from 'axios'
+import './Login.css';
 
-
-function Login({setIsAuth}) {
+function Login() {
 
     const navigate = useNavigate();
     const RegisterURL = 'http://localhost:4000/api/v1/auth/register'
@@ -62,7 +62,7 @@ function Login({setIsAuth}) {
     }
 
     return (
-        <div>
+        <div className="LoginAndRegister">
             {isRegister ? <Register setError={setError} error={error} setIsRegister={setIsRegister} setRegisterUserName={setRegisterUserName} setRegisterEmail={setRegisterEmail} setRegisterPassword={setRegisterPassword} RegisterUser={RegisterUser}/>
              : <LoginButton setError={setError} error={error} LoginUser={LoginUser}  setIsRegister={setIsRegister} setLoginEmail={setLoginEmail} setLoginPassword={setLoginPassword} />}       
             

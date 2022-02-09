@@ -7,3 +7,29 @@
     justify-content: center;
     align-items: center;
   }
+  @media (min-width: 768px) {
+       .UpdatePostBG {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(21, 24, 23, 0.829);
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  }
+
+  @media (max-width: 480px) {
+       .UpdatePostBG {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(21, 24, 23, 0.829);
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .cpContainer{
+        width: 200px;
+      }
+  }

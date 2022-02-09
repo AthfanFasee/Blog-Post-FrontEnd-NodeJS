@@ -39,7 +39,7 @@ export default function SortButton({setSort}) {
             fontFamily : 'Baloo Bhaijaan 2 cursive',
             border : '1px solid #87BCF2',
             borderRadius: '5px',
-            
+            backgroundColor: '#87BCF2',      
           }}
         className="Button"
         id="basic-button"

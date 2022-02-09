@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import CreatePostElmnts from "../../Components/CreatePostElements/CreatePostElmnts"
+import './CreatePost.css';
 
 function CreatePost() {
 
@@ -54,7 +55,7 @@ function CreatePost() {
     })
 
     return (
-        <div>
+        <div className="CreatePage">
             <CreatePostElmnts error={error} Cancel={Cancel} createPost={createPost} setTitle={setTitle} setPostText={setPostText} title={title} postText={postText}/>
         </div>
         

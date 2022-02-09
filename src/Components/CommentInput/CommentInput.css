@@ -4,10 +4,26 @@
     align-items:center;
 }
 .Input{
-    width: 550px;
+    width: 520px;
    
     
 }
 .Button{
     cursor: pointer;
+}
+
+@media (max-width: 760px) {
+    .Input{
+        width: 390px;
+       
+        
+    }
+}
+
+@media (max-width: 480px) {
+    .Input{
+        width: 290px;
+     
+    }
+    
 }

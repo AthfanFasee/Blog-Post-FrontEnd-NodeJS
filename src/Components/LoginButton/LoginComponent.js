@@ -4,21 +4,21 @@ function LoginButton({setError, error, setIsRegister, setLoginEmail, setLoginPas
  
     return (
         <div className="MainContainer">
-        <div className="childContainer">
+        <div className="LogInContainer">
         <h1>Login with your Email</h1>
         {error && <h3 className="error">{`!! ${error}`}</h3>}
         
-        <div className="inputGp">
+        <div className="LoginInput">
             <label>Email:</label>
             <input placeholder="Email..." onChange={(event) => setLoginEmail(event.target.value)}/>
         </div>
-        <div className="inputGp">
+        <div className="LoginInput">
             <label>Password:</label>
             <input placeholder="Password..." onChange={(event) => setLoginPassword(event.target.value)}/>
         </div>
         <button onClick={LoginUser} >Login</button>
         <div className="RegisterContainer">
-            <p>Don't have an account?</p>
+            <p className="LoginText">Don't have an account?</p>
         <button onClick={() => {
             setIsRegister(true)
             setError("")
