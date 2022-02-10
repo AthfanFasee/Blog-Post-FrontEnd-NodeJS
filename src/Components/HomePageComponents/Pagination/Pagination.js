@@ -16,7 +16,7 @@ export default function Page({pageCount}) {
   return (
         <div>
         <Stack spacing={5}>   
-            <Pagination count={pageCount} variant="outlined" shape="rounded"  size="large" onChange={handleChange}/>  
+            <Pagination  count={pageCount} variant="outlined" shape="rounded"   onChange={handleChange}/>  
         </Stack>
         </div>
     

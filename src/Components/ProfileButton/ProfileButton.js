@@ -49,7 +49,7 @@ export default function ProfileButton({setID, ID}) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 55, height: 55 }}>{userName.charAt(0)}</Avatar>
+            <Avatar  sx={{ width: 50, height: 50 }}>{userName.charAt(0)}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>

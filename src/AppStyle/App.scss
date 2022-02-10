@@ -23,17 +23,10 @@ nav {
     text-decoration: none;
   }
   
+
   a {
-    
-    color: white;
     text-decoration: none;
    
-    font-size: 25px;
-  }
-
-
-  a {
- 
     box-sizing: border-box;
     margin: 1em;
     padding: 1em 2em;
@@ -58,6 +51,18 @@ nav {
     }
   }
   
+  @media(max-width: 760px) {
+    a {
+      width: auto;
+      font-size: 15px;
+    }
+  }
+  @media(max-width: 480px) {
+    a {
+      width: auto;
+      font-size: 12px;
+    }
+  }
 
   a {
     &:hover {

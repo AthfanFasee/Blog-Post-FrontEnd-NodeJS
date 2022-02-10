@@ -7,14 +7,14 @@ export default function UpdatePost({updatePost}) {
     const {isEditsection, setNewTitle, setNewPostText, newpostText, newtitle, id } = useContext(HomePageContext)
     return (
         <div className="UpdatePostBG">
-        <div className="createPostPage">
-            <div className="cpContainer">
+        <div className="UpdatePostPage">
+            <div className="UpdatePostContainer">
             <h1>Update Your Post</h1>
-            <div className="inputGp">
+            <div className="UpdatePostInput">
                 <label>New Post Title:</label>
                 <input placeholder="Title.." title="Title" value={newtitle}  onChange={(event) => setNewTitle(event.target.value)}/>
             </div>
-            <div className="inputGp">
+            <div className="UpdatePostInput">
                 <label>New Post:</label>
                 <textarea placeholder="Post..." title="TextArea" value={newpostText} onChange={(event) => setNewPostText(event.target.value)} />
             </div>

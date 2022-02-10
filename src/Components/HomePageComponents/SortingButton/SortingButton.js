@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
-
+import './SortingButton.css';
 
 
 
@@ -33,7 +33,7 @@ export default function SortButton({setSort}) {
   return (
     <div className="SortButtonContainer">
       <Button
-      sx={{ fontSize: '18px', 
+      sx={{ fontSize: '15px', 
             color: '#020202',
             textTransform: 'none',
             fontFamily : 'Baloo Bhaijaan 2 cursive',
@@ -59,9 +59,9 @@ export default function SortButton({setSort}) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={Newest}>Newest First</MenuItem>
-        <MenuItem onClick={Oldest}>Oldest First</MenuItem>
-        <MenuItem onClick={MostLiked}>Most Liked</MenuItem>
+        <MenuItem className="MenuItem"onClick={Newest}>Newest First</MenuItem>
+        <MenuItem className="MenuItem" onClick={Oldest}>Oldest First</MenuItem>
+        <MenuItem className="MenuItem" onClick={MostLiked}>Most Liked</MenuItem>
       </Menu>
     </div>
   );

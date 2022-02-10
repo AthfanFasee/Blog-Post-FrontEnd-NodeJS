@@ -1,6 +1,7 @@
 
 
 .LogInContainer {
+  margin-top: 120px;
   font-family: 'Pacifico', cursive;
   width: 500px;
   height: auto;
@@ -33,7 +34,6 @@
   font-size: 20px;
 }
 .LogInContainer .LoginInput {
-  
   display: flex;
   flex-direction: column;
 }
@@ -176,7 +176,7 @@
   font-size: 17px;
 }
 .LogInContainer .LoginInput {
-  
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
