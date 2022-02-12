@@ -45,9 +45,7 @@ function App() {
         <Route path='/' element={<HomePageProvider><HomePage ID={ID}/></HomePageProvider>} />
         <Route path='/createpost' element={<CreatePost />} />
         <Route path='/login' element={<Login />} />
-{
-        //Our Login(child component)is being rendered in App(parent comp) right here so gotta pass props right here as well(if u are passing props. but in our case no props needed)
-}
+        
       </Routes>
     </Router>
   )

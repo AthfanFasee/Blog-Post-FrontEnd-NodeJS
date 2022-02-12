@@ -15,13 +15,13 @@ export function HomePageProvider({children}) {
     
     
     //To save noOfPages
-  const [pageCount, setPageCount] = useState(1);
+   const [pageCount, setPageCount] = useState(1);
 
   //To save updatedPost
-  const [updatedPost, setUpdatedPost] = useState("");
+   const [updatedPost, setUpdatedPost] = useState("");
 
   //to save sort value
-  const [sort, setSort] = useState('-createdAt');
+   const [sort, setSort] = useState('-createdAt');
 
 
 
@@ -34,6 +34,9 @@ export function HomePageProvider({children}) {
 
     //For Pagination
     const [page, setPage] = useState(1);
+
+
+    
     
     return (
         <HomePageContext.Provider value={{sort, setSort, setUpdatedPost, updatedPost, pageCount, setPageCount, setID, ID, postLists, setPostLists, newtitle, setNewTitle, newpostText ,setNewPostText, id, setId, editsection, isEditsection, page, setPage}}>

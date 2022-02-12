@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext} from "react";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
@@ -70,7 +70,7 @@ function HomePage({ ID }) {
 
       {/*Warning Users to SignIn when they are not SignedIn */}
       {/* Need to make this like an Alert */}
-      {!token && <p>Please Login to createPosts or to comment</p>} 
+      {!token && <p>Please Login to Create Your Own Posts</p>} 
       
       {/* Sort Button */}
       {!editsection && 
