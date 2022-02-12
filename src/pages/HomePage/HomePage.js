@@ -3,10 +3,10 @@ import { useEffect, useContext, useState } from "react";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
-import './HomePage.css'
-import Pagination from '../../Components/HomePageComponents/Pagination/Pagination'
+import Pagination from '../../Components/HomePageComponents/Pagination/Pagination';
 import SortButton from "../../Components/HomePageComponents/SortingButton/SortingButton";
 import BackToTop from "../../Components/ScrollToTopButton/ScrollToTopButton";
+import './HomePage.css';
 
 
 
@@ -15,27 +15,16 @@ import BackToTop from "../../Components/ScrollToTopButton/ScrollToTopButton";
 
 function HomePage({ ID }) {
 
-  const {page, postLists, setPostLists, newtitle, setNewTitle, newpostText, setNewPostText, editsection, isEditsection} = useContext(HomePageContext)
+  const {sort, setSort, setUpdatedPost, updatedPost, pageCount, setPageCount, page, postLists, setPostLists, newtitle, setNewTitle, newpostText, setNewPostText, editsection, isEditsection} = useContext(HomePageContext);
 
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token');
   
-
-  //To save noOfPages
-  const [pageCount, setPageCount] = useState(1)
-
-  //To save updatedPost
-  const [updatedPost, setUpdatedPost] = useState("")
-
-  //to save sort value
-  const [sort, setSort] = useState('-createdAt')
-
   
-
   //Getting Posts from MongoDB when the HomePage Component is rendered
-  const url = 'http://localhost:4000/api/v1/posts'
+  const url = 'https://blog-posts-1699.herokuapp.com/api/v1/posts';
   useEffect(() => {
     const getPosts = async () => {
-      const {data} = await axios.get(url+`?page=${page}&sort=${sort}${ID}`)
+      const {data} = await axios.get(url+`?page=${page}&sort=${sort}${ID}`);
       setPostLists(data.posts);
       setPageCount(data.noOfPages);
     };
@@ -52,12 +41,12 @@ function HomePage({ ID }) {
           Authorization: `Bearer ${token}`
         }
       })
-      setUpdatedPost(data.post) //To re-render a post as soon as it's updated
+      setUpdatedPost(data.post); //To re-render a post as soon as it's updated
       isEditsection(false);
 
       //After Updating when user click edit button again giving them the updated values typed in Inputs already.
-      setNewTitle(data.post.title)
-      setNewPostText(data.post.postText)
+      setNewTitle(data.post.title);
+      setNewPostText(data.post.postText);
   }
   
   
@@ -69,13 +58,11 @@ function HomePage({ ID }) {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    })
-    
-}
+    })   
+};
 
   
 
-  
 
 
   return (

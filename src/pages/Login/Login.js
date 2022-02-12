@@ -1,15 +1,15 @@
-import { useNavigate } from 'react-router-dom'
-import LoginButton from '../../Components/LoginButton/LoginComponent'
-import Register from '../../Components/Register/Register'
-import {useState} from 'react'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import LoginButton from '../../Components/LoginButton/LoginComponent';
+import Register from '../../Components/Register/Register';
+import {useState} from 'react';
+import axios from 'axios';
 import './Login.css';
 
 function Login() {
 
     const navigate = useNavigate();
-    const RegisterURL = 'http://localhost:4000/api/v1/auth/register'
-    const LoginURL = 'http://localhost:4000/api/v1/auth/login'
+    const RegisterURL = 'https://blog-posts-1699.herokuapp.com/api/v1/auth/register';
+    const LoginURL = 'https://blog-posts-1699.herokuapp.com/api/v1/auth/login';
 
     //To render register form
     const [isRegister, setIsRegister] = useState(false);
@@ -25,7 +25,7 @@ function Login() {
     const [loginPassword, setLoginPassword] = useState("");
 
     //to catch errors
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
 
   
 
@@ -33,14 +33,14 @@ function Login() {
     const LoginUser = async () => {
         try{
             const {data} = await axios.post(LoginURL, {email: loginEmail, password: loginPassword});
-            localStorage.setItem('token', data.token)
-            localStorage.setItem('userID', data.user.id)  //Saving token and username as soon as the user is logged in / Registered
-            localStorage.setItem('userName', data.user.name)
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userID', data.user.id); //Saving token and username as soon as the user is logged in / Registered
+            localStorage.setItem('userName', data.user.name);
 
             navigate("/")
             window.location.reload();
         } catch(err) {
-             setError(err.response.data.msg)             
+             setError(err.response.data.msg);          
         }
     }
 
@@ -49,15 +49,15 @@ function Login() {
     const RegisterUser = async () => {
         try {
             const {data} = await axios.post(RegisterURL, {email: registerEmail, password: registerPassword, name: registerUserName});
-            localStorage.setItem('token', data.token)
-            localStorage.setItem('userID', data.user.id)
-            localStorage.setItem('userName', data.user.name)
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userID', data.user.id);
+            localStorage.setItem('userName', data.user.name);
 
-            navigate("/")
+            navigate("/");
             window.location.reload();
 
         } catch(err) {
-            setError(err.response.data.msg)
+            setError(err.response.data.msg);
         }
     }
 
@@ -70,4 +70,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Login;

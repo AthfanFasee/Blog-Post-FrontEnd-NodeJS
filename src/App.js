@@ -1,5 +1,5 @@
 import './AppStyle/App.css';
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Login from './pages/Login/Login';
 import CreatePost from './pages/CreatePost/CreatePost';
 import HomePage from './pages/HomePage/HomePage';
@@ -15,7 +15,7 @@ function App() {
 
   const token = localStorage.getItem('token');
   //Saving current User's ID to get only his posts if needed
-  const [ID, setID] = useState("")
+  const [ID, setID] = useState("");
 
   return (
     <Router>

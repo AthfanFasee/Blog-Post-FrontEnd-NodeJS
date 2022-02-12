@@ -64,4 +64,4 @@ function DeleteButton({deletePost, post}) {
     )
 }
 
-export default DeleteButton
+export default DeleteButton;

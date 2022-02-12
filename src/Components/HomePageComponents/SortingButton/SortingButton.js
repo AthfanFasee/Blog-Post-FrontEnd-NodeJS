@@ -19,15 +19,15 @@ export default function SortButton({setSort}) {
   }
   const Newest = () => {
     setAnchorEl(null);
-    setSort('-createdAt')
+    setSort('-createdAt');
   };
   const Oldest = () => {
     setAnchorEl(null);
-    setSort('createdAt')
+    setSort('createdAt');
   };
   const MostLiked = () => {
     setAnchorEl(null);
-    setSort('likesCount')
+    setSort('likesCount');
   };
 
   return (

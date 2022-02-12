@@ -1,4 +1,4 @@
-import './CreatePostElement.css'
+import './CreatePostElement.css';
 
 function CreatePostElmnts({error, Cancel, createPost, setTitle, setPostText, postText, title}) {
     
@@ -22,5 +22,5 @@ function CreatePostElmnts({error, Cancel, createPost, setTitle, setPostText, pos
     )
 }
 
-export default CreatePostElmnts
+export default CreatePostElmnts;
 

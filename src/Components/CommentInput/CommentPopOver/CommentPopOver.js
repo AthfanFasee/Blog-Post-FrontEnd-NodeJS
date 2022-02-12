@@ -1,9 +1,9 @@
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import SendIcon from '@mui/icons-material/Send';
 
-export default function LikePopOver() {
+export default function CommentPopOver() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -19,7 +19,7 @@ export default function LikePopOver() {
 
   return (
     <div>
-      <ThumbUpOffAltIcon aria-describedby={id} variant="contained" onClick={handleClick}></ThumbUpOffAltIcon>
+      <SendIcon aria-describedby={id} variant="contained" onClick={handleClick}></SendIcon>
       <Popover
         id={id}
         open={open}
@@ -30,7 +30,7 @@ export default function LikePopOver() {
           horizontal: 'left',
         }}
       >
-        <Typography sx={{ p: 2 }}>Please Login to Like a Post</Typography>
+        <Typography sx={{ p: 2 }}>Please Login to Post a Comment</Typography>
       </Popover>
     </div>
   );

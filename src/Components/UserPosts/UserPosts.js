@@ -1,6 +1,6 @@
 import DeleteButton from "../DeleteButton/DeleteButton";
 import UpdateButton from "../UpdateButton/UpdateButton";
-import { useContext, useState } from "react"
+import { useContext, useState } from "react";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import './UserPosts.css';
 import axios from "axios"
@@ -18,8 +18,8 @@ function UserPosts({post, deletePost, updatedPost}) {
     const userID = localStorage.getItem('userID');
     
     //Modifying Time which comes from DB
-    let time = post.createdAt.split('T').join(', ')
-    time = time.slice(0, 17)
+    let time = post.createdAt.split('T').join(', ');
+    time = time.slice(0, 17);
 
     //Saving default values to show when page reloads
     const [likesCount, setLikesCount] = useState(post.likedBy.length);
@@ -31,7 +31,7 @@ function UserPosts({post, deletePost, updatedPost}) {
     //Like Button Section
     //This function is when the user didnt like the post yet
     const LikePost = async () => {
-        const {data} = await axios.patch(`http://localhost:4000/api/v1/posts/liked/${post._id}`,{id: userID}, {
+        const {data} = await axios.patch(`https://blog-posts-1699.herokuapp.com/api/v1/posts/liked/${post._id}`,{id: userID}, {
         headers: {
           Authorization: `Bearer ${token}`
         }})
@@ -43,7 +43,7 @@ function UserPosts({post, deletePost, updatedPost}) {
 
     //This function is when user already liked the post and wanna dislike
     const disLikePost = async () => {
-        const {data} = await axios.patch(`http://localhost:4000/api/v1/posts/disliked/${post._id}`,{id: userID}, {
+        const {data} = await axios.patch(`https://blog-posts-1699.herokuapp.com/api/v1/posts/disliked/${post._id}`,{id: userID}, {
         headers: {
           Authorization: `Bearer ${token}`
         }})
@@ -66,25 +66,25 @@ function UserPosts({post, deletePost, updatedPost}) {
     //For Comment Section
 
     //For comments button
-    const [isComments, setIsComments] = useState(false)
+    const [isComments, setIsComments] = useState(false);
   
    //to save comments data
-    const [commentData, setCommentData] = useState("")
+    const [commentData, setCommentData] = useState("");
     
     //to save commentInput value
-    const [commentInput, setCommentInput] = useState("")
+    const [commentInput, setCommentInput] = useState("");
 
 
-    const url = 'http://localhost:4000/api/v1/posts/comments'
+    const url = 'https://blog-posts-1699.herokuapp.com/api/v1/posts/comments';
 
     const CommentButtonClick = async () => {
       try {
-        const {data} = await axios.get(`${url}/${post._id}`)
-        setCommentData(data.comments)
-        setIsComments(true)
+        const {data} = await axios.get(`${url}/${post._id}`);
+        setCommentData(data.comments);
+        setIsComments(true);
 
       } catch (error) {
-        alert(error)
+        alert(error);
       }
        
     }
@@ -94,10 +94,10 @@ function UserPosts({post, deletePost, updatedPost}) {
           await axios.post(url, {Text:commentInput, Post:id}, {
             headers: {Authorization: `Bearer ${token}`}
           })
-          CommentButtonClick()
-          setCommentInput("")
+          CommentButtonClick();
+          setCommentInput("");
       } catch (error) {
-        alert(error)
+        alert(error);
       }
     }
 
@@ -109,7 +109,7 @@ function UserPosts({post, deletePost, updatedPost}) {
       })
       CommentButtonClick()
     } catch (error) {
-      alert.log(error)
+      alert.log(error);
     }   
   }
 
@@ -166,18 +166,11 @@ function UserPosts({post, deletePost, updatedPost}) {
                 <div key={comment._id}>
                   <Comments userID={userID} comment={comment} deleteComment={deleteComment}/>
                 </div>
-              )
-              
+              )             
             })}
-            </div>
-            
-
-
-            
-            
-            
+            </div>                        
           </div>
     )
 }
 
-export default UserPosts
+export default UserPosts;

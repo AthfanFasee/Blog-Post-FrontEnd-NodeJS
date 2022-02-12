@@ -10,7 +10,7 @@ function Comments({comment, deleteComment, userID}) {
       </div>
       {userID === comment.createdBy && <DeleteIcon size="small" className="Delete" onClick={() => deleteComment(comment._id)}></DeleteIcon>}
       
-  </div>;
+  </div>
 }
 
 export default Comments;

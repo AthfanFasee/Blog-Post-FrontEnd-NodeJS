@@ -1,6 +1,6 @@
-import { useContext } from "react"
-import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider"
-import './UpdatePost.css'
+import { useContext } from "react";
+import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
+import './UpdatePost.css';
 
 
 export default function UpdatePost({updatePost}) {

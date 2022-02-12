@@ -5,7 +5,7 @@ import { HomePageContext } from "../../../Helper/HomePageContexts/HomePageProvid
 
 
 export default function Page({pageCount}) {
-  const {setPage} = useContext(HomePageContext)
+  const {setPage} = useContext(HomePageContext);
 
   const handleChange = (event, value) => {
     setPage(value);

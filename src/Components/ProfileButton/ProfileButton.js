@@ -14,7 +14,7 @@ import './ProfileButton.css';
 export default function ProfileButton({setID, ID}) {
 
   const userID = localStorage.getItem('userID');
-  const userName = localStorage.getItem('userName')
+  const userName = localStorage.getItem('userName');
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -33,7 +33,7 @@ export default function ProfileButton({setID, ID}) {
     const signOut = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userID');
-        navigate('/')
+        navigate('/');
         window.location.reload();
     }
 

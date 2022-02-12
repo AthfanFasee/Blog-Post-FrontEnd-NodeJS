@@ -28,7 +28,7 @@ function ScrollTop(props) {
         behavior: 'smooth',
         block: 'center',
       });
-    }
+    };
   };
 
   return (

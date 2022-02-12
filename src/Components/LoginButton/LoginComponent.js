@@ -1,4 +1,4 @@
-import './LoginComponent.css'
+import './LoginComponent.css';
 
 function LoginButton({setError, error, setIsRegister, setLoginEmail, setLoginPassword, LoginUser}) {
  
@@ -30,4 +30,4 @@ function LoginButton({setError, error, setIsRegister, setLoginEmail, setLoginPas
     )
 }
 
-export default LoginButton
+export default LoginButton;
