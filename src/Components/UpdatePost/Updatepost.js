@@ -4,7 +4,9 @@ import './UpdatePost.css';
 
 
 export default function UpdatePost({updatePost}) {
-    const {isEditsection, setNewTitle, setNewPostText, newpostText, newtitle, id } = useContext(HomePageContext)
+
+     const {isEditsection, setNewTitle, setNewPostText, newpostText, newtitle, id } = useContext(HomePageContext)
+    
     return (
         <div className="UpdatePostBG">
         <div className="UpdatePostPage">
