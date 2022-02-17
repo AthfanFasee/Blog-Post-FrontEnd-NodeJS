@@ -9,7 +9,7 @@ export function HomePageProvider({children}) {
     const [postLists, setPostLists] = useState([]);
     
 
-
+    //To save data while updating
     const [newtitle, setNewTitle] = useState("");
     const [newpostText, setNewPostText] = useState("");
     

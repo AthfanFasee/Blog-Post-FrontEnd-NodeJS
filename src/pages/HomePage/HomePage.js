@@ -7,6 +7,7 @@ import Pagination from '../../Components/HomePageComponents/Pagination/Paginatio
 import SortButton from "../../Components/HomePageComponents/SortingButton/SortingButton";
 import BackToTop from "../../Components/ScrollToTopButton/ScrollToTopButton";
 import './HomePage.css';
+import LoadingComponent from "../../Components/HomePageComponents/LoadingComponent/LoadingComponent";
 
 
 
@@ -84,11 +85,17 @@ function HomePage({ ID }) {
       {!editsection && <Pagination pageCount={pageCount}/>}
 
       <BackToTop />
+
+      {/* Loading Icon */}
+      {postLists.length < 1 && <LoadingComponent />}
+
+
       {/*Showing Posts when HomePage Component is Rendered */}
       {postLists.map((post) => {
         return(
+          
           <div key={post._id}>
-          <UserPosts updatedPost={updatedPost} post={post} deletePost={deletePost}/></div> //delete post ithukkulle props ah pohuma
+          <UserPosts updatedPost={updatedPost} post={post} deletePost={deletePost}/></div> 
          )
       })}
 
