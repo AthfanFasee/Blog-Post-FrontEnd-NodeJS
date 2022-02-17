@@ -2,8 +2,7 @@
 .post {
     position: relative;
     width: 600px;
-    height: auto;
-    max-height: 800px;
+    height: auto;  
     background-color: rgb(237, 248, 248);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin: 25px;
@@ -94,7 +93,6 @@
       
       width: 460px;
       height: auto;
-      max-height: 800px;
       margin: 15px;
       
       padding-left: 10px;
@@ -187,7 +185,6 @@
       
       width: 360px;
       height: auto;
-      max-height: 800px;
       margin: 15px;
       
       padding-left: 10px;
