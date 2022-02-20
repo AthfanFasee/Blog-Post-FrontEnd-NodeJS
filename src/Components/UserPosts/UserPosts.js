@@ -14,21 +14,24 @@ import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 
  
 function UserPosts({post, deletePost, updatedPost}) {
-    const {setId, isEditsection, setNewTitle, setNewPostText} = useContext(HomePageContext);
+
+    const {setCommentInput, commentInput, commentData, setCommentData, isComments, setIsComments} = useContext(HomePageContext);
+    
     const userID = localStorage.getItem('userID');
+    const token = localStorage.getItem('token');
     
     //Modifying Time which comes from DB
     let time = post.createdAt.split('T').join(', ');
     time = time.slice(0, 17);
+
+
+    //Like Button Section
 
     //Saving default values to show when page reloads
     const [likesCount, setLikesCount] = useState(post.likedBy.length);
     const [liked, setLiked] = useState(post.likedBy.includes(userID)? true : false);
     
     
-    const token = localStorage.getItem('token');
-
-    //Like Button Section
     //This function is when the user didnt like the post yet
     const LikePost = async () => {
         const {data} = await axios.patch(`https://blog-posts-1699.herokuapp.com/api/v1/posts/liked/${post._id}`,{id: userID}, {
@@ -63,17 +66,8 @@ function UserPosts({post, deletePost, updatedPost}) {
     }
 
 
-    //For Comment Section
-
-    //For comments button
-    const [isComments, setIsComments] = useState(false);
-  
-   //to save comments data
-    const [commentData, setCommentData] = useState("");
     
-    //to save commentInput value
-    const [commentInput, setCommentInput] = useState("");
-
+    //Comment Functionality
 
     const url = 'https://blog-posts-1699.herokuapp.com/api/v1/posts/comments';
 
@@ -118,7 +112,7 @@ function UserPosts({post, deletePost, updatedPost}) {
 
     return (        
           <div className="post">
-                                            {/* Making sure only the newly Updated post's title and postText re-renders on screen*/}
+                                           {/* Making sure only the newly Updated post's title and postText re-renders on screen. This is to fix a bug where if a single post gets updated in to something all the other posts also chang on screen*/}
             <div className="postHeader"><h1>{updatedPost._id === post._id ? updatedPost.title : post.title}</h1></div> 
 
              <div className="postContentContainer">
@@ -130,7 +124,7 @@ function UserPosts({post, deletePost, updatedPost}) {
               <div className="UpdateButton">
               {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn(passing post as props so I can access post.id and stuffs to set them to states)*/}     
               {userID === post.createdBy && 
-              <div><UpdateButton updatedPost={updatedPost} post={post} setId={setId} isEditsection={isEditsection} setNewTitle={setNewTitle} setNewPostText={setNewPostText}/></div>
+              <div><UpdateButton updatedPost={updatedPost} post={post}/></div>
               }        
             </div>
 
@@ -159,7 +153,7 @@ function UserPosts({post, deletePost, updatedPost}) {
 
             {/* If comment Icon is clicked Rendering Comments on Screen */}
             
-            {isComments && <CommentInput commentInput={commentInput} setCommentInput={setCommentInput} id={post._id} addComment={addComment}/>}
+            {isComments && <CommentInput id={post._id} addComment={addComment}/>}
             <div className="AllComments">
             {isComments && commentData.map(comment => {
               return (

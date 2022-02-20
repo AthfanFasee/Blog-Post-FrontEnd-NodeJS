@@ -8,15 +8,20 @@ import SortButton from "../../Components/HomePageComponents/SortingButton/Sortin
 import BackToTop from "../../Components/ScrollToTopButton/ScrollToTopButton";
 import './HomePage.css';
 import LoadingComponent from "../../Components/HomePageComponents/LoadingComponent/LoadingComponent";
-
-
+import {useSelector, useDispatch} from 'react-redux';
+import {updateInputValue} from '../../features/UpdateInputElements';
 
 //Using contextApi to pass props to Child Components
 
 
-function HomePage({ ID }) {
+function HomePage() {
 
-  const {sort, setSort, setUpdatedPost, updatedPost, pageCount, setPageCount, page, postLists, setPostLists, newtitle, setNewTitle, newpostText, setNewPostText, editsection, isEditsection} = useContext(HomePageContext);
+  const {sort, setSort, setUpdatedPost, updatedPost, pageCount, setPageCount, page, postLists, setPostLists, editsection, isEditsection} = useContext(HomePageContext);
+
+  const update = useSelector((state) => state.update.value);
+  const UserIDParam = useSelector((state) => state.UserIDParam.value);
+
+  const dispatch = useDispatch();
 
   const token = localStorage.getItem('token');
   
@@ -25,19 +30,19 @@ function HomePage({ ID }) {
   const url = 'https://blog-posts-1699.herokuapp.com/api/v1/posts';
   useEffect(() => {
     const getPosts = async () => {
-      const {data} = await axios.get(url+`?page=${page}&sort=${sort}${ID}`);
+      const {data} = await axios.get(url+`?page=${page}&sort=${sort}${UserIDParam}`);
       setPostLists(data.posts);
       setPageCount(data.noOfPages);
     };
     getPosts();
-  }, [page, sort, ID]);
+  }, [page, sort, UserIDParam]);
 
  
 
   //Updating the Post(Editing the Post)
 
-  const updatePost = async (id) => {
-      const {data} = await axios.patch(url+`/${id}`, {title: newtitle, postText: newpostText }, {
+  const updatePost = async (postID) => {
+      const {data} = await axios.patch(url+`/${postID}`, {title: update.newtitle, postText: update.newpostText }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -46,8 +51,7 @@ function HomePage({ ID }) {
       isEditsection(false);
 
       //After Updating when user click edit button again giving them the updated values typed in Inputs already.
-      setNewTitle(data.post.title);
-      setNewPostText(data.post.postText);
+      dispatch(updateInputValue({newtitle: updatedPost.title, newpostText: updatedPost.postText}))
   }
   
   

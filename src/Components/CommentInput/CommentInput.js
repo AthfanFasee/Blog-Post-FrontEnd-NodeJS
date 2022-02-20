@@ -4,10 +4,14 @@ import SendIcon from '@mui/icons-material/Send';
 import './CommentInput.css';
 import { IconButton } from '@mui/material';
 import CommentPopOver from './CommentPopOver/CommentPopOver';
+import { useContext } from 'react';
+import { HomePageContext } from '../../Helper/HomePageContexts/HomePageProvider';
 
 const ariaLabel = { 'aria-label': 'description' };
 
-export default function CommentInput({addComment, commentInput, id, setCommentInput}) {
+export default function CommentInput({addComment, id}) {
+
+  const { setCommentInput, commentInput} = useContext(HomePageContext);
 
   const token = localStorage.getItem('token');
   

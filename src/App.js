@@ -4,8 +4,10 @@ import Login from './pages/Login/Login';
 import CreatePost from './pages/CreatePost/CreatePost';
 import HomePage from './pages/HomePage/HomePage';
 import {HomePageProvider} from './Helper/HomePageContexts/HomePageProvider';
+import {CreatePostProvider} from './Helper/CreatePostContext/CreatePostProvider';
+import {LoginPageProvider} from './Helper/LoginPageContext/LoginPageProvider';
 import ProfileButton from './Components/ProfileButton/ProfileButton';
-import { useState } from 'react';
+
 
 
 
@@ -14,9 +16,7 @@ import { useState } from 'react';
 function App() {
 
   const token = localStorage.getItem('token');
-  //Saving current User's ID to get only his posts if needed
-  const [ID, setID] = useState("");
-
+  
   return (
     <Router>
       <nav>
@@ -31,7 +31,7 @@ function App() {
          <Link to='/createpost'>Create Post</Link>
 
          <div className='ProfileButton'>
-          <ProfileButton ID={ID} setID={setID}/>
+          <ProfileButton />
          </div>
        
       
@@ -42,9 +42,9 @@ function App() {
       
       <Routes>
       
-        <Route path='/' element={<HomePageProvider><HomePage ID={ID}/></HomePageProvider>} />
-        <Route path='/createpost' element={<CreatePost />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/' element={<HomePageProvider><HomePage /></HomePageProvider>} />
+        <Route path='/createpost' element={<CreatePostProvider><CreatePost /></CreatePostProvider>} />
+        <Route path='/login' element={<LoginPageProvider><Login /></LoginPageProvider>} />
         
       </Routes>
     </Router>

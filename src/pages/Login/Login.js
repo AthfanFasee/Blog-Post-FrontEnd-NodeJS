@@ -1,33 +1,21 @@
 import { useNavigate } from 'react-router-dom';
 import LoginButton from '../../Components/LoginButton/LoginComponent';
 import Register from '../../Components/Register/Register';
-import {useState} from 'react';
+import {useContext} from 'react';
 import axios from 'axios';
 import './Login.css';
+import { LoginPageContext } from '../../Helper/LoginPageContext/LoginPageProvider';
+
 
 function Login() {
+
+    const {loginPassword, loginEmail, registerUserName, registerPassword, isRegister, registerEmail, setError} =
+     useContext(LoginPageContext);
 
     const navigate = useNavigate();
     const RegisterURL = 'https://blog-posts-1699.herokuapp.com/api/v1/auth/register';
     const LoginURL = 'https://blog-posts-1699.herokuapp.com/api/v1/auth/login';
 
-    //To render register form
-    const [isRegister, setIsRegister] = useState(false);
-
-    //in Register form
-    const [registerEmail, setRegisterEmail] = useState("");
-    const [registerPassword, setRegisterPassword] = useState("");
-    const [registerUserName, setRegisterUserName] = useState("");
-
-
-    //in Login Form
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPassword, setLoginPassword] = useState("");
-
-    //to catch errors
-    const [error, setError] = useState("");
-
-  
 
     //Login
     const LoginUser = async () => {
@@ -63,8 +51,8 @@ function Login() {
 
     return (
         <div className="LoginAndRegister">
-            {isRegister ? <Register setError={setError} error={error} setIsRegister={setIsRegister} setRegisterUserName={setRegisterUserName} setRegisterEmail={setRegisterEmail} setRegisterPassword={setRegisterPassword} RegisterUser={RegisterUser}/>
-             : <LoginButton setError={setError} error={error} LoginUser={LoginUser}  setIsRegister={setIsRegister} setLoginEmail={setLoginEmail} setLoginPassword={setLoginPassword} />}       
+            {isRegister ? <Register RegisterUser={RegisterUser}/>
+             : <LoginButton LoginUser={LoginUser}/>}       
             
         </div>
     )

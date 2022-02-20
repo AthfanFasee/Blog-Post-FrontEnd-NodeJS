@@ -1,7 +1,11 @@
+import { useContext } from 'react';
+import { CreatePostContext } from '../../Helper/CreatePostContext/CreatePostProvider';
 import './CreatePostElement.css';
 
-function CreatePostElmnts({error, Cancel, createPost, setTitle, setPostText, postText, title}) {
+function CreatePostElmnts({Cancel, createPost}) {
     
+    const {title, setTitle, postText, setPostText, error} = useContext(CreatePostContext);
+
     return (
         <div className="createPostPage">
             <div className="cpContainer">

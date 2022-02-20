@@ -1,19 +1,27 @@
 import { useContext } from "react";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
-
-
+import {useDispatch} from 'react-redux';
+import {updateInputValue} from '../../features/UpdateInputElements';
+import {updatePostID} from '../../features/PostID';
 
 function UpdateButton({post, updatedPost}) {
-  const {setNewTitle, setNewPostText, isEditsection, setId} = useContext(HomePageContext)
+  const {isEditsection} = useContext(HomePageContext);
+
+  const dispatch = useDispatch();
+
     return (
         <div>
             <button 
-                title="Update"
-                onClick={() => { 
-                setId(post._id)                           
-                isEditsection(true)
-                setNewTitle(updatedPost._id === post._id ? updatedPost.title : post.title)          //If user updated the post when they click edit button again showing them the updated values in input boxes
-                setNewPostText(updatedPost._id === post._id ? updatedPost.postText : post.postText)
+                  title="Update"
+                  onClick={() => { 
+                  dispatch(updatePostID( post._id))                          
+                  isEditsection(true)
+                  
+                  //When users go to update section the post's title and text will already be in the input elements.
+                  //If user already updated the post, when they click edit button again, showing them the updated values in input elements.
+                  dispatch(updateInputValue({newtitle: updatedPost._id === post._id ? updatedPost.title : post.title,
+                  newpostText: updatedPost._id === post._id ? updatedPost.postText : post.postText
+                }))         
                   
               }}>&#128394;</button>
         </div>

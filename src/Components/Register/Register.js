@@ -1,7 +1,12 @@
+import { useContext } from 'react';
+import { LoginPageContext } from '../../Helper/LoginPageContext/LoginPageProvider';
 import './Register.css';
 
 
-function Register({setError, error, RegisterUser, setIsRegister, setRegisterPassword, setRegisterEmail, setRegisterUserName}) {
+function Register({RegisterUser}) {
+
+    const {setRegisterUserName, setRegisterPassword, setIsRegister, setRegisterEmail, error, setError} =
+     useContext(LoginPageContext)
 
     return (
     <div className="RegisterMainContainer">

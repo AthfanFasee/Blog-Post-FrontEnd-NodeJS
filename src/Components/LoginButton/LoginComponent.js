@@ -1,7 +1,12 @@
+import { useContext } from 'react';
+import { LoginPageContext } from '../../Helper/LoginPageContext/LoginPageProvider';
 import './LoginComponent.css';
 
-function LoginButton({setError, error, setIsRegister, setLoginEmail, setLoginPassword, LoginUser}) {
- 
+function LoginButton({LoginUser}) {
+    
+    const {setError, error, setIsRegister, setLoginEmail, setLoginPassword } =
+     useContext(LoginPageContext);
+
     return (
         <div className="MainContainer">
         <div className="LogInContainer">
