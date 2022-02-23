@@ -14,4 +14,15 @@ describe('HomePageContext State Values', () => {
         const EditSection = screen.getByText(/is Edit Section : false/i)
         expect(EditSection).toBeTruthy()
     })
+    it('isComments should be false as default', () => {
+        render(<HomePageProvider>
+            <HomePageContext.Consumer>
+                {
+                    value => <span>is Edit Section : {value.isComments.toString()}</span>
+                }
+            </HomePageContext.Consumer>
+        </HomePageProvider>)
+        const IsComments = screen.getByText(/is Edit Section : false/i)
+        expect(IsComments).toBeTruthy()
+    })
 })

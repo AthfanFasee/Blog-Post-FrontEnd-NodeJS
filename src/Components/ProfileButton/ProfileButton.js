@@ -48,6 +48,7 @@ export default function ProfileButton() {
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="My Profile">
           <IconButton
+            data-testid="IconButton"
             onClick={handleClick}
             size="small"
             sx={{ ml: 2 }}

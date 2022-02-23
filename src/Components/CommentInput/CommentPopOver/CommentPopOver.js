@@ -19,7 +19,7 @@ export default function CommentPopOver() {
 
   return (
     <div>
-      <SendIcon aria-describedby={id} variant="contained" onClick={handleClick}></SendIcon>
+      <SendIcon data-testid="sendButton" aria-describedby={id} variant="contained" onClick={handleClick}></SendIcon>
       <Popover
         id={id}
         open={open}

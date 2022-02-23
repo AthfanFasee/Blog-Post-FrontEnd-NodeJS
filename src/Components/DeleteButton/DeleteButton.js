@@ -33,7 +33,7 @@ function DeleteButton({deletePost, post}) {
         <div className="deletediv">
 
             {/* Delete Confirmation */} 
-             <DeleteIcon variant="outlined" onClick={handleClickOpen}></DeleteIcon>
+             <DeleteIcon variant="outlined" data-testid="deleteIcon" onClick={handleClickOpen}></DeleteIcon>
                 <Dialog
                     open={open}
                     onClose={handleClose}

@@ -1,21 +1,24 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import LoginButton from '../LoginButton';
+import Register from '../Register';
 import { LoginPageContext } from '../../../Helper/LoginPageContext/LoginPageProvider';
 
 
 const mockedFunction= jest.fn();
 const setIsRegister= jest.fn();
 const setError= jest.fn();
-const setLoginEmail= jest.fn();
-const setLoginPassword= jest.fn();
-describe('LoginButton', () => {
+const setRegisterUserName= jest.fn();
+const setRegisterPassword= jest.fn();
+const setRegisterEmail= jest.fn();
+
+
+describe('Register', () => {
 
     beforeEach(() => {
         // eslint-disable-next-line testing-library/no-render-in-setup
-        render(<LoginPageContext.Provider value={{setError, setIsRegister, setLoginEmail, setLoginPassword}}>
-            <LoginButton LoginUser={mockedFunction}/></LoginPageContext.Provider>);
+        render(<LoginPageContext.Provider value={{setRegisterUserName, setRegisterPassword, setIsRegister, setRegisterEmail,  setError}}>
+            <Register RegisterUser={mockedFunction}/></LoginPageContext.Provider>);
     })
 
 
@@ -43,23 +46,35 @@ describe('LoginButton', () => {
             expect(screen.getByPlaceholderText(/Password.../i).value).toBe('Password')
         })
     })
-
-    describe('Login Button', () => {
+    describe('Username Input Element', () => {
         it('should render', () => {
-            expect(screen.getByRole('button', {name: /Login/i})).toBeInTheDocument();
+            expect(screen.getByPlaceholderText(/Name.../i)).toBeInTheDocument();
         })
-        it('should run LoginUser function onClick', () => {
-            userEvent.click(screen.getByRole('button', {name: /Login/i}));
+        it('should be empty by default', () => {
+            expect(screen.getByPlaceholderText(/Name.../i).value).toBe('');
+        })
+        it('should be able to type', () => {
+            userEvent.type(screen.getByPlaceholderText(/Name.../i), 'Password');
+            expect(screen.getByPlaceholderText(/Name.../i).value).toBe('Password')
+        })
+    })
+
+    describe('Submit Button', () => {
+        it('should render', () => {
+            expect(screen.getByRole('button', {name: /Submit/i})).toBeInTheDocument();
+        })
+        it('should run RegisterUser function onClick', () => {
+            userEvent.click(screen.getByRole('button', {name: /Submit/i}));
             expect(mockedFunction).toBeCalled();
         })          
     })
 
-    describe('Register Here Button', () => {
+    describe('Login Here Button', () => {
         it('should render', () => {
-            expect(screen.getByRole('button', {name: /Register Here/i})).toBeInTheDocument();
+            expect(screen.getByRole('button', {name: /Login Here/i})).toBeInTheDocument();
         })
         it('should call setIsRegister function onClick', () => {
-            userEvent.click(screen.getByRole('button', {name: /Register Here/i}));
+            userEvent.click(screen.getByRole('button', {name: /Login Here/i}));
             expect(setIsRegister).toBeCalled();
             expect(setError).toBeCalled();
         })

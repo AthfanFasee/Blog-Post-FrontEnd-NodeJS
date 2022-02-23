@@ -19,7 +19,7 @@ export default function LikePopOver() {
 
   return (
     <div>
-      <ThumbUpOffAltIcon aria-describedby={id} variant="contained" onClick={handleClick}></ThumbUpOffAltIcon>
+      <ThumbUpOffAltIcon data-testid="ThumbUpOffAltIcon" aria-describedby={id} variant="contained" onClick={handleClick}></ThumbUpOffAltIcon>
       <Popover
         id={id}
         open={open}

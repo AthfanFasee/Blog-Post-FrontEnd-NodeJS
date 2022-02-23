@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { LoginPageContext } from '../../Helper/LoginPageContext/LoginPageProvider';
-import './LoginComponent.css';
+import './LoginButton.css';
 
 function LoginButton({LoginUser}) {
     

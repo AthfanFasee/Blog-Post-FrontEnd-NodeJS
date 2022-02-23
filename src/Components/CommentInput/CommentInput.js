@@ -33,9 +33,7 @@ export default function CommentInput({addComment, id}) {
         <IconButton className="Button" onClick={() => addComment(id)} disabled={!commentInput} color="primary">
         <SendIcon  />
       </IconButton>
-        }
-        
-       
+        }     
     </div>
   );
 }

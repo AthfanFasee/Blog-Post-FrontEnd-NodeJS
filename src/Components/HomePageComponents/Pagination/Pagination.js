@@ -9,7 +9,6 @@ export default function Page({pageCount}) {
 
   const handleChange = (event, value) => {
     setPage(value);
-    console.log(value);
   };
 
   

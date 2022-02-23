@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LoginButton from '../../Components/LoginButton/LoginComponent';
+import LoginButton from '../../Components/LoginButton/LoginButton';
 import Register from '../../Components/Register/Register';
 import {useContext} from 'react';
 import axios from 'axios';
