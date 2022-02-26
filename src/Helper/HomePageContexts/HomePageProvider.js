@@ -11,9 +11,6 @@ export function HomePageProvider({children}) {
     //To save noOfPages
    const [pageCount, setPageCount] = useState(1);
 
-  //To save updatedPost
-   const [updatedPost, setUpdatedPost] = useState("");
-
   //to save sort value
    const [sort, setSort] = useState('-createdAt');
 
@@ -38,7 +35,7 @@ export function HomePageProvider({children}) {
     
     
     return (
-        <HomePageContext.Provider value={{setCommentInput, commentInput, commentData, setCommentData, isComments, setIsComments, sort, setSort, setUpdatedPost, updatedPost, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
+        <HomePageContext.Provider value={{setCommentInput, commentInput, commentData, setCommentData, isComments, setIsComments, sort, setSort, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
             {children}
         </HomePageContext.Provider>
     )

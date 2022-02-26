@@ -8,15 +8,21 @@ import {Provider} from 'react-redux';
 import updateReducer from './features/UpdateInputElements';
 import updatePostID from './features/PostID';
 import updateUserIDParam from './features/UserIDParam';
-
+import PostsReducer from './features/HomePageAPIs/PostsList';
+import UpdatePostReducer from './features/HomePageAPIs/UpdatePost';
+import deletePostReducer from './features/HomePageAPIs/UpdatePost';
 
 
 const store = configureStore({
   reducer: {
     update: updateReducer,
     PostID: updatePostID,
-    UserIDParam: updateUserIDParam
-  }
+    UserIDParam: updateUserIDParam,
+    Posts: PostsReducer,
+    updatePost : UpdatePostReducer,
+    deletePost : deletePostReducer
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 

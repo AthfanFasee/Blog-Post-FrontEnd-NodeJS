@@ -11,15 +11,19 @@ import LikePopOver from "../LikePopOver/LikePopOver";
 import Comments from "../Comments/Comments";
 import CommentInput from "../CommentInput/CommentInput";
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
-
+import {useSelector} from 'react-redux';
  
-function UserPosts({post, deletePost, updatedPost}) {
+function UserPosts({post}) {
 
     const {setCommentInput, commentInput, commentData, setCommentData, isComments, setIsComments} = useContext(HomePageContext);
     
     const userID = localStorage.getItem('userID');
     const token = localStorage.getItem('token');
-    
+
+    //To re-render a post as soon as it's updated
+    const updatedPost = useSelector((state) => state.updatePost.value.UpdatedPost);
+
+
     //Modifying Time which comes from DB
     let time = post.createdAt.split('T').join(', ');
     time = time.slice(0, 17);
@@ -147,7 +151,7 @@ function UserPosts({post, deletePost, updatedPost}) {
 
               {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
               {userID === post.createdBy &&
-              <div className="DeleteButton"><DeleteButton deletePost={deletePost} post={post}/></div>
+              <div className="DeleteButton"><DeleteButton post={post}/></div>
               }
             </div>
 

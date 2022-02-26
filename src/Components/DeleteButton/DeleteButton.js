@@ -6,13 +6,20 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
+import {useDispatch} from 'react-redux';
+import {deletePost} from '../../features/HomePageAPIs/DeletePost';
 
 
-function DeleteButton({deletePost, post}) {
+function DeleteButton({post}) {
+
+
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('token');
 
     //for delete confirmation
     const [open, setOpen] = useState(false);
 
+    
   
     const handleClickOpen = () => {
         setOpen(true);
@@ -23,7 +30,7 @@ function DeleteButton({deletePost, post}) {
       };
 
       const confirmDelete = () => {
-        deletePost(post._id);
+        dispatch(deletePost({id: post._id, token}));
         setOpen(false);
       }
 
