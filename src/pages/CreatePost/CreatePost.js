@@ -1,35 +1,31 @@
-import axios from "axios";
 import { useEffect, useContext } from "react";
 import {useNavigate} from 'react-router-dom';
 import CreatePostElmnts from "../../Components/CreatePostElements/CreatePostElmnts";
 import './CreatePost.css';
 import {CreatePostContext} from '../../Helper/CreatePostContext/CreatePostProvider';
+import {useDispatch} from 'react-redux';
+import {createPost} from '../../api/CreatePostAPI/CreatePost';
+
 
 function CreatePost() {
 
     const {title, postText, setError} = useContext(CreatePostContext);
 
     const navigate = useNavigate();
-
-    const url = "https://blog-posts-1699.herokuapp.com/api/v1/posts";
+    const dispatch = useDispatch();
     const token = localStorage.getItem("token");
 
    
     //Adding Post to MongoDB
-    const createPost = async () => {
-        try {
-            await axios.post(url, {title, postText}, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+    const CreatePostButtonClick = async () => {
+        try{
+            await dispatch(createPost({title, postText, token}));    
             localStorage.removeItem("Title");
             localStorage.removeItem("PostText");
             navigate("/"); 
-
-        } catch (err) {
-            setError(err.response.data.msg);
-        }
+        } catch(err){
+            setError(err);
+        }                  
     }
 
     //For Cancel button
@@ -55,7 +51,7 @@ function CreatePost() {
 
     return (
         <div className="CreatePage">
-            <CreatePostElmnts Cancel={Cancel} createPost={createPost} />
+            <CreatePostElmnts Cancel={Cancel} CreatePostButtonClick={CreatePostButtonClick} />
         </div>
         
     )

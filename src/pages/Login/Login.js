@@ -2,9 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import LoginButton from '../../Components/LoginButton/LoginButton';
 import Register from '../../Components/Register/Register';
 import {useContext} from 'react';
-import axios from 'axios';
 import './Login.css';
 import { LoginPageContext } from '../../Helper/LoginPageContext/LoginPageProvider';
+import {login} from '../../api/LoginAPIs/Login'
+import { register } from '../../api/LoginAPIs/Register';
 
 
 function Login() {
@@ -13,18 +14,14 @@ function Login() {
      useContext(LoginPageContext);
 
     const navigate = useNavigate();
-    const RegisterURL = 'https://blog-posts-1699.herokuapp.com/api/v1/auth/register';
-    const LoginURL = 'https://blog-posts-1699.herokuapp.com/api/v1/auth/login';
-
 
     //Login
     const LoginUser = async () => {
         try{
-            const {data} = await axios.post(LoginURL, {email: loginEmail, password: loginPassword});
+            const {data} = await login({loginEmail, loginPassword})
             localStorage.setItem('token', data.token);
             localStorage.setItem('userID', data.user.id); //Saving token and username as soon as the user is logged in / Registered
             localStorage.setItem('userName', data.user.name);
-
             navigate("/")
             window.location.reload();
         } catch(err) {
@@ -36,7 +33,7 @@ function Login() {
     //Register
     const RegisterUser = async () => {
         try {
-            const {data} = await axios.post(RegisterURL, {email: registerEmail, password: registerPassword, name: registerUserName});
+            const {data} = await register({registerEmail, registerPassword, registerUserName})
             localStorage.setItem('token', data.token);
             localStorage.setItem('userID', data.user.id);
             localStorage.setItem('userName', data.user.name);

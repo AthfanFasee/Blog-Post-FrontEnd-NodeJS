@@ -5,13 +5,17 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState } from 'react';
-import {useDispatch} from 'react-redux';
-import {deletePost} from '../../features/HomePageAPIs/DeletePost';
+import { useContext, useState } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {deletePost} from '../../api/HomePageAPIs/Posts';
+import {getPosts} from '../../api/HomePageAPIs/Posts';
+import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 
 
 function DeleteButton({post}) {
 
+  const {sort, page} = useContext(HomePageContext);
+  const UserIDParam = useSelector((state) => state.UserIDParam.value);
 
   const dispatch = useDispatch();
   const token = localStorage.getItem('token');
@@ -29,8 +33,9 @@ function DeleteButton({post}) {
         setOpen(false);
       };
 
-      const confirmDelete = () => {
-        dispatch(deletePost({id: post._id, token}));
+      const confirmDelete = async () => {
+        await dispatch(deletePost({id: post._id, token}));
+        dispatch(getPosts({page, sort, UserIDParam}));
         setOpen(false);
       }
 

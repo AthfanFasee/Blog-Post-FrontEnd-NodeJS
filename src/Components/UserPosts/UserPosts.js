@@ -1,9 +1,7 @@
 import DeleteButton from "../DeleteButton/DeleteButton";
 import UpdateButton from "../UpdateButton/UpdateButton";
-import { useContext, useState } from "react";
-import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
+import {  useState } from "react";
 import './UserPosts.css';
-import axios from "axios"
 import CommentIcon from '@mui/icons-material/Comment';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -12,13 +10,24 @@ import Comments from "../Comments/Comments";
 import CommentInput from "../CommentInput/CommentInput";
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import {useSelector} from 'react-redux';
- 
-function UserPosts({post}) {
+import {FetchComments, AddComment, DeleteComment} from '../../api/UserPostsAPIs/Comments';
+import {LikePost, DisLikePost} from '../../api/UserPostsAPIs/Likes';
 
-    const {setCommentInput, commentInput, commentData, setCommentData, isComments, setIsComments} = useContext(HomePageContext);
-    
+function UserPosts({post}) {
+  
     const userID = localStorage.getItem('userID');
     const token = localStorage.getItem('token');
+
+    //to save comments data
+    const [commentData, setCommentData] = useState("");
+    
+    //to save commentInput value
+    const [commentInput, setCommentInput] = useState("");
+
+
+    //For comments button
+    const [isComments, setIsComments] = useState(false);
+  
 
     //To re-render a post as soon as it's updated
     const updatedPost = useSelector((state) => state.updatePost.value.UpdatedPost);
@@ -37,12 +46,8 @@ function UserPosts({post}) {
     
     
     //This function is when the user didnt like the post yet
-    const LikePost = async () => {
-        const {data} = await axios.patch(`https://blog-posts-1699.herokuapp.com/api/v1/posts/liked/${post._id}`,{id: userID}, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }})
-        
+    const likePost = async () => {
+        const {data} = await LikePost({postID: post._id, userID, token});
         setLikesCount(data.post.likedBy.length);  //Live updating likes count and like icon
         setLiked(true);
          
@@ -50,10 +55,7 @@ function UserPosts({post}) {
 
     //This function is when user already liked the post and wanna dislike
     const disLikePost = async () => {
-        const {data} = await axios.patch(`https://blog-posts-1699.herokuapp.com/api/v1/posts/disliked/${post._id}`,{id: userID}, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }})
+      const {data} = await DisLikePost({postID: post._id, userID, token});
         setLikesCount(data.post.likedBy.length);  //Live updating likes count and like icon     
         setLiked(false);
     }
@@ -64,7 +66,7 @@ function UserPosts({post}) {
     if(!token) {
       likeButton = <LikePopOver />;
     } else if (!liked) {
-      likeButton = <ThumbUpOffAltIcon fontSize="medium"  onClick ={LikePost}/>;
+      likeButton = <ThumbUpOffAltIcon fontSize="medium"  onClick ={likePost}/>;
     } else {
       likeButton = <ThumbUpAltIcon fontSize="medium" onClick ={disLikePost}/>;
     }
@@ -73,50 +75,29 @@ function UserPosts({post}) {
     
     //Comment Functionality
 
-    const url = 'https://blog-posts-1699.herokuapp.com/api/v1/posts/comments';
-
     const CommentButtonClick = async () => {
-      try {
-        const {data} = await axios.get(`${url}/${post._id}`);
-        setCommentData(data.comments);
+        const {data} = await FetchComments ({postID: post._id});
+        setCommentData(data.comments);       
         setIsComments(true);
-
-      } catch (error) {
-        alert(error);
-      }
        
     }
 
     const addComment = async (id) => {
-      try {
-          await axios.post(url, {Text:commentInput, Post:id}, {
-            headers: {Authorization: `Bearer ${token}`}
-          })
-          CommentButtonClick();
-          setCommentInput("");
-      } catch (error) {
-        alert(error);
-      }
+        await AddComment(commentInput, id, token);
+        CommentButtonClick();
+        setCommentInput("");
     }
 
 
-  const deleteComment = async (id) => {
-    try{
-      await axios.delete(`${url}/${id}`, {
-        headers: {Authorization: `Bearer ${token}`}
-      })
-      CommentButtonClick()
-    } catch (error) {
-      alert.log(error);
-    }   
-  }
-
-
+    const deleteComment = async (id) => {
+        await DeleteComment(id, token);
+        CommentButtonClick();
+    }
 
 
     return (        
           <div className="post">
-                                           {/* Making sure only the newly Updated post's title and postText re-renders on screen. This is to fix a bug where if a single post gets updated in to something all the other posts also chang on screen*/}
+                                           {/* Making sure only the newly Updated post's title and postText re-renders on screen */}
             <div className="postHeader"><h1>{updatedPost._id === post._id ? updatedPost.title : post.title}</h1></div> 
 
              <div className="postContentContainer">
@@ -157,7 +138,7 @@ function UserPosts({post}) {
 
             {/* If comment Icon is clicked Rendering Comments on Screen */}
             
-            {isComments && <CommentInput id={post._id} addComment={addComment}/>}
+            {isComments && <CommentInput id={post._id} addComment={addComment} setCommentInput={setCommentInput} commentInput={commentInput}/>}
             <div className="AllComments">
             {isComments && commentData.map(comment => {
               return (

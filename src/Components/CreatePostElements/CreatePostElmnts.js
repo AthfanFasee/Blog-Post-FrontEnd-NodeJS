@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { CreatePostContext } from '../../Helper/CreatePostContext/CreatePostProvider';
 import './CreatePostElement.css';
 
-function CreatePostElmnts({Cancel, createPost}) {
+function CreatePostElmnts({Cancel, CreatePostButtonClick}) {
     
     const {title, setTitle, postText, setPostText, error} = useContext(CreatePostContext);
 
@@ -19,7 +19,7 @@ function CreatePostElmnts({Cancel, createPost}) {
                 <label>Post:</label>
                 <textarea placeholder="Post..." value={postText} onChange={(event) => setPostText(event.target.value)} />
             </div>
-            <button disabled={!title || !postText}  onClick={createPost}>Submit Post</button>
+            <button disabled={!title || !postText}  onClick={CreatePostButtonClick}>Submit Post</button>
             <button onClick={Cancel}>Cancel</button>
             </div>
         </div>

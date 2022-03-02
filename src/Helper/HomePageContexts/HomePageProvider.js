@@ -23,19 +23,13 @@ export function HomePageProvider({children}) {
 
     //For Comment Section
 
-    //For comments button
-    const [isComments, setIsComments] = useState(false);
-  
-   //to save comments data
-    const [commentData, setCommentData] = useState("");
     
-    //to save commentInput value
-    const [commentInput, setCommentInput] = useState("");
-
+   
+    
     
     
     return (
-        <HomePageContext.Provider value={{setCommentInput, commentInput, commentData, setCommentData, isComments, setIsComments, sort, setSort, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
+        <HomePageContext.Provider value={{sort, setSort, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
             {children}
         </HomePageContext.Provider>
     )

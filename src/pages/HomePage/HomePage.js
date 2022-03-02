@@ -9,8 +9,8 @@ import './HomePage.css';
 import LoadingComponent from "../../Components/HomePageComponents/LoadingComponent/LoadingComponent";
 import {useSelector, useDispatch} from 'react-redux';
 import {updateInputValue} from '../../features/UpdateInputElements';
-import {getPosts} from '../../features/HomePageAPIs/PostsList';
-import {updatePost} from '../../features/HomePageAPIs/UpdatePost';
+import {getPosts} from '../../api/HomePageAPIs/Posts';
+import {updatePost} from '../../api/HomePageAPIs/Posts';
 
 
 
@@ -63,15 +63,15 @@ function HomePage() {
       <BackToTop />
 
       {/* Loading Icon */}
-      {PostsList.posts.length < 1 && <LoadingComponent />}
+      {PostsList.status === 'loading' && <LoadingComponent />}
 
 
       {/*Showing Posts when HomePage Component is Rendered */}
       {PostsList.posts.map((post) => {
-        return(
-          
+        return( 
           <div key={post._id}>
-          <UserPosts post={post}/></div> 
+          <UserPosts post={post}/>
+          </div> 
          )
       })}
 
