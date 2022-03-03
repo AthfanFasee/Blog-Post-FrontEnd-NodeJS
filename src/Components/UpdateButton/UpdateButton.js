@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
-import {useDispatch} from 'react-redux';
 import {updateInputValue} from '../../features/UpdateInputElements';
 import {updatePostID} from '../../features/PostID';
+import {useUpdateButtonDispatch}from '../../redux/redux-hooks';
+
 
 function UpdateButton({post, updatedPost}) {
   const {isEditsection} = useContext(HomePageContext);
 
-  const dispatch = useDispatch();
+  const dispatch = useUpdateButtonDispatch();
 
     return (
         <div>

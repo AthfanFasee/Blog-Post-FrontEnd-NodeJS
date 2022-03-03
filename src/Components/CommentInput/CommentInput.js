@@ -29,7 +29,7 @@ export default function CommentInput({addComment, id, commentInput, setCommentIn
 
         {/* Showing PopUp to Login if not Logged in */}
         {!token ? <CommentPopOver /> : 
-        <IconButton className="Button" onClick={() => addComment(id)} disabled={!commentInput} color="primary">
+        <IconButton data-testid='IconButton' className="Button" onClick={() => addComment(id)} disabled={!commentInput} color="primary">
         <SendIcon  />
       </IconButton>
         }     

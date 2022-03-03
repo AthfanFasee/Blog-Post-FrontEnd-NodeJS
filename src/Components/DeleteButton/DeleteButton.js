@@ -6,18 +6,18 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useContext, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
 import {deletePost} from '../../api/HomePageAPIs/Posts';
 import {getPosts} from '../../api/HomePageAPIs/Posts';
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
+import { useDeleteButtonDispatch, useDeleteButtonSelector } from '../../redux/redux-hooks';
 
 
 function DeleteButton({post}) {
 
   const {sort, page} = useContext(HomePageContext);
-  const UserIDParam = useSelector((state) => state.UserIDParam.value);
+  const UserIDParam = useDeleteButtonSelector((state) => state.UserIDParam.value);
 
-  const dispatch = useDispatch();
+  const dispatch = useDeleteButtonDispatch();
   const token = localStorage.getItem('token');
 
     //for delete confirmation

@@ -5,12 +5,16 @@ import { HomePageProvider } from '../../../Helper/HomePageContexts/HomePageProvi
 import CommentInput from '../CommentInput';
 
 
+const mockedSetCommentInput = jest.fn();
+const mockedAddComment = jest.fn();
+const id = 1
+
 
 describe('CommentInput', () => {
 
     beforeEach(() => {
         // eslint-disable-next-line testing-library/no-render-in-setup
-        render(<HomePageProvider><CommentInput /></HomePageProvider>);
+        render(<HomePageProvider><CommentInput  id={id} addComment={mockedAddComment} setCommentInput={mockedSetCommentInput}/></HomePageProvider>);
     })
 
     describe('Input element', () => {
@@ -26,5 +30,4 @@ describe('CommentInput', () => {
             expect(inputElement.value).toBe('Comment');    
         })
     })
-
 })

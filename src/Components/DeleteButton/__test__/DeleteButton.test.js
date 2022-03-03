@@ -2,14 +2,21 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import DeleteButton from '../DeleteButton';
+import { HomePageProvider } from '../../../Helper/HomePageContexts/HomePageProvider';
+import { useDeleteButtonSelector } from '../../../redux/redux-hooks';
+import {testUseUserIDSelector} from '../../../redux/test-app-selector';
 
-const mockedFunction= jest.fn();
+jest.mock('../../../redux/redux-hooks')
 const post = {_id : 1}
-describe('Comments', () => {
+
+
+describe('DeleteButton', () => {
 
     beforeEach(() => {
+        useDeleteButtonSelector.mockImplementation(testUseUserIDSelector);
+
         // eslint-disable-next-line testing-library/no-render-in-setup
-        render(<DeleteButton deletePost={mockedFunction} post={post}/>);
+        render(<HomePageProvider><DeleteButton post={post}/></HomePageProvider>);
     })
 
 
@@ -34,24 +41,12 @@ describe('Comments', () => {
                 userEvent.click(screen.getByTestId(/deleteIcon/i));
                 expect(screen.getByRole('button', {name: /Confirm/i})).toBeInTheDocument();
             })
-            it('should run deletePost function onClick', () => {
-                userEvent.click(screen.getByTestId(/deleteIcon/i));
-                userEvent.click(screen.getByRole('button', {name: /Confirm/i}));
-                expect(mockedFunction).toBeCalled();
-            })
-
         })
 
         describe('Close Button', () => {
             it('should render after clicking deleteIcon', () => {
                 userEvent.click(screen.getByTestId(/deleteIcon/i));
                 expect(screen.getByRole('button', {name: /Close/i})).toBeInTheDocument();
-            })
-            
-            it('should not run deletePost function onClick', () => {
-                userEvent.click(screen.getByTestId(/deleteIcon/i));
-                userEvent.click(screen.getByRole('button', {name: /Close/i}));
-                expect(mockedFunction).toBeCalledTimes(0);
             })
         })
 

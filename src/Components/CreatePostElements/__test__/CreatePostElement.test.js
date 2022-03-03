@@ -4,13 +4,13 @@ import '@testing-library/jest-dom';
 import CreatePostElmnts from '../CreatePostElmnts';
 import { CreatePostProvider } from '../../../Helper/CreatePostContext/CreatePostProvider';
 
-const mockedCreatePost = jest.fn();
+const mockedCreatePostButtonClick = jest.fn();
 const mockedCancel = jest.fn();
 
 describe('CreatePostElmnts', () => {
     beforeEach(() => {
         // eslint-disable-next-line testing-library/no-render-in-setup
-        render(<CreatePostProvider><CreatePostElmnts createPost={mockedCreatePost} Cancel={mockedCancel}/></CreatePostProvider>);
+        render(<CreatePostProvider><CreatePostElmnts CreatePostButtonClick={mockedCreatePostButtonClick} Cancel={mockedCancel}/></CreatePostProvider>);
     })
     
     describe('Title Input Element', () => {
@@ -57,7 +57,7 @@ describe('CreatePostElmnts', () => {
             userEvent.type(screen.getByPlaceholderText(/Title../i), 'title');
             userEvent.type(screen.getByPlaceholderText(/Post.../i), 'post'); 
             userEvent.click(screen.getByRole('button', {name: /Submit Post/i}));
-            expect(mockedCreatePost).toBeCalled();
+            expect(mockedCreatePostButtonClick).toBeCalled();
         })
     })
 

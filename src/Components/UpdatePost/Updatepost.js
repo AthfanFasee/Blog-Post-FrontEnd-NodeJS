@@ -1,17 +1,17 @@
 import { useContext } from "react";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import './UpdatePost.css';
-import {useSelector, useDispatch} from 'react-redux';
+import {useUpdatePostDispatch, useUpdatePostSelector} from '../../redux/redux-hooks';
 import {updateInputValue} from '../../features/UpdateInputElements';
 
 
 export default function UpdatePost({updatePostButtonClick}) {
 
     const {isEditsection} = useContext(HomePageContext);
-    const PostID = useSelector((state) => state.PostID.value);
-    const update = useSelector((state) => state.update.value);
+    const PostID = useUpdatePostSelector((state) => state.PostID.value);
+    const update = useUpdatePostSelector((state) => state.update.value);
 
-    const dispatch = useDispatch();
+    const dispatch = useUpdatePostDispatch();
 
     return (
         <div className="UpdatePostBG">

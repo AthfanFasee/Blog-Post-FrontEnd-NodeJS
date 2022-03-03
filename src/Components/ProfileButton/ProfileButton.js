@@ -10,14 +10,14 @@ import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import './ProfileButton.css';
-import {useSelector, useDispatch} from 'react-redux';
 import {updateUserIDParam} from '../../features/UserIDParam';
+import { useProfileButtonSelector , useProfileButtonDispatch } from '../../redux/redux-hooks';
 
 export default function ProfileButton() {
 
 
-  const UserIDParam = useSelector((state) => state.UserIDParam.value);
-  const dispatch = useDispatch();
+  const UserIDParam = useProfileButtonSelector((state) => state.UserIDParam.value);
+  const dispatch = useProfileButtonDispatch();
 
   const userID = localStorage.getItem('userID');
   const userName = localStorage.getItem('userName');
@@ -104,7 +104,7 @@ export default function ProfileButton() {
         {UserIDParam&&
         <MenuItem className="Menu" onClick={() => dispatch(updateUserIDParam(""))}>
         <LocalPostOfficeIcon className="PostsIcon" /> Show All Posts
-      </MenuItem>
+        </MenuItem>
         }
         
         <MenuItem className="Menu" onClick={signOut}>
