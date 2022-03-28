@@ -10,13 +10,17 @@ import Comments from "../Comments/Comments";
 import CommentInput from "../CommentInput/CommentInput";
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import {useSelector} from 'react-redux';
-import {FetchComments, AddComment, DeleteComment} from '../../api/UserPostsAPIs/Comments';
-import {LikePost, DisLikePost} from '../../api/UserPostsAPIs/Likes';
+import {useAddLikeMutation, useDisLikeMutation, useLazyFetchCommentsQuery, useAddCommentMutation, useDeleteCommentMutation} from '../../services/Like&CommentApi';
+
+
 
 function UserPosts({post}) {
   
     const userID = localStorage.getItem('userID');
     const token = localStorage.getItem('token');
+
+    //Either Updated Post or Default Post is saved here to live render when gets updated
+    const [Post, setPost] = useState(post);
 
     //to save comments data
     const [commentData, setCommentData] = useState("");
@@ -24,46 +28,33 @@ function UserPosts({post}) {
     //to save commentInput value
     const [commentInput, setCommentInput] = useState("");
 
-
     //For comments button
     const [isComments, setIsComments] = useState(false);
-
-    const [Post, setPost] = useState("")
-
-    
     
     //Modifying Time which comes from DB
     let time = Post.createdAt.split('T').join(', ');
     time = time.slice(0, 17);
 
     //To re-render a post as soon as it's updated
-    const updatedPost = useSelector((state) => state.updatePost.value.UpdatedPost);
-    
+    const updatedPost = useSelector((state) => state.updatePost.value);
+    console.log(updatedPost);
     //Conditionally Rendering the Original Post or the Updated Post if the Post got Updated
     useEffect(() => {
       setPost(updatedPost._id === post._id ? updatedPost : post)
     }, [updatedPost, post])
 
     //Like Button Section
-
-    //Saving default values to show when page reloads
-    const [likesCount, setLikesCount] = useState(post.likedBy.length);
-    const [liked, setLiked] = useState(post.likedBy.includes(userID)? true : false);
+    const [ triggerLikePost] = useAddLikeMutation()
+    const [ triggerDisLikePost] = useDisLikeMutation()
     
-    
-    //This function is when the user didnt like the post yet
     const likePost = async () => {
-        const {data} = await LikePost({postID: post._id, userID, token});
-        setLikesCount(data.post.likedBy.length);  //Live updating likes count and like icon
-        setLiked(true);
-         
+        const {data} = await triggerLikePost({postID: Post._id, userID});
+        setPost(data.post)  //Live updating likes count and like icon      
     }
 
-    //This function is when user already liked the post and wanna dislike
     const disLikePost = async () => {
-      const {data} = await DisLikePost({postID: post._id, userID, token});
-        setLikesCount(data.post.likedBy.length);  //Live updating likes count and like icon     
-        setLiked(false);
+      const {data} = await triggerDisLikePost({postID: Post._id, userID});
+      setPost(data.post);  //Live updating likes count and like icon     
     }
 
     //Showing alert if user isnt logged in but tried to like the post
@@ -71,32 +62,32 @@ function UserPosts({post}) {
     let likeButton;
     if(!token) {
       likeButton = <LikePopOver />;
-    } else if (!liked) {
+    } else if (!Post.likedBy.includes(userID)) {
       likeButton = <ThumbUpOffAltIcon fontSize="medium"  onClick ={likePost}/>;
     } else {
       likeButton = <ThumbUpAltIcon fontSize="medium" onClick ={disLikePost}/>;
     }
-
-
     
     //Comment Functionality
+    const [triggerFetchComments] = useLazyFetchCommentsQuery();
+    const [triggerAddComment] = useAddCommentMutation();
+    const [triggerDeleteComment] = useDeleteCommentMutation();
 
     const CommentButtonClick = async () => {
-        const {data} = await FetchComments ({postID: post._id});
-        setCommentData(data.comments);       
-        setIsComments(true);
-       
+        const {data} = await triggerFetchComments({postID: post._id});
+        setCommentData(data.comments); //This state will handle refetching as well      
+        setIsComments(true);   
     }
 
     const addComment = async (id) => {
-        await AddComment(commentInput, id, token);
+        await triggerAddComment({commentInput, id});
         CommentButtonClick();
         setCommentInput("");
     }
 
 
     const deleteComment = async (id) => {
-        await DeleteComment(id, token);
+        await triggerDeleteComment({id});
         CommentButtonClick();
     }
 
@@ -127,7 +118,7 @@ function UserPosts({post}) {
             
               <div className="LikeIcon">{likeButton}</div>
 
-              <p className="likesCount">{likesCount}</p> 
+              <p className="likesCount">{Post.likedBy.length}</p> 
 
 
               {/* Conditionally Rendering CommentsIcon */}

@@ -1,19 +1,20 @@
 import {createSlice} from '@reduxjs/toolkit';
+import postsApi from '../services/HomePageApi';
 
 export const postsSlice = createSlice({
     name: 'UpdatedPost',
-    initialState : {value: {
-        UpdatedPost: {},
+    initialState : {value: {     
     }},
-    reducers: {
-      updatePost: (state,action) => {
-          state.value = action.payload;
-          console.log('updated', action.payload)
-      }
-  }
+    extraReducers: (builder) => {
+        builder.addMatcher(
+            postsApi.endpoints.updatePost.matchFulfilled,
+          (state, { payload }) => {
+            state.value = payload.post
+          }
+        )
+      },
       
 })
 
-export const {updatePost} = postsSlice.actions;
 
 export default postsSlice.reducer;

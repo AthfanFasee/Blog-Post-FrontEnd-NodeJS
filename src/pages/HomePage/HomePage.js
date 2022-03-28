@@ -1,4 +1,4 @@
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
@@ -10,7 +10,8 @@ import LoadingComponent from "../../Components/HomePageComponents/LoadingCompone
 import {useSelector, useDispatch} from 'react-redux';
 import {updateInputValue} from '../../features/UpdateInputElements';
 import {useGetPostsQuery, useUpdatePostMutation} from '../../services/HomePageApi';
-import {updatePost} from '../../features/UpdatedPost';
+
+import {updatePostAction} from '../../features/UpdatedPost';
 
 function HomePage() {
 
@@ -31,10 +32,8 @@ function HomePage() {
   
   //Updating the Post(Editing the Post)
   const updatePostButtonClick = async (PostID) => {
-      const {data} = await updatePost({PostID, update})
-      console.log(data)
-      isEditsection(false);
-
+      await updatePost({PostID, update})
+      isEditsection(false);  
       //After Updating when user click edit button again giving them the updated values typed in Inputs already.
       dispatch(updateInputValue({newtitle: updatedPost.title, newpostText: updatedPost.postText}))
   }

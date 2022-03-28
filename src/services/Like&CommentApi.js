@@ -1,38 +1,59 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const URL = 'https://blog-posts-1699.herokuapp.com/api/v1'
+const URL = 'https://blog-posts-1699.herokuapp.com/api/v1/posts'
 const token = localStorage.getItem('token');
 
 
 const likeAndCommentApi = createApi({
-  reducerPath: 'postsApi',
+  reducerPath: 'likeAndCommentApi',
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
-  tagTypes: ['Post'],
   endpoints: (builder) => ({
-    getPosts: builder.query({
-      query: ({page, sort, UserIDParam }) => `/posts?page=${page}&sort=${sort}${UserIDParam}`,
-      providesTags: ['Post'],
+
+    addLike: builder.mutation({
+      query: ({postID, userID}) => ({
+        url: `/liked/${postID}`,
+        method: 'PATCH',
+        body: {id: userID},
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }),
     }),
-    deletePost: builder.mutation({
-      query: (id) => ({
-        url: `/posts/${id}`,
+
+    disLike: builder.mutation({
+      query: ({postID, userID}) => ({
+        url: `/disliked/${postID}`,
+        method: 'PATCH',
+        body: {id: userID},
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }),
+    }),
+
+    fetchComments: builder.query({
+      query: ({postID}) => `/comments/${postID}`,
+    }),
+    
+    addComment: builder.mutation({
+      query: ({commentInput, id}) => ({
+        url: `/comments`,
+        method: 'POST',
+        body: {Text:commentInput, Post:id},
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      }),
+    }),
+
+    deleteComment: builder.mutation({
+      query: ({id}) => ({
+        url: `/comments/${id}`,
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
       }),
-      invalidatesTags: ['Post'],
-    }),
-    createPost: builder.mutation({
-      query: ({title, postText}) => ({
-        url: `/posts`,
-        method: 'POST',
-        body: {title, postText},
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }),
-      invalidatesTags: ['Post'],
     }),
   }),
 });
@@ -40,9 +61,9 @@ const likeAndCommentApi = createApi({
 export default likeAndCommentApi;
 
 export const {
-  useGetPostsQuery,
-  useLazyGetPostsQuery,
-  useDeletePostMutation,
-  useCreatePostMutation,
-  useUpdatePostMutation
+  useAddLikeMutation,
+  useDisLikeMutation,
+  useLazyFetchCommentsQuery,
+  useAddCommentMutation,
+  useDeleteCommentMutation
 } = likeAndCommentApi;
