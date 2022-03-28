@@ -6,27 +6,24 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useContext, useState } from 'react';
-import {deletePost} from '../../api/HomePageAPIs/Posts';
-import {getPosts} from '../../api/HomePageAPIs/Posts';
-import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
-import { useDeleteButtonDispatch, useDeleteButtonSelector } from '../../redux/redux-hooks';
-
+import { HomePageContext } from '../../Helper/HomePageContexts/HomePageProvider';
+import { useDeletePostMutation } from '../../services/HomePageApi';
 
 function DeleteButton({post}) {
 
-  const {sort, page} = useContext(HomePageContext);
-  const UserIDParam = useDeleteButtonSelector((state) => state.UserIDParam.value);
-
-  const dispatch = useDeleteButtonDispatch();
-  const token = localStorage.getItem('token');
+  const {setIsdeleted} = useContext(HomePageContext);
 
     //for delete confirmation
     const [open, setOpen] = useState(false);
 
-    
-  
+
+
+    //Deleting the post 
+    const [deletePost] = useDeletePostMutation()
+   
     const handleClickOpen = () => {
         setOpen(true);
+
       };
     
       const handleClose = () => {
@@ -34,9 +31,10 @@ function DeleteButton({post}) {
       };
 
       const confirmDelete = async () => {
-        await dispatch(deletePost({id: post._id, token}));
-        dispatch(getPosts({page, sort, UserIDParam}));
+        await deletePost(post._id)
+        setIsdeleted(true)
         setOpen(false);
+        
       }
 
       

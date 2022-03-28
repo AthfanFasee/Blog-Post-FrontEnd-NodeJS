@@ -21,7 +21,8 @@ export function HomePageProvider({children}) {
     const [page, setPage] = useState(1);
 
 
-    //For Comment Section
+    //For reloading homepage after a post is deleted
+    const [ isdeleted, setIsdeleted ] = useState("")
 
     
    
@@ -29,7 +30,7 @@ export function HomePageProvider({children}) {
     
     
     return (
-        <HomePageContext.Provider value={{sort, setSort, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
+        <HomePageContext.Provider value={{isdeleted,setIsdeleted, sort, setSort, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
             {children}
         </HomePageContext.Provider>
     )

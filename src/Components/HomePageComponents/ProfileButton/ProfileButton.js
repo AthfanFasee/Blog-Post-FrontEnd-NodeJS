@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import './ProfileButton.css';
 import {useSelector, useDispatch} from 'react-redux';
-import {updateUserIDParam} from '../../features/UserIDParam';
+import {updateUserIDParam} from '../../../features/UserIDParam';
 
 export default function ProfileButton() {
 

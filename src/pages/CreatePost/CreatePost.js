@@ -3,29 +3,25 @@ import {useNavigate} from 'react-router-dom';
 import CreatePostElmnts from "../../Components/CreatePostElements/CreatePostElmnts";
 import './CreatePost.css';
 import {CreatePostContext} from '../../Helper/CreatePostContext/CreatePostProvider';
-import {useDispatch} from 'react-redux';
-import {createPost} from '../../api/CreatePostAPI/CreatePost';
-
+import {useCreatePostMutation, useLazyGetPostsQuery} from '../../services/HomePageApi';
 
 function CreatePost() {
 
-    const {title, postText, setError} = useContext(CreatePostContext);
+    const {title, postText} = useContext(CreatePostContext);
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const token = localStorage.getItem("token");
 
-   
+    const [createPost] = useCreatePostMutation()
+    const [triggerGetPost] = useLazyGetPostsQuery()
+
     //Adding Post to MongoDB
     const CreatePostButtonClick = async () => {
-        try{
-            await dispatch(createPost({title, postText, token}));    
+            await createPost({title, postText})  
+            triggerGetPost()
             localStorage.removeItem("Title");
             localStorage.removeItem("PostText");
             navigate("/"); 
-        } catch(err){
-            setError(err);
-        }                  
     }
 
     //For Cancel button

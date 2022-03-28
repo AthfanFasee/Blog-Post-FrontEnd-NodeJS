@@ -1,41 +1,37 @@
-import { useEffect, useContext} from "react";
+import {useContext, useEffect} from "react";
 import UpdatePost from "../../Components/UpdatePost/UpdatePost";
 import UserPosts from "../../Components/UserPosts/UserPosts";
 import { HomePageContext } from "../../Helper/HomePageContexts/HomePageProvider";
 import Pagination from '../../Components/HomePageComponents/Pagination/Pagination';
 import SortButton from "../../Components/HomePageComponents/SortingButton/SortingButton";
-import BackToTop from "../../Components/ScrollToTopButton/ScrollToTopButton";
+import BackToTop from "../../Components/HomePageComponents/ScrollToTopButton/ScrollToTopButton";
 import './HomePage.css';
 import LoadingComponent from "../../Components/HomePageComponents/LoadingComponent/LoadingComponent";
 import {useSelector, useDispatch} from 'react-redux';
 import {updateInputValue} from '../../features/UpdateInputElements';
-import {getPosts} from '../../api/HomePageAPIs/Posts';
-import {updatePost} from '../../api/HomePageAPIs/Posts';
-
+import {useGetPostsQuery, useUpdatePostMutation} from '../../services/HomePageApi';
 
 
 function HomePage() {
 
-  const {sort, setSort, page, editsection, isEditsection} = useContext(HomePageContext);
+  const {sort, setSort, page, editsection, isEditsection, isdeleted} = useContext(HomePageContext);
 
   const update = useSelector((state) => state.update.value);
   const UserIDParam = useSelector((state) => state.UserIDParam.value);
-  const PostsList = useSelector((state) => state.Posts.value);
   const updatedPost = useSelector((state) => state.updatePost.value.UpdatedPost);
 
   const dispatch = useDispatch();
 
   const token = localStorage.getItem('token');
-  
-  //Getting Posts from MongoDB when the HomePage Component is rendered
-  useEffect(() => {
-      dispatch(getPosts({page, sort, UserIDParam}));
-  }, [dispatch, page, sort, UserIDParam]);
 
- 
+   //Getting Posts from MongoDB when the HomePage Component is rendered
+  const { data : PostsList, isFetching } = useGetPostsQuery({page, sort, UserIDParam })
+    
+  const [updatePost] = useUpdatePostMutation()
+  
   //Updating the Post(Editing the Post)
   const updatePostButtonClick = async (PostID) => {
-      dispatch(updatePost({PostID, update, token})); 
+      await updatePost({PostID, update})
       isEditsection(false);
 
       //After Updating when user click edit button again giving them the updated values typed in Inputs already.
@@ -58,16 +54,16 @@ function HomePage() {
       
         
       {/* Page SetUp(Pagination) */}
-      {!editsection && <Pagination pageCount={PostsList.noOfPages}/>}
+      {!editsection && <Pagination pageCount={PostsList?.noOfPages}/>}
 
       <BackToTop />
 
       {/* Loading Icon */}
-      {PostsList.status === 'loading' && <LoadingComponent />}
+      {isFetching && <LoadingComponent />}
 
 
       {/*Showing Posts when HomePage Component is Rendered */}
-      {PostsList.posts.map((post) => {
+      {PostsList?.posts.map((post) => {
         return( 
           <div key={post._id}>
           <UserPosts post={post}/>

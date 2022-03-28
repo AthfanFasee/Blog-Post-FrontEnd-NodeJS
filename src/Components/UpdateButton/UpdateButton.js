@@ -22,8 +22,7 @@ function UpdateButton({post, updatedPost}) {
                   //If user already updated the post, when they click edit button again, showing them the updated values in input elements.
                   dispatch(updateInputValue({newtitle: updatedPost._id === post._id ? updatedPost.title : post.title,
                   newpostText: updatedPost._id === post._id ? updatedPost.postText : post.postText
-                }))         
-                  
+                }))                          
               }}>&#128394;</button>
         </div>
     )

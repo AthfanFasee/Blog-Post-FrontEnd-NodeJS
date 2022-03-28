@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage/HomePage';
 import {HomePageProvider} from './Helper/HomePageContexts/HomePageProvider';
 import {CreatePostProvider} from './Helper/CreatePostContext/CreatePostProvider';
 import {LoginPageProvider} from './Helper/LoginPageContext/LoginPageProvider';
-import ProfileButton from './Components/ProfileButton/ProfileButton';
+import ProfileButton from './Components/HomePageComponents/ProfileButton/ProfileButton';
 
 
 

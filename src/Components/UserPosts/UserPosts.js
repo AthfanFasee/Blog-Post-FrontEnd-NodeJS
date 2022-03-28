@@ -32,7 +32,6 @@ function UserPosts({post}) {
     //To re-render a post as soon as it's updated
     const updatedPost = useSelector((state) => state.updatePost.value.UpdatedPost);
 
-
     //Modifying Time which comes from DB
     let time = post.createdAt.split('T').join(', ');
     time = time.slice(0, 17);
