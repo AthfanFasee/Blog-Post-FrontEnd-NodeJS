@@ -4,7 +4,7 @@ const URL = 'https://blog-posts-1699.herokuapp.com/api/v1'
 const token = localStorage.getItem('token');
 
 
-const postsApi = createApi({
+const likeAndCommentApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   tagTypes: ['Post'],
@@ -34,21 +34,10 @@ const postsApi = createApi({
       }),
       invalidatesTags: ['Post'],
     }),
-    updatePost: builder.mutation({
-      query: ({PostID, update}) => ({
-        url: `/posts/${PostID}`,
-        method: 'PATCH',
-        body: {title: update.newtitle, postText: update.newpostText },
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }),
-    }),
-
   }),
 });
 
-export default postsApi;
+export default likeAndCommentApi;
 
 export const {
   useGetPostsQuery,
@@ -56,4 +45,4 @@ export const {
   useDeletePostMutation,
   useCreatePostMutation,
   useUpdatePostMutation
-} = postsApi;
+} = likeAndCommentApi;

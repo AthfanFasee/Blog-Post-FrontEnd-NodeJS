@@ -4,9 +4,7 @@ import Register from '../../Components/Register/Register';
 import {useContext} from 'react';
 import './Login.css';
 import { LoginPageContext } from '../../Helper/LoginPageContext/LoginPageProvider';
-import {login} from '../../api/LoginAPIs/Login'
-import { register } from '../../api/LoginAPIs/Register';
-
+import {useLoginUserMutation, useRegisterUserMutation} from '../../services/LoginPageApi';
 
 function Login() {
 
@@ -15,35 +13,29 @@ function Login() {
 
     const navigate = useNavigate();
 
+    const [login] = useLoginUserMutation()
+    const [register] = useRegisterUserMutation()
+    
+    localStorage.getItem('userInfo')
     //Login
     const LoginUser = async () => {
-        try{
             const {data} = await login({loginEmail, loginPassword})
             localStorage.setItem('token', data.token);
-            localStorage.setItem('userID', data.user.id); //Saving token and username as soon as the user is logged in / Registered
-            localStorage.setItem('userName', data.user.name);
-            navigate("/")
+            localStorage.setItem('userID', data.user.id);
+            localStorage.setItem('userName', data.user.name);           
+            navigate("/");
             window.location.reload();
-        } catch(err) {
-             setError(err.response.data.msg);          
-        }
     }
 
 
     //Register
     const RegisterUser = async () => {
-        try {
             const {data} = await register({registerEmail, registerPassword, registerUserName})
             localStorage.setItem('token', data.token);
             localStorage.setItem('userID', data.user.id);
-            localStorage.setItem('userName', data.user.name);
-
+            localStorage.setItem('userName', data.user.name);           
             navigate("/");
             window.location.reload();
-
-        } catch(err) {
-            setError(err.response.data.msg);
-        }
     }
 
     return (

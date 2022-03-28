@@ -1,6 +1,6 @@
 import DeleteButton from "../DeleteButton/DeleteButton";
 import UpdateButton from "../UpdateButton/UpdateButton";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import './UserPosts.css';
 import CommentIcon from '@mui/icons-material/Comment';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -27,15 +27,22 @@ function UserPosts({post}) {
 
     //For comments button
     const [isComments, setIsComments] = useState(false);
-  
+
+    const [Post, setPost] = useState("")
+
+    
+    
+    //Modifying Time which comes from DB
+    let time = Post.createdAt.split('T').join(', ');
+    time = time.slice(0, 17);
 
     //To re-render a post as soon as it's updated
     const updatedPost = useSelector((state) => state.updatePost.value.UpdatedPost);
-
-    //Modifying Time which comes from DB
-    let time = post.createdAt.split('T').join(', ');
-    time = time.slice(0, 17);
-
+    
+    //Conditionally Rendering the Original Post or the Updated Post if the Post got Updated
+    useEffect(() => {
+      setPost(updatedPost._id === post._id ? updatedPost : post)
+    }, [updatedPost, post])
 
     //Like Button Section
 
@@ -97,18 +104,18 @@ function UserPosts({post}) {
     return (        
           <div className="post">
                                            {/* Making sure only the newly Updated post's title and postText re-renders on screen */}
-            <div className="postHeader"><h1>{updatedPost._id === post._id ? updatedPost.title : post.title}</h1></div> 
+            <div className="postHeader"><h1>{Post.title}</h1></div> 
 
              <div className="postContentContainer">
-                  <div className="postTextContainer">{updatedPost._id === post._id ? updatedPost.postText : post.postText}</div>
-                  <h4 className="Aurthor">Posted by: {post.userName}</h4>
+                  <div className="postTextContainer">{Post.postText}</div>
+                  <h4 className="Aurthor">Posted by: {Post.userName}</h4>
                   <div className="Time">@{time}</div>   
               </div>   
 
               <div className="UpdateButton">
               {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn(passing post as props so I can access post.id and stuffs to set them to states)*/}     
               {userID === post.createdBy && 
-              <div><UpdateButton updatedPost={updatedPost} post={post}/></div>
+              <div><UpdateButton updatedPost={updatedPost} post={Post}/></div>
               }        
             </div>
 
@@ -131,13 +138,13 @@ function UserPosts({post}) {
 
               {/*Showing DeleteButton only when the user who posted the post LoggedIn*/}
               {userID === post.createdBy &&
-              <div className="DeleteButton"><DeleteButton post={post}/></div>
+              <div className="DeleteButton"><DeleteButton post={Post}/></div>
               }
             </div>
 
             {/* If comment Icon is clicked Rendering Comments on Screen */}
             
-            {isComments && <CommentInput id={post._id} addComment={addComment} setCommentInput={setCommentInput} commentInput={commentInput}/>}
+            {isComments && <CommentInput id={Post._id} addComment={addComment} setCommentInput={setCommentInput} commentInput={commentInput}/>}
             <div className="AllComments">
             {isComments && commentData.map(comment => {
               return (
