@@ -11,7 +11,7 @@ import CommentInput from "../CommentInput/CommentInput";
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import {useSelector} from 'react-redux';
 import {useAddLikeMutation, useDisLikeMutation, useLazyFetchCommentsQuery, useAddCommentMutation, useDeleteCommentMutation} from '../../services/Like&CommentApi';
-
+import DefaultPostImg from './DefaultPostImg.png';
 
 
 function UserPosts({post}) {
@@ -28,7 +28,7 @@ function UserPosts({post}) {
     //to save commentInput value
     const [commentInput, setCommentInput] = useState("");
 
-    //For comments button
+    //to Render Comments Section
     const [isComments, setIsComments] = useState(false);
     
     //Modifying Time which comes from DB
@@ -37,7 +37,7 @@ function UserPosts({post}) {
 
     //To re-render a post as soon as it's updated
     const updatedPost = useSelector((state) => state.updatePost.value);
-    console.log(updatedPost);
+    
     //Conditionally Rendering the Original Post or the Updated Post if the Post got Updated
     useEffect(() => {
       setPost(updatedPost._id === post._id ? updatedPost : post)
@@ -91,11 +91,12 @@ function UserPosts({post}) {
         CommentButtonClick();
     }
 
-
     return (        
           <div className="post">
-                                           {/* Making sure only the newly Updated post's title and postText re-renders on screen */}
+            <div className="TitlendImage">
             <div className="postHeader"><h1>{Post.title}</h1></div> 
+            <img className="postImage" src={Post.img? Post.img : DefaultPostImg} alt=""/>
+            </div>
 
              <div className="postContentContainer">
                   <div className="postTextContainer">{Post.postText}</div>

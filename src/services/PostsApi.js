@@ -9,10 +9,12 @@ const postsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: URL }),
   tagTypes: ['Post'],
   endpoints: (builder) => ({
+
     getPosts: builder.query({
       query: ({page, sort, UserIDParam }) => `/posts?page=${page}&sort=${sort}${UserIDParam}`,
       providesTags: ['Post'],
     }),
+
     deletePost: builder.mutation({
       query: (id) => ({
         url: `/posts/${id}`,
@@ -23,22 +25,24 @@ const postsApi = createApi({
       }),
       invalidatesTags: ['Post'],
     }),
+
     createPost: builder.mutation({
-      query: ({title, postText}) => ({
+      query: ({title, postText, img}) => ({
         url: `/posts`,
         method: 'POST',
-        body: {title, postText},
+        body: {title, postText, img},
         headers: {
           Authorization: `Bearer ${token}`
         }
       }),
       invalidatesTags: ['Post'],
     }),
+    
     updatePost: builder.mutation({
-      query: ({PostID, update}) => ({
+      query: ({PostID, UpdateInputValue}) => ({
         url: `/posts/${PostID}`,
         method: 'PATCH',
-        body: {title: update.newtitle, postText: update.newpostText },
+        body: {title: UpdateInputValue.newtitle, postText: UpdateInputValue.newpostText, img:UpdateInputValue.newImg},
         headers: {
           Authorization: `Bearer ${token}`
         }

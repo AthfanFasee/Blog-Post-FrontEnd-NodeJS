@@ -7,35 +7,75 @@ import SortButton from "../../Components/HomePageComponents/SortingButton/Sortin
 import BackToTop from "../../Components/HomePageComponents/ScrollToTopButton/ScrollToTopButton";
 import './HomePage.css';
 import LoadingComponent from "../../Components/HomePageComponents/LoadingComponent/LoadingComponent";
-import {useSelector, useDispatch} from 'react-redux';
-import {updateInputValue} from '../../features/UpdateInputElements';
-import {useGetPostsQuery, useUpdatePostMutation} from '../../services/HomePageApi';
+import {useSelector} from 'react-redux';
+import {useGetPostsQuery, useUpdatePostMutation} from '../../services/PostsApi';
+import app from '../../firebase';
+import {getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 
-import {updatePostAction} from '../../features/UpdatedPost';
+
 
 function HomePage() {
 
-  const {sort, setSort, page, editsection, isEditsection} = useContext(HomePageContext);
+  const {setFile, file, sort, setSort, page, editsection, isEditsection} = useContext(HomePageContext);
 
-  const update = useSelector((state) => state.update.value);
+  let UpdateInputValue = useSelector((state) => state.UpdatedInputValues.value);
   const UserIDParam = useSelector((state) => state.UserIDParam.value);
-  const updatedPost = useSelector((state) => state.updatePost.value.UpdatedPost);
-
-  const dispatch = useDispatch();
 
   const token = localStorage.getItem('token');
 
    //Getting Posts from MongoDB when the HomePage Component is rendered
   const { data : PostsList, isFetching } = useGetPostsQuery({page, sort, UserIDParam })
     
-  const [updatePost] = useUpdatePostMutation()
-  
   //Updating the Post(Editing the Post)
+  const [triggerUpdatePost] = useUpdatePostMutation();
+  
   const updatePostButtonClick = async (PostID) => {
-      await updatePost({PostID, update})
+    if(file) {
+      //If User Uploads a new Image
+      const fileName = new Date().getTime() + file.name;
+      const storage = getStorage(app);
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {
+          alert(error);
+        },
+        () => {
+          // Handle successful uploads on complete
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          UpdateInputValue = {...UpdateInputValue, newImg:downloadURL };
+          triggerUpdatePost({PostID, UpdateInputValue}); 
+          localStorage.removeItem("Title");
+          localStorage.removeItem("PostText");
+          setFile(null)
+          isEditsection(false);
+           
+          });
+        }
+      );        
+    } else {
+      //If User didn't Upload a new Image
+      await triggerUpdatePost({PostID, UpdateInputValue});
+      localStorage.removeItem("Title");
+      localStorage.removeItem("PostText"); 
       isEditsection(false);  
-      //After Updating when user click edit button again giving them the updated values typed in Inputs already.
-      dispatch(updateInputValue({newtitle: updatedPost.title, newpostText: updatedPost.postText}))
+    }          
   }
    
   return (
@@ -75,9 +115,7 @@ function HomePage() {
     {/* Rendering UpdatePost Component only when UpdateButton is clicked */}
     {editsection && 
     <UpdatePost updatePostButtonClick={updatePostButtonClick}/>
-    }
-    
-    
+    }  
     
     </div>)
 }

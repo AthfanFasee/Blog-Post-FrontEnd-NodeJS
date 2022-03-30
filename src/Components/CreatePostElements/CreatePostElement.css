@@ -40,7 +40,26 @@
   .inputGp textarea {
     height: 150px;
   }
-  
+  .AddImagendIcon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .AddImage{
+    margin-top: 0px;
+    font-size: 22px !important;
+    color:rgb(0, 0, 0)
+  }
+  .AddImageIcon{
+    font-size: 20px !important;
+  }
+  .hiddenInput{
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+  }
   .cpContainer button {
     font-family: 'Pacifico', cursive;
     margin-top: 20px;
@@ -99,7 +118,13 @@
     .inputGp textarea {
       height: 150px;
     }
-    
+    .AddImage{
+      font-size: 20px !important;
+      color:rgb(0, 0, 0)
+    }
+    .AddImageIcon{
+      font-size: 18px !important;
+    }
     .cpContainer button {
       margin-top: 20px;
       height: 40px;
@@ -154,7 +179,13 @@
     .inputGp textarea {
       height: 100px;
     }
-    
+    .AddImage{
+      font-size: 18px !important;
+      color:rgb(0, 0, 0)
+    }
+    .AddImageIcon{
+      font-size: 16px !important;
+    }
     .cpContainer button {
       margin-top: 20px;
       height: 30px;

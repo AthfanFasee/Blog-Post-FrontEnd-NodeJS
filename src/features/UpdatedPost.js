@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import postsApi from '../services/HomePageApi';
+import postsApi from '../services/PostsApi';
 
 export const postsSlice = createSlice({
     name: 'UpdatedPost',
@@ -15,6 +15,5 @@ export const postsSlice = createSlice({
       },
       
 })
-
 
 export default postsSlice.reducer;

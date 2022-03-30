@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import LoginButton from '../../Components/LoginButton/LoginButton';
-import Register from '../../Components/Register/Register';
+import LoginElements from '../../Components/LoginElements/LoginElements';
+import RegisterElements from '../../Components/RegisterElements/RegisterElements';
 import {useContext} from 'react';
 import './Login.css';
 import { LoginPageContext } from '../../Helper/LoginPageContext/LoginPageProvider';
@@ -13,24 +13,32 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const [login] = useLoginUserMutation()
+    const [login, ] = useLoginUserMutation()
     const [register] = useRegisterUserMutation()
     
     localStorage.getItem('userInfo')
     //Login
     const LoginUser = async () => {
-            const {data} = await login({loginEmail, loginPassword})
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('userID', data.user.id);
-            localStorage.setItem('userName', data.user.name);           
-            navigate("/");
-            window.location.reload();
+        const {data, error} = await login({loginEmail, loginPassword})
+        if(error) {
+            setError(error.data.msg)
+            return
+        }                    
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userID', data.user.id);
+        localStorage.setItem('userName', data.user.name);           
+        navigate("/");
+        window.location.reload();
     }
 
 
     //Register
     const RegisterUser = async () => {
-            const {data} = await register({registerEmail, registerPassword, registerUserName})
+            const {data, error} = await register({registerEmail, registerPassword, registerUserName})
+            if(error) {
+                setError(error.data.msg)
+                return
+            }           
             localStorage.setItem('token', data.token);
             localStorage.setItem('userID', data.user.id);
             localStorage.setItem('userName', data.user.name);           
@@ -40,8 +48,8 @@ function Login() {
 
     return (
         <div className="LoginAndRegister">
-            {isRegister ? <Register RegisterUser={RegisterUser}/>
-             : <LoginButton LoginUser={LoginUser}/>}       
+            {isRegister ? <RegisterElements RegisterUser={RegisterUser}/>
+             : <LoginElements LoginUser={LoginUser}/>}       
             
         </div>
     )

@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useContext, useState } from 'react';
 import { HomePageContext } from '../../Helper/HomePageContexts/HomePageProvider';
-import { useDeletePostMutation } from '../../services/HomePageApi';
+import { useDeletePostMutation } from '../../services/PostsApi';
 
 function DeleteButton({post}) {
 
@@ -56,15 +56,15 @@ function DeleteButton({post}) {
 
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Note That Once Deleted, This Post cannot be RESTORED!!!
+                        Once Deleted, This Post cannot be RESTORED!!!
                     </DialogContentText>
                     </DialogContent>
 
                     <DialogActions>
-                    <Button onClick={handleClose}>Close</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
 
                     <Button onClick={confirmDelete} autoFocus>
-                        Confirm
+                        Delete
                     </Button>
 
                     </DialogActions>

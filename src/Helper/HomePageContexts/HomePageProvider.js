@@ -24,13 +24,14 @@ export function HomePageProvider({children}) {
     //For reloading homepage after a post is deleted
     const [ isdeleted, setIsdeleted ] = useState("")
 
+    const [file, setFile] = useState(null);
     
    
     
     
     
     return (
-        <HomePageContext.Provider value={{isdeleted,setIsdeleted, sort, setSort, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
+        <HomePageContext.Provider value={{file, setFile, isdeleted,setIsdeleted, sort, setSort, pageCount, setPageCount, postLists, setPostLists, editsection, isEditsection, page, setPage}}>
             {children}
         </HomePageContext.Provider>
     )

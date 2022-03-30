@@ -9,10 +9,6 @@ import {LoginPageProvider} from './Helper/LoginPageContext/LoginPageProvider';
 import ProfileButton from './Components/HomePageComponents/ProfileButton/ProfileButton';
 
 
-
-
-
-
 function App() {
 
   const token = localStorage.getItem('token');

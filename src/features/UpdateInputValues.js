@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialStateValues = { newtitle: "", newpostText: ""}
 
-export const updateSlice = createSlice({
+export const updateInputValuesSlice = createSlice({
     name: 'update',
     //to save data of update post input elements
     initialState : { value: initialStateValues},  
@@ -13,5 +13,5 @@ export const updateSlice = createSlice({
     }
 })
 
-export const {updateInputValue} = updateSlice.actions;
-export default updateSlice.reducer;
+export const {updateInputValue} = updateInputValuesSlice.actions;
+export default updateInputValuesSlice.reducer;

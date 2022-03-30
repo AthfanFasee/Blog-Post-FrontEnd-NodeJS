@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import LoginButton from '../LoginButton';
+import LoginElements from '../LoginElements';
 import { LoginPageContext } from '../../../Helper/LoginPageContext/LoginPageProvider';
 
 
@@ -10,12 +10,12 @@ const setIsRegister= jest.fn();
 const setError= jest.fn();
 const setLoginEmail= jest.fn();
 const setLoginPassword= jest.fn();
-describe('LoginButton', () => {
+describe('LoginElements', () => {
 
     beforeEach(() => {
         // eslint-disable-next-line testing-library/no-render-in-setup
         render(<LoginPageContext.Provider value={{setError, setIsRegister, setLoginEmail, setLoginPassword}}>
-            <LoginButton LoginUser={mockedFunction}/></LoginPageContext.Provider>);
+            <LoginElements LoginUser={mockedFunction}/></LoginPageContext.Provider>);
     })
 
 

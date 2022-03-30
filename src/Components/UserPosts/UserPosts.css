@@ -14,6 +14,14 @@
     border-radius: 15px;
   }
 
+  .TitlendImage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(183, 193, 209);
+  }
+
    .postHeader {
     display: flex;
     justify-content: center;
@@ -23,6 +31,13 @@
     flex: 50%;
   }   
 
+  .postImage{
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    
+  }
   .post .postTextContainer {
     font-family: 'Open Sans', sans-serif;
     word-wrap: break-word;
@@ -110,6 +125,13 @@
      
       flex: 50%;
     }   
+    .postImage{
+      height: 150px;
+      width: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      
+    }
   
     .post .postTextContainer {
  
@@ -212,7 +234,13 @@
       overflow: hidden;
       overflow-y: auto;
     }
-  
+    .postImage{
+      height: 100px;
+      width: 200px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      
+    }
     .AllComments{
       height: auto;
       max-height: 220px;
