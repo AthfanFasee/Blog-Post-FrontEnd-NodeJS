@@ -59,13 +59,12 @@ function HomePage() {
         () => {
           // Handle successful uploads on complete
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          UpdateInputValue = {...UpdateInputValue, newImg:downloadURL };
+          UpdateInputValue = {...UpdateInputValue, newImgURL:downloadURL };
           triggerUpdatePost({PostID, UpdateInputValue}); 
           localStorage.removeItem("Title");
           localStorage.removeItem("PostText");
           setFile(null)
-          isEditsection(false);
-           
+          isEditsection(false);           
           });
         }
       );        
@@ -82,7 +81,6 @@ function HomePage() {
     <div className="homePage">
 
       {/*Warning Users to SignIn when they are not SignedIn */}
-      {/* Need to make this like an Alert */}
       {!token && <p>Please Login to Create Your Own Posts</p>} 
       
       {/* Sort Button */}

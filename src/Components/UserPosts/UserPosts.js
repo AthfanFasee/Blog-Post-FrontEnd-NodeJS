@@ -19,7 +19,7 @@ function UserPosts({post}) {
     const userID = localStorage.getItem('userID');
     const token = localStorage.getItem('token');
 
-    //Either Updated Post or Default Post is saved here to live render when gets updated
+    //Either Updated Post or Default Post is saved here to live render when post is edited
     const [Post, setPost] = useState(post);
 
     //to save comments data
@@ -75,7 +75,7 @@ function UserPosts({post}) {
 
     const CommentButtonClick = async () => {
         const {data} = await triggerFetchComments({postID: post._id});
-        setCommentData(data.comments); //This state will handle refetching as well      
+        setCommentData(data.comments); //This Comment Data state will handle refetching as well      
         setIsComments(true);   
     }
 
@@ -105,9 +105,9 @@ function UserPosts({post}) {
               </div>   
 
               <div className="UpdateButton">
-              {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn(passing post as props so I can access post.id and stuffs to set them to states)*/}     
+              {/*Showing UpdateButton(Edit Button) only when the user who posted the post LoggedIn. Passing post as props so I can access post.id and stuffs to set them to states */}     
               {userID === post.createdBy && 
-              <div><UpdateButton updatedPost={updatedPost} post={Post}/></div>
+              <div><UpdateButton Post={Post}/></div>
               }        
             </div>
 
@@ -115,15 +115,12 @@ function UserPosts({post}) {
 
             <div className="LikeandCommentDeleteContainer">
 
-              {/* Showing like button according to if the user alrdy liked the post or not */}
-            
+              {/* Showing like button according to if the user alrdy liked the post or not */}           
               <div className="LikeIcon">{likeButton}</div>
-
               <p className="likesCount">{Post.likedBy.length}</p> 
 
 
               {/* Conditionally Rendering CommentsIcon */}
-
               {isComments ?  <CloseFullscreenIcon onClick={() => setIsComments(false)} className="commentsIcon" fontSize="medium" /> :
               <CommentIcon onClick={CommentButtonClick} fontSize="medium" className="commentsIcon"/>}
 
@@ -134,10 +131,11 @@ function UserPosts({post}) {
               }
             </div>
 
-            {/* If comment Icon is clicked Rendering Comments on Screen */}
-            
+
+            {/* If comment Icon is clicked Rendering Commend Input and Comments on Screen */}      
             {isComments && <CommentInput id={Post._id} addComment={addComment} setCommentInput={setCommentInput} commentInput={commentInput}/>}
             <div className="AllComments">
+              
             {isComments && commentData.map(comment => {
               return (
                 <div key={comment._id}>

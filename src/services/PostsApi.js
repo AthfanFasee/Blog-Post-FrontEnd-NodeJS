@@ -42,7 +42,7 @@ const postsApi = createApi({
       query: ({PostID, UpdateInputValue}) => ({
         url: `/posts/${PostID}`,
         method: 'PATCH',
-        body: {title: UpdateInputValue.newtitle, postText: UpdateInputValue.newpostText, img:UpdateInputValue.newImg},
+        body: {title: UpdateInputValue.newtitle, postText: UpdateInputValue.newpostText, img:UpdateInputValue.newImgURL},
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -56,7 +56,6 @@ export default postsApi;
 
 export const {
   useGetPostsQuery,
-  useLazyGetPostsQuery,
   useDeletePostMutation,
   useCreatePostMutation,
   useUpdatePostMutation

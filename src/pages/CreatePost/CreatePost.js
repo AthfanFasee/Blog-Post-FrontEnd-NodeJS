@@ -65,8 +65,7 @@ function CreatePost() {
             );      
         } else {
           setError('Please Provide an Image')
-        }
-        
+        }      
     }
 
     //For Cancel button

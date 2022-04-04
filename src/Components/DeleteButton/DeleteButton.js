@@ -5,13 +5,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useContext, useState } from 'react';
-import { HomePageContext } from '../../Helper/HomePageContexts/HomePageProvider';
+import { useState } from 'react';
 import { useDeletePostMutation } from '../../services/PostsApi';
 
 function DeleteButton({post}) {
-
-  const {setIsdeleted} = useContext(HomePageContext);
 
     //for delete confirmation
     const [open, setOpen] = useState(false);
@@ -32,9 +29,7 @@ function DeleteButton({post}) {
 
       const confirmDelete = async () => {
         await deletePost(post._id)
-        setIsdeleted(true)
-        setOpen(false);
-        
+        setOpen(false);   
       }
 
       
@@ -55,21 +50,17 @@ function DeleteButton({post}) {
                     </DialogTitle>
 
                     <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Once Deleted, This Post cannot be RESTORED!!!
-                    </DialogContentText>
+                      <DialogContentText id="alert-dialog-description">
+                          Once Deleted, This Post cannot be RESTORED!!!
+                      </DialogContentText>
                     </DialogContent>
 
                     <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-
-                    <Button onClick={confirmDelete} autoFocus>
-                        Delete
-                    </Button>
-
+                      <Button onClick={handleClose}>Cancel</Button>
+                      <Button onClick={confirmDelete} autoFocus>Delete</Button>
                     </DialogActions>
-                </Dialog>
-                        
+
+                </Dialog>                      
         </div>
     )
 }
